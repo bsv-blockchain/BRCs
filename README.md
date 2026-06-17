@@ -203,6 +203,7 @@ BRC | Standard
 137  | [Device-Aware Wallet Onboarding and Fallback Login for BRC-100 Applications](./opinions/0137.md)
 138  | [Single-Use Signed Proofs for Request Authentication](./peer-to-peer/0138.md)
 139  | [Multicast Shard Manifest Announcement Protocol](./transactions/0139.md)
+140  | [Threshold Key Sharing and Backup via Shamir's Secret Sharing Scheme](./key-derivation/0140.md)
 
 ## License
 

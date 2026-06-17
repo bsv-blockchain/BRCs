@@ -15,3 +15,4 @@ BRC | Standard
 86   | [Bidirectionally Authenticated Derivation of Privacy Restricted Type 42 Keys](./0086.md)
 93   | [Limitations of BRC-69 Key Linkage Revelation](./0093.md)
 94   | [Verifiable Revelation of Shared Secrets Using Schnorr Protocol](./0094.md)
+140  | [Threshold Key Sharing and Backup via Shamir's Secret Sharing Scheme](./0140.md)
