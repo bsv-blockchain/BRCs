@@ -17,3 +17,4 @@ BRC | Standard
 103  | [Peer-to-Peer Mutual Authentication and Certificate Exchange Protocol](./0103.md)
 104  | [HTTP Transport for BRC-103 Mutual Authentication](./0104.md)
 138  | [Single-Use Signed Proofs for Request Authentication](./0138.md)
+169  | [Universal Handle Addressing and Resolution for the Metanet](./0169.md)
