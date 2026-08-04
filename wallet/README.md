@@ -35,4 +35,5 @@ BRC | Standard
 114  | [Time Labels: Backwards-Compatible Action Timestamp Filters for List Actions](./0114.md)
 116  | [Wallet Permissions and Counterparty Trust](./0116.md)
 123  | [Basket Permission Scheme Registry and Governance](./0123.md)
+153  | [Action References for BRC-100 Wallets](./0153.md)
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)

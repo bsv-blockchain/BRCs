@@ -45,6 +45,7 @@
 * [Time Labels: Backwards-Compatible Action Timestamp Filters for List Actions](./wallet/0114.md)
 * [Wallet Permissions and Counterparty Trust](./wallet/0116.md)
 * [Basket Permission Scheme Registry and Governance](./wallet/0123.md)
+* [Action References for BRC-100 Wallets](./wallet/0153.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 
 ## Transactions
