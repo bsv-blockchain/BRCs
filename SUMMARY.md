@@ -112,6 +112,14 @@
 * [Proof-of-Indexing Hash-to-Mint Tokens](./tokens/0117.md)
 * [1Sat Ordinals Basket Profile for BRC-46 / BRC-100](./tokens/0147.md)
 * [1Sat Provenance Remittance for Basket `1sat`](./tokens/0150.md)
+* [1Sat Ordinals — Single-Satoshi Tokens and Origin Tracking](./tokens/0300.md) (draft)
+* [1Sat Ordinals — Inscription Envelopes](./tokens/0301.md) (draft)
+* [1Sat Assets in BRC-100 Wallets (P1Sat Scheme)](./tokens/0302.md) (draft)
+* [1Sat Collectables in BRC-100 Wallets](./tokens/0303.md) (draft)
+* [1Sat Ordinal Collections](./tokens/0304.md) (draft)
+* [Sigma — Transaction-Bound Script Signatures](./tokens/0307.md) (draft)
+* [BSV-21 Fungible Tokens (JSON / Legacy)](./tokens/0305.md) (draft)
+* [BSV-21 Fungible Tokens (Binary)](./tokens/0306.md) (draft)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 
 ## Overlays
