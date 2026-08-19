@@ -40,3 +40,4 @@ BRC | Standard
 155  | [Pull-Based Receive Discovery](./0155.md)
 164  | [Output Identity Tags for BRC-100 Wallets](./0164.md)
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
+229  | [Wallet-Native Elliptic Curve Point Multiplication](./0229.md)

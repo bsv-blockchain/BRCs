@@ -235,6 +235,7 @@ BRC | Standard
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 227  | [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
 228  | [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
+229  | [Wallet-Native Elliptic Curve Point Multiplication](./wallet/0229.md)
 
 ## License
 
