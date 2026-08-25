@@ -224,6 +224,7 @@ BRC | Standard
 159  | [1Sat Ordinals — Single-Satoshi Tokens and Origin Tracking](./tokens/0159.md)
 160  | [1Sat Ordinals — Inscription Envelopes](./tokens/0160.md)
 164  | [Output Identity Tags for BRC-100 Wallets](./wallet/0164.md)
+167  | [Chunked, Hashed, Interleaved Resolution Protocol (CHIRP)](./overlays/0167.md)
 168  | [Verifiable Time Allocation](./apps/0168.md)
 169  | [Universal Handle Addressing and Resolution for the Metanet](./peer-to-peer/0169.md)
 210  | [Derived Collectibles](./apps/0210.md)
@@ -235,7 +236,6 @@ BRC | Standard
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 227  | [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
 228  | [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
-230  | [Chunked, Hashed, Interleaved Resolution Protocol (CHIRP)](./overlays/0230.md)
 
 ## License
 
