@@ -236,6 +236,7 @@ BRC | Standard
 172  | [Giving an AI Agent Control of a Delivery Vehicle Without Giving It a Wallet](./state-machines/0172.md)
 173  | [Bitcoin Script to and from Bitcoin BASIC — a compiler and a decompiler](./scripts/0173.md)
 174  | [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
+176  | [BSV-21 — Validity Proofs](./tokens/0176.md)
 190  | [Access Gates for Metanet Rooms](./apps/0190.md)
 210  | [Derived Collectibles](./apps/0210.md)
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)

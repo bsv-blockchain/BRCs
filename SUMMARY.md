@@ -127,6 +127,7 @@
 * [BSV-21 Basket Profile for BRC-46 / BRC-100](./tokens/0163.md)
 * [P1Sat Permission Scheme for Basket `1sat`](./tokens/0165.md)
 * [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
+* [BSV-21 — Validity Proofs](./tokens/0176.md)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 
 ## Overlays
