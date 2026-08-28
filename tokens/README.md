@@ -17,4 +17,5 @@ BRC | Standard
 150  | [1Sat Provenance Remittance for Basket `1sat`](./0150.md)
 159  | [1Sat Ordinals — Single-Satoshi Tokens and Origin Tracking](./0159.md)
 160  | [1Sat Ordinals — Inscription Envelopes](./0160.md)
+175  | [1Sat Fungible Basket Profile for BRC-46 / BRC-100](./0175.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./0226.md)
