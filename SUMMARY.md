@@ -52,6 +52,7 @@
 * [Pluggable Backup Services for BRC-140 Share Vaults](./wallet/0154.md)
 * [Pull-Based Receive Discovery](./wallet/0155.md)
 * [Output Identity Tags for BRC-100 Wallets](./wallet/0164.md)
+* [Wallet-Enforced Expiry for `noSend` Actions](./wallet/0177.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 
 ## Transactions
