@@ -15,3 +15,4 @@ BRC  | Standard
 47   | [Bare Multi-Signature](./0047.md)
 48   | [Pay to Push Drop](./0048.md)
 106  | [Bitcoin Script ASM Format](./0106.md)
+173  | [Bitcoin Script to and from Bitcoin BASIC — a compiler and a decompiler](./0173.md)

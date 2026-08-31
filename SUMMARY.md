@@ -13,8 +13,9 @@
 * [The deployment-info.json Specification](./apps/0102.md)
 * [Auditable Real-time Inference Architecture (ARIA)](./apps/0122.md)
 * [Registry-Free Typed Content Anchor with On-Chain Code Provenance](./apps/0145.md)
-* [Access Gates for Metanet Rooms](./apps/0146.md)
 * [Verifiable Time Allocation](./apps/0168.md)
+* [Locked Content Header (LCH) — Licensed, Micropayment-Enabled Content](./apps/0170.md)
+* [Access Gates for Metanet Rooms](./apps/0190.md)
 * [Derived Collectibles](./apps/0210.md)
 * [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
 * [NotaryHash — Privacy-Preserving Signed-Hash Notarization with SPV-Verifiable Certificates](./apps/0220.md)
@@ -105,6 +106,7 @@
 * [Bare Multi-Signature](./scripts/0047.md)
 * [Pay to Push Drop](./scripts/0048.md)
 * [Bitcoin Script ASM Format](./scripts/0106.md)
+* [Bitcoin Script to and from Bitcoin BASIC — a compiler and a decompiler](./scripts/0173.md)
 
 ## Tokens
 
@@ -121,6 +123,11 @@
 * [1Sat Provenance Remittance for Basket `1sat`](./tokens/0150.md)
 * [1Sat Ordinals — Single-Satoshi Tokens and Origin Tracking](./tokens/0159.md)
 * [1Sat Ordinals — Inscription Envelopes](./tokens/0160.md)
+* [BSV-21 Fungible Tokens (JSON / Legacy)](./tokens/0161.md)
+* [BSV-21 Fungible Tokens (Binary)](./tokens/0162.md)
+* [BSV-21 Basket Profile for BRC-46 / BRC-100](./tokens/0163.md)
+* [P1Sat Permission Scheme for Basket `1sat`](./tokens/0165.md)
+* [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 
 ## Overlays
@@ -137,6 +144,7 @@
 * [Overlay Services Synchronization Architecture](./overlays/0088.md)
 * [Diverse Facilitators and URL Protocols for SHIP and SLAP Overlay Advertisements](./overlays/0101.md)
 * [Block-Anchored Overlay Synchronization via Block-Aligned Sparse Merkle Trees (BASM)](./overlays/0136.md)
+* [Chunked, Hashed, Interleaved Resolution Protocol (CHIRP)](./overlays/0167.md)
 
 ## Payments
 
@@ -152,6 +160,7 @@
 * [x402 Stateless Settlement-Gated HTTP Protocol](./payments/0120.md)
 * [Simple 402 Payments](./payments/0121.md)
 * [PeerPay URI Scheme for BRC-29 Payments](./payments/0125.md)
+* [P2PKH Payments for HTTP 402](./payments/0166.md)
 * [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 
 ## Peer-to-Peer
@@ -172,6 +181,7 @@
 * [Fountain-Coded Air-Gap Transport for Arbitrary Payloads](./peer-to-peer/0141.md)
 * [Universal Handle Addressing and Resolution for the Metanet](./peer-to-peer/0169.md)
 * [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./peer-to-peer/0225.md)
+* [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
 ## Key Derivation
 
@@ -215,3 +225,5 @@
 ## State Machines
 
 * [Simplifying State Machine Event Chains in Bitcoin](./state-machines/0060.md)
+* [Fixed-Width State in a Covenant's Own Locking Script](./state-machines/0171.md)
+* [Giving an AI Agent Control of a Delivery Vehicle Without Giving It a Wallet](./state-machines/0172.md)

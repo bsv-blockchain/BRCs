@@ -20,3 +20,4 @@ BRC | Standard
 141  | [Fountain-Coded Air-Gap Transport for Arbitrary Payloads](./0141.md)
 169  | [Universal Handle Addressing and Resolution for the Metanet](./0169.md)
 225  | [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./0225.md)
+369  | [Keyed Content and Conditional Key Release](./0369.md)
