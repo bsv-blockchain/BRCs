@@ -53,7 +53,7 @@
 * [Pull-Based Receive Discovery](./wallet/0155.md)
 * [Output Identity Tags for BRC-100 Wallets](./wallet/0164.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
-* [Wallet-Native Elliptic Curve Point Multiplication](./wallet/0229.md)
+* [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 
 ## Transactions
 
