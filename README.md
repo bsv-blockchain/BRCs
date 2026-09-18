@@ -238,6 +238,7 @@ BRC | Standard
 174  | [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
 176  | [BSV-21 — Validity Proofs](./tokens/0176.md)
 177  | [Wallet-Enforced Expiry for `noSend` Actions](./wallet/0177.md)
+178  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0178.md)
 190  | [Access Gates for Metanet Rooms](./apps/0190.md)
 210  | [Derived Collectibles](./apps/0210.md)
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
@@ -250,7 +251,6 @@ BRC | Standard
 228  | [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
-370  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0370.md)
 
 ## License
 
