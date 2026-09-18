@@ -250,6 +250,7 @@ BRC | Standard
 228  | [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
+370  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0370.md)
 
 ## License
 
