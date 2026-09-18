@@ -37,6 +37,7 @@ BRC | Standard
 123  | [Basket Permission Scheme Registry and Governance](./0123.md)
 153  | [Action Reference Labels for BRC-100 Wallets](./0153.md)
 154  | [Pluggable Backup Services for BRC-140 Share Vaults](./0154.md)
+146  | [Vault Sub-Accounts (Named Account Roots)](./0146.md)
 155  | [Pull-Based Receive Discovery](./0155.md)
 164  | [Output Identity Tags for BRC-100 Wallets](./0164.md)
 177  | [Wallet-Enforced Expiry for `noSend` Actions](./0177.md)
