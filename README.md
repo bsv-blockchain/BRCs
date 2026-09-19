@@ -247,6 +247,7 @@ BRC | Standard
 220  | [NotaryHash — Privacy-Preserving Signed-Hash Notarization with SPV-Verifiable Certificates](./apps/0220.md)
 224  | [Block Media Format (BMF) — Composable On-Chain Audio/Video](./apps/0224.md)
 225  | [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./peer-to-peer/0225.md)
+246  | [Session Upgrade for BRC-33 Messagebox Hot Paths](./peer-to-peer/0246.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 227  | [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
 228  | [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
