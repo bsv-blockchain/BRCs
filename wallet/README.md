@@ -43,3 +43,4 @@ BRC | Standard
 179  | [Signed Capability Manifest for Wallet and Tool-Server Method Exposure](./0179.md)
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./0229.md)
+230  | [Wallet Index Expansion Packs](./0230.md)
