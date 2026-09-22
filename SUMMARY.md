@@ -54,6 +54,7 @@
 * [Output Identity Tags for BRC-100 Wallets](./wallet/0164.md)
 * [Wallet-Enforced Expiry for `noSend` Actions](./wallet/0177.md)
 * [Signed Capability Manifest for Wallet and Tool-Server Method Exposure](./wallet/0179.md)
+* [Wallet-Enforced Autonomous-Agent Spend Policy](./wallet/0181.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 
