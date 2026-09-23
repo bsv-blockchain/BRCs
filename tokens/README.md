@@ -23,4 +23,5 @@ BRC | Standard
 165  | [P1Sat Permission Scheme for Basket `1sat`](./0165.md)
 174  | [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./0174.md)
 176  | [BSV-21 — Validity Proofs](./0176.md)
+182  | [Mandala Extension for BSV-21 Compatibility](./0182.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./0226.md)

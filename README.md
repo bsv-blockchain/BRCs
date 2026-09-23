@@ -240,6 +240,7 @@ BRC | Standard
 177  | [Wallet-Enforced Expiry for `noSend` Actions](./wallet/0177.md)
 178  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0178.md)
 179  | [Signed Capability Manifest for Wallet and Tool-Server Method Exposure](./wallet/0179.md)
+182  | [Mandala Extension for BSV-21 Compatibility](./tokens/0182.md)
 190  | [Access Gates for Metanet Rooms](./apps/0190.md)
 210  | [Derived Collectibles](./apps/0210.md)
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)

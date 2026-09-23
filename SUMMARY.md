@@ -131,6 +131,7 @@
 * [P1Sat Permission Scheme for Basket `1sat`](./tokens/0165.md)
 * [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
 * [BSV-21 — Validity Proofs](./tokens/0176.md)
+* [Mandala Extension for BSV-21 Compatibility](./tokens/0182.md)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
 
 ## Overlays
@@ -145,6 +146,7 @@
 * [Private Overlays with P2PKH Transactions](./overlays/0081.md)
 * [Standardized Naming Conventions for BRC-22 Topic Managers and BRC-24 Lookup Services](./overlays/0087.md)
 * [Overlay Services Synchronization Architecture](./overlays/0088.md)
+* [Overlay Service Discovery at an Internet Domain](./overlays/0180.md)
 * [Diverse Facilitators and URL Protocols for SHIP and SLAP Overlay Advertisements](./overlays/0101.md)
 * [Block-Anchored Overlay Synchronization via Block-Aligned Sparse Merkle Trees (BASM)](./overlays/0136.md)
 * [Chunked, Hashed, Interleaved Resolution Protocol (CHIRP)](./overlays/0167.md)
