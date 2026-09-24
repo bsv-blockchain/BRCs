@@ -241,6 +241,7 @@ BRC | Standard
 178  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0178.md)
 179  | [Signed Capability Manifest for Wallet and Tool-Server Method Exposure](./wallet/0179.md)
 180  | [Overlay Service Discovery at an Internet Domain](./overlays/0180.md)
+183  | [A Framework for Strict and Federated Overlays](./overlays/0183.md)
 190  | [Access Gates for Metanet Rooms](./apps/0190.md)
 210  | [Derived Collectibles](./apps/0210.md)
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
