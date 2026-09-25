@@ -1,0 +1,54 @@
+{
+  "notice": "Public deterministic format fixtures only. The RFC 8032 test seed is intentionally public and MUST NOT be used in production. These fixtures do not constitute Noise interoperability or a security audit.",
+  "descriptorProof": {
+    "seedHex": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60",
+    "publicKeyHex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+    "input": {
+      "origin": "https://app.example",
+      "challenge": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8",
+      "descriptor": {
+        "version": 1,
+        "instanceId": "11111111-1111-4111-8111-111111111111",
+        "name": "Example Wallet",
+        "instanceLabel": "",
+        "vendor": "example.wallet",
+        "continuityKey": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo",
+        "endpoints": [
+          {
+            "id": "wire",
+            "type": "http-wire",
+            "address": "http://localhost:3302"
+          }
+        ]
+      }
+    },
+    "jcsUtf8": "{\"challenge\":\"AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8\",\"descriptor\":{\"continuityKey\":\"11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo\",\"endpoints\":[{\"address\":\"http://localhost:3302\",\"id\":\"wire\",\"type\":\"http-wire\"}],\"instanceId\":\"11111111-1111-4111-8111-111111111111\",\"instanceLabel\":\"\",\"name\":\"Example Wallet\",\"vendor\":\"example.wallet\",\"version\":1},\"origin\":\"https://app.example\"}",
+    "preimageHex": "4252432d3138352064657363726970746f722076310a7b226368616c6c656e6765223a2241414543417751464267634943516f4c4441304f4478415245684d554652595847426b6147787764486838222c2264657363726970746f72223a7b22636f6e74696e756974794b6579223a223131715941594b7843726656535f3754795751484f6737686376506170694d6c727749616150634855526f222c22656e64706f696e7473223a5b7b2261646472657373223a22687474703a2f2f6c6f63616c686f73743a33333032222c226964223a2277697265222c2274797065223a22687474702d77697265227d5d2c22696e7374616e63654964223a2231313131313131312d313131312d343131312d383131312d313131313131313131313131222c22696e7374616e63654c6162656c223a22222c226e616d65223a224578616d706c652057616c6c6574222c2276656e646f72223a226578616d706c652e77616c6c6574222c2276657273696f6e223a317d2c226f726967696e223a2268747470733a2f2f6170702e6578616d706c65227d",
+    "signatureBase64url": "QJK8mC5s_STpsfSIolI3SpWPFOaeICv5Tz49O42IhC6u6Go36Xqp0GwoDvilT4TVt7yd7KE57y7OUxE_FfqpDg"
+  },
+  "confirmationCode": {
+    "handshakeHashHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "digestHex": "f9fe8beb228344cce21e20c50aca893ac3f0a9b73c775402aa96636ac1e8ca27",
+    "display": "9420 8747"
+  },
+  "requestFraming": {
+    "method": "getVersion",
+    "originator": "app.example",
+    "requestIdHex": "000102030405060708090a0b0c0d0e0f",
+    "brc100RequestHex": "1c0b6170702e6578616d706c65",
+    "plaintextHex": "10000102030405060708090a0b0c0d0e0f0000000d000000001c0b6170702e6578616d706c65",
+    "topicHex": "101112131415161718191a1b1c1d1e1f",
+    "direction": 0,
+    "sequence": "0",
+    "aadHex": "4252432d313835207265636f72642076310a101112131415161718191a1b1c1d1e1f000000000000000000",
+    "outerHeaderHex": "020000000000000000"
+  },
+  "boundaries": {
+    "maximumNoiseCiphertext": 65535,
+    "maximumPlaintext": 65519,
+    "plaintextHeader": 25,
+    "maximumFragment": 65494,
+    "maximumMessage": 67108864,
+    "defaultProbeCount": 148
+  }
+}
