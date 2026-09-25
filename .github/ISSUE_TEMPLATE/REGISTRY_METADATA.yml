@@ -1,0 +1,57 @@
+name: Registry metadata request or correction
+description: Request, improve or dispute optional ProtoMap, BasketMap or CertMap descriptions.
+title: "[REGISTRY] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use the BRC process: link your protocol proposal or existing BRC and tag the relevant maintainer in the request. For Metanet Trust Services, tag @ty-everett. See [the submission guide](https://github.com/bsv-blockchain/BRCs/blob/master/REGISTRY_SUBMISSIONS.md).
+
+        Registry metadata is optional and does not grant protocol access, wallet permission or endorsement. This is a lightweight evolving editorial process. For genuinely urgent or long-time unresolved matters, email ty@projectbabbage.com. Do not post secrets, personal certificate contents or sensitive incident details here.
+  - type: dropdown
+    id: action
+    attributes:
+      label: Request type
+      options:
+        - New description
+        - Update or correction
+        - Proposed withdrawal
+        - Dispute or reconsideration
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Publisher and network
+      description: Identify the requested operator and mainnet/testnet. A listing is publisher-specific.
+      placeholder: Metanet Trust Services, mainnet
+    validations:
+      required: true
+  - type: textarea
+    id: identifiers
+    attributes:
+      label: Exact identifiers and existing record
+      description: Supply protocol tuples, basket names or base64 certificate types. For changes, include the publisher key and current outpoint if known.
+    validations:
+      required: true
+  - type: textarea
+    id: specification
+    attributes:
+      label: BRC and implementation evidence
+      description: Link the BRC or PR and state its status. Include public specification/source revisions, actual usage and compatibility information. Explain missing documentation when requesting a correction or dispute.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed metadata or remedy
+      description: Provide a plain name/description, public documentation, usable icon and certificate field descriptors as applicable. For disputes, identify the statement, supporting evidence and requested remedy.
+    validations:
+      required: true
+  - type: textarea
+    id: maintenance
+    attributes:
+      label: Maintenance and review context
+      description: Include a public maintainer contact, relevant conflicts, previous discussion, versioning/deprecation notes and the maintainer tag.
+    validations:
+      required: true
