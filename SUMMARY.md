@@ -151,6 +151,7 @@
 * [Chunked, Hashed, Interleaved Resolution Protocol (CHIRP)](./overlays/0167.md)
 * [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0178.md)
 * [Overlay Service Discovery at an Internet Domain](./overlays/0180.md)
+* [A Framework for Strict and Federated Overlays](./overlays/0183.md)
 
 ## Payments
 

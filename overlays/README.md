@@ -2,6 +2,8 @@
 
 This directory contains standards for creating and interacting with overlay networks generally, and protocols for specific overlay networks.
 
+[BRC-183](./0183.md) defines Strict Overlays and Federated Overlays within this general category, providing shared terminology for common state and permitted differences in hosts' collections.
+
 BRC | Standard
 -----|------------------
 22   | [Overlay Network Data Synchronization](./0022.md)
@@ -19,3 +21,4 @@ BRC | Standard
 167  | [Chunked, Hashed, Interleaved Resolution Protocol (CHIRP)](./0167.md)
 178  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./0178.md)
 180  | [Overlay Service Discovery at an Internet Domain](./0180.md)
+183  | [A Framework for Strict and Federated Overlays](./0183.md)
