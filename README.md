@@ -8,6 +8,11 @@ Contributions from all builders are welcome and encouraged. To propose a new BRC
 
 To participate in discussions about existing proposals, simply open an issue and link back to the BRC file in question.
 
+For protocol, basket and certificate descriptions in wallet registries, see the
+[registry submission and maintenance guide](./REGISTRY_SUBMISSIONS.md). Start with
+the BRC process, then request inclusion from the desired operator. Registry
+metadata is optional and is not permission to use a protocol.
+
 ## Iterative improvement
 
 We believe in encouraging discussion and iterative improvement of proposals, resulting in incremental improvement within the bounds of the Bitcoin protocol. We welcome suggestions for improvement and are committed to working with contributors to improve proposals and ensure that they align with our guidelines.
@@ -241,6 +246,7 @@ BRC | Standard
 178  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0178.md)
 179  | [Signed Capability Manifest for Wallet and Tool-Server Method Exposure](./wallet/0179.md)
 180  | [Overlay Service Discovery at an Internet Domain](./overlays/0180.md)
+184  | [Optional Metadata Registries and Their Stewardship](./wallet/0184.md)
 190  | [Access Gates for Metanet Rooms](./apps/0190.md)
 210  | [Derived Collectibles](./apps/0210.md)
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)

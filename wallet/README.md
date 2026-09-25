@@ -9,6 +9,8 @@ Current orientation:
 - [BRC-73](./0073.md) should be read as the grouped-permission declaration shape used by current wallets, alongside BRC-116.
 - [BRC-98](./0098.md), [BRC-99](./0099.md), [BRC-111](./0111.md), [BRC-112](./0112.md), and [BRC-114](./0114.md) are compatibility-oriented extensions around permission and query behavior.
 
+- [BRC-184](./0184.md) proposes the separate, optional metadata-registry role; its descriptions are not wallet grants or executable permission modules.
+
 BRC | Standard
 -----|------------------
 1    | [Transaction Creation](./0001.md)
@@ -41,5 +43,6 @@ BRC | Standard
 164  | [Output Identity Tags for BRC-100 Wallets](./0164.md)
 177  | [Wallet-Enforced Expiry for `noSend` Actions](./0177.md)
 179  | [Signed Capability Manifest for Wallet and Tool-Server Method Exposure](./0179.md)
+184  | [Optional Metadata Registries and Their Stewardship](./0184.md)
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./0229.md)
