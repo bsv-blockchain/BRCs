@@ -50,6 +50,7 @@
 * [Basket Permission Scheme Registry and Governance](./wallet/0123.md)
 * [Action Reference Labels for BRC-100 Wallets](./wallet/0153.md)
 * [Pluggable Backup Services for BRC-140 Share Vaults](./wallet/0154.md)
+* [Vault Sub-Accounts (Named Account Roots)](./wallet/0146.md)
 * [Pull-Based Receive Discovery](./wallet/0155.md)
 * [Output Identity Tags for BRC-100 Wallets](./wallet/0164.md)
 * [Wallet-Enforced Expiry for `noSend` Actions](./wallet/0177.md)
