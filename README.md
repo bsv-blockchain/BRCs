@@ -260,6 +260,7 @@ BRC | Standard
 227  | [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
 228  | [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
+231  | [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
 ## License
