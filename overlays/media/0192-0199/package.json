@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node verify.mjs && node verify-reconciliation.mjs && node ../../../tokens/media/0197/test-family.mjs",
+    "test": "node verify.mjs && node verify-proposal-query.mjs && node verify-reconciliation.mjs && node ../../../tokens/media/0197/test-family.mjs",
     "generate": "node generate.mjs"
   },
   "dependencies": {

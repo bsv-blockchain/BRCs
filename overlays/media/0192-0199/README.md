@@ -85,6 +85,7 @@ python3 -m venv overlays/media/0192-0199/.venv
 overlays/media/0192-0199/.venv/bin/python -m pip install -r overlays/media/0192-0199/requirements-lock.txt
 npm test --prefix overlays/media/0192-0199
 overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-independent.py
+overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-proposal-query.py
 overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-traces.py
 overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-reconciliation.py
 overlays/media/0192-0199/.venv/bin/python tokens/media/0197/verify-script.py
@@ -99,7 +100,8 @@ funding outputs in the corpus are **public test material**.
 The normative frozen family build can also be reproduced using the pinned Rúnar
 checkout and command in the family guide. Test execution never recompiles or
 regenerates its expected transactions. Generators are separate authoring tools:
-`generate.mjs`, `generate-reconciliation.mjs`, `generate-digests.py` and the family transaction generator. Signature
+`generate.mjs`, `generate-reconciliation.mjs`, `generate-proposal-query.mjs`,
+`generate-digests.py` and the family transaction generator. Signature
 randomness means regeneration may change corpus bytes; review the new bytes and
 re-run both independent verifiers before committing them. The published family
 program cannot be silently replaced under its existing IRI.
@@ -203,6 +205,21 @@ wrong shares, missing consent, state revision changes, malformed receipts and
 incorrect retirement top-up. A separate real funded-copy merge demonstrates
 Script acceptance with domain-lineage rejection. See the family manifest for
 per-case sources, expected outcomes and reasons.
+
+[proposal-query-vectors.json](./proposal-query-vectors.json) adds three frozen
+BRC-77 signed proposal heads and four frozen selection digests for the optional
+BRC-194 `proposal-channel-heads-v1` query. The JavaScript and independent Python
+verifiers check signatures and digests, then execute 16 manually specified query
+mapping scenarios and 10 malformed-query rejections, including the 256-channel
+boundary. Snapshot ordering, private filtering, unknown predecessor history,
+atomic replacement, state-only expiry, retention removal, no-op writes and
+visibility resets are explicit. The `head` names in model expectations refer to
+the complete signed objects in that file; they are fixture notation, not an
+alternative observation wire format. A row's `readable` flag models an already
+evaluated host-access decision. These models do not validate a production
+policy implementation, durable journal/index/log transaction, history pin,
+authenticated transport or current disclosure gate. Those require the real
+provider/client qualification described in BRC-194 section 7.
 
 ## Conformance claims
 
