@@ -135,6 +135,11 @@
       "immutable": true
     },
     {
+      "id": "https://bsv.brc.dev/overlays/0194#proposal-channel-heads-v1",
+      "definition": "overlays/0194.md",
+      "immutable": true
+    },
+    {
       "id": "https://bsv.brc.dev/overlays/0194#proposal-v1",
       "definition": "overlays/0194.md",
       "immutable": true
