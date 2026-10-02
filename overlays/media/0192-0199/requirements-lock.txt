@@ -1,7 +1,7 @@
 asn1crypto==1.5.1
 attrs==26.1.0
 bitcoinX==0.9
-cbor2==5.7.1
+cbor2==5.9.0
 cffi==2.1.1
 cryptography==46.0.3
 electrumsv-secp256k1==18.0.0
