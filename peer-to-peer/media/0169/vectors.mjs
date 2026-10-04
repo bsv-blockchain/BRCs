@@ -1,9 +1,9 @@
 // BRC-169 Appendix A.7 envelope test vectors.
-// Reproduces the published vectors for a given `payment` shape and prints
+// Reproduces the published envelope vectors and prints
 // the JSON (RFC 8785) and DAG-CBOR preimages and signatures.
 // All keys are PUBLIC TEST KEYS from BRC-169 Appendix A.1.
-//   node vectors.mjs           -> current (outputs-list) payment shape
-//   node vectors.mjs --legacy  -> the pre-amendment single-object shape, asserted
+//   node vectors.mjs           -> current `transaction` member (beef + outputs list)
+//   node vectors.mjs --legacy  -> the pre-amendment single-object `payment` member, asserted
 //                                 byte-for-byte against the vectors BRC-169 published
 //                                 before the payment-outputs amendment (harness check)
 import { createHash } from "node:crypto";
@@ -57,13 +57,14 @@ async function sign(bytes) {
   return Utils.toHex(signature);
 }
 
-const jsonPre = canonicalize({ ...meta, payment: paymentJson, contentHash: contentHash.toString("hex") });
+const member = legacy ? "payment" : "transaction";
+const jsonPre = canonicalize({ ...meta, [member]: paymentJson, contentHash: contentHash.toString("hex") });
 const jsonSig = await sign(Buffer.from(jsonPre, "utf8"));
 
 const cborMap = {
   ...meta,
   sender: { ...meta.sender, identityKey: new Uint8Array(Buffer.from(crumbsPub, "hex")) },
-  payment: paymentCbor,
+  [member]: paymentCbor,
   contentHash: new Uint8Array(contentHash),
 };
 const cborPre = dagCbor.encode(cborMap);
@@ -81,11 +82,11 @@ if (legacy) {
     throw new Error("harness does not reproduce the published pre-amendment vectors");
 }
 
-console.log("shape:", legacy ? "legacy single object" : "outputs list");
+console.log("member:", legacy ? "payment (legacy single object)" : "transaction (beef + outputs)");
 console.log("identityKey:", crumbsPub);
 console.log("signing pubkey:", signingPub);
 console.log("contentHash:", contentHash.toString("hex"));
-console.log("\nJSON envelope payment:\n" + JSON.stringify(paymentJson, null, 2));
+console.log(`\nJSON envelope ${member}:\n` + JSON.stringify(paymentJson, null, 2));
 console.log("\nJCS preimage:\n" + jsonPre);
 console.log("\nJSON signature:\n" + jsonSig);
 console.log(`\nDAG-CBOR preimage (${cborPre.length} bytes):\n` + Buffer.from(cborPre).toString("hex"));
