@@ -63,6 +63,9 @@ const keys = Object.fromEntries(
     processor: 47,
     rootA: 48,
     rootB: 49,
+    sellerFunding: 50,
+    buyerAFunding: 51,
+    buyerBFunding: 52,
   }).map(([n, k]) => [n, new PrivateKey(k)]),
 );
 const wallets = Object.fromEntries(
@@ -164,13 +167,13 @@ function mine(root, previous, height) {
   return hash;
 }
 const fundingOwners = [
-  "seller",
-  "buyerA",
-  "buyerB",
-  "buyerA",
-  "seller",
-  "seller",
-  "buyerA",
+  "sellerFunding",
+  "buyerAFunding",
+  "buyerBFunding",
+  "buyerAFunding",
+  "sellerFunding",
+  "sellerFunding",
+  "buyerAFunding",
 ];
 const rootTx = new Transaction(
   1,
@@ -198,7 +201,6 @@ const anchor = { chain, txid: rootTx.id("hex"), outputIndex: 0 },
   seller = keys.seller,
   buyerA = keys.buyerA;
 const initialRevenue = {
-  revision: "0",
   recipients: [keys.recipientA, keys.recipientB]
     .sort((a, b) => (pub(a) < pub(b) ? -1 : 1))
     .map((k, i) => ({ identity: pub(k), weight: i ? 3 : 7 })),
@@ -426,16 +428,18 @@ function offer(mode) {
             [C]: {
               version: 1,
               family: F,
+              expiryHeight: 123456,
               initialRevenue: {
-                revision: 0,
                 recipients: initialRevenue.recipients.map((r) => ({
                   identity: Buffer.from(r.identity, "hex"),
                   weight: r.weight,
                 })),
               },
-              amendment: "unanimous-current-recipients",
+              schedule: "immutable",
+              derivation: "brc29-anyone-fixed",
+              withdrawal: "permissionless-quanta",
               remainders: "retain-until-payout",
-              retirement: "externally-funded-exact-top-up",
+              retirement: "seller-child-or-expiry-height-exact-top-up",
             },
             [S]: { version: 1 },
           }
@@ -467,9 +471,9 @@ const descriptor = {
   lineageAnchor: anchor,
   purchasePrice: "1001",
   reserve: "1",
+  expiryHeight: 123456,
   termsDigest: hex(lchId("offer", covenantOffer.body)),
   scriptFamily: F,
-  administration: "seller-v1",
   metadataDigest: hex(sha(Buffer.from("fixture metadata"))),
   initialRevenue,
 };
@@ -478,14 +482,34 @@ const genesis = new Transaction(
   [input(rootTx, 0)],
   [
     output(1, encode(descriptor, initialRevenue)),
-    output(999899, new P2PKH().lock([...pkh(seller)])),
+    output(999899, new P2PKH().lock([...pkh(keys.sellerFunding)])),
   ],
   0,
 );
 genesis.inputs[0].unlockingScript = await new P2PKH()
-  .unlock(seller)
+  .unlock(keys.sellerFunding)
   .sign(genesis, 0);
 retain(genesis, "authorized listing genesis");
+const activation = new Transaction(
+  1,
+  [input(genesis, 0), input(genesis, 1)],
+  [
+    output(1, encode(descriptor, initialRevenue, "active")),
+    output(999799, new P2PKH().lock([...pkh(keys.sellerFunding)])),
+  ],
+  0,
+);
+activation.inputs[0].unlockingScript = unlock(activation, 0, {
+  operation: 0,
+  descriptor,
+  changeHash: pkh(keys.sellerFunding),
+  changeAmount: 999799,
+});
+activation.inputs[1].unlockingScript = await new P2PKH()
+  .unlock(keys.sellerFunding)
+  .sign(activation, 1);
+retain(activation, "public-key linkage activation");
+assert(evaluate(activation, 0));
 const genesisAuth = packet(
   "sale-genesis",
   {
@@ -721,8 +745,8 @@ function license(offer, req, buyer, settlement, mode) {
   );
 }
 vector.acquisitions = [];
-let current = genesis,
-  ancestors = [genesis];
+let current = activation,
+  ancestors = [genesis, activation];
 for (const [buyerName, nonce, fundingIndex] of [
   ["buyerA", 10, 1],
   ["buyerB", 11, 2],
@@ -795,7 +819,7 @@ for (const [buyerName, nonce, fundingIndex] of [
         current.outputs[0].lockingScript,
       ),
       output(1, receipt),
-      output(998898, new P2PKH().lock([...pkh(buyer)])),
+      output(998898, new P2PKH().lock([...pkh(keys[buyerName+"Funding"])])),
     ],
     0,
   );
@@ -803,10 +827,10 @@ for (const [buyerName, nonce, fundingIndex] of [
     operation: 1,
     receipt,
     recipientY: ys(buyer),
-    changeHash: pkh(buyer),
+    changeHash: pkh(keys[buyerName+"Funding"]),
     changeAmount: 998898,
   });
-  tx.inputs[1].unlockingScript = await new P2PKH().unlock(buyer).sign(tx, 1);
+  tx.inputs[1].unlockingScript = await new P2PKH().unlock(keys[buyerName+"Funding"]).sign(tx, 1);
   retain(tx, buyerName + " purchase");
   assert(evaluate(tx, 0));
   const release = releases(tx);
@@ -963,12 +987,12 @@ const payment = new Transaction(
   [input(rootTx, 3)],
   [
     output(1001, new P2PKH().lock(destination.toAddress())),
-    output(998899, new P2PKH().lock([...pkh(buyerA)])),
+    output(998899, new P2PKH().lock([...pkh(keys.buyerAFunding)])),
   ],
   0,
 );
 payment.inputs[0].unlockingScript = await new P2PKH()
-  .unlock(buyerA)
+  .unlock(keys.buyerAFunding)
   .sign(payment, 0);
 retain(payment, "BRC-105 payment");
 const challenge = {
@@ -1084,9 +1108,9 @@ const publication = {
   requestId: "publication-example-0001",
   topic: "tm_listings",
   evidence: {
-    txid: genesis.id("hex"),
+    txid: activation.id("hex"),
     outputIndex: 0,
-    beef: b64(genesis.toAtomicBEEF()),
+    beef: b64(activation.toAtomicBEEF()),
   },
   assetId: hex(assetId),
   schema: "urn:brc-fixture:key-publication:1",
@@ -1096,7 +1120,7 @@ vector.publication = {
   request: publication,
   proofVariant: {
     ...publication,
-    evidence: { ...publication.evidence, beef: b64(genesis.toBEEF()) },
+    evidence: { ...publication.evidence, beef: b64(activation.toBEEF()) },
   },
   result: {
     version: 1,
@@ -1106,7 +1130,7 @@ vector.publication = {
       topic: "tm_listings",
       requestId: publication.requestId,
     }),
-    txid: genesis.id("hex"),
+    txid: activation.id("hex"),
     status: "ready",
     updatedAt: String(now),
   },
@@ -1142,11 +1166,11 @@ const finalScript = LockingScript.fromHex(
 const finalizationTx = new Transaction(
   1,
   [input(rootTx, 6)],
-  [output(1, finalScript), output(999899, new P2PKH().lock([...pkh(buyerA)]))],
+  [output(1, finalScript), output(999899, new P2PKH().lock([...pkh(keys.buyerAFunding)]))],
   0,
 );
 finalizationTx.inputs[0].unlockingScript = await new P2PKH()
-  .unlock(buyerA)
+  .unlock(keys.buyerAFunding)
   .sign(finalizationTx, 0);
 retain(finalizationTx, "author-document finalization");
 vector.proposalFinalization = {
@@ -1169,10 +1193,10 @@ for (const [protocol, name, index] of [
   const tx = new Transaction(
     1,
     [input(rootTx, index)],
-    [output(1, script), output(999899, new P2PKH().lock([...pkh(seller)]))],
+    [output(1, script), output(999899, new P2PKH().lock([...pkh(keys.sellerFunding)]))],
     0,
   );
-  tx.inputs[0].unlockingScript = await new P2PKH().unlock(seller).sign(tx, 0);
+  tx.inputs[0].unlockingScript = await new P2PKH().unlock(keys.sellerFunding).sign(tx, 0);
   retain(tx, protocol + " advertisement");
   vector.advertisements.push({
     protocol,
@@ -1435,9 +1459,9 @@ const observation = {
   kind: "output",
   payload: {
     evidence: {
-      txid: genesis.id("hex"),
+      txid: activation.id("hex"),
       outputIndex: 0,
-      beef: b64(genesis.toAtomicBEEF()),
+      beef: b64(activation.toAtomicBEEF()),
     },
   },
 };
@@ -1478,7 +1502,7 @@ const firstPurchase = vector.acquisitions[0],
     scope,
     kind: "spend",
     payload: {
-      previous: listing,
+      previous: { chain, txid: activation.id("hex"), outputIndex: 0 },
       spendingTxid: firstPurchase.submit.txid,
       beef: firstPurchase.submit.beef,
     },

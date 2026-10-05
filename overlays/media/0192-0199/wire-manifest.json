@@ -1,18 +1,18 @@
 {
   "version": 1,
   "archive": "wire-vectors.json.gz",
-  "sha256": "3db6afd08e9c5f11ca703ebe921566d9ca80b3fef22c42f1262662fd46f92f39",
-  "decodedBytes": 18014463,
+  "sha256": "5a30970058074d16f5a35591120525b1e26ceb202ce5a45cfc402b33be16f317",
+  "decodedBytes": 20199019,
   "clock": 1790611200,
   "chain": {
     "network": "brc-fixture-easy-work",
-    "genesisHash": "5f64d0c41ff7a0bfda7eaf203606d7b562e579f67e80921dd98df949a87fe309"
+    "genesisHash": "58ec6ad620a4c7788bc3ce8a434a709f3b668dfc6feb29ef7050d8c5cc99b639"
   },
   "counts": {
     "packets": 24,
     "lch": 11,
     "http": 20,
-    "transactions": 8,
+    "transactions": 9,
     "acquisitions": 3
   },
   "warning": "All keys are public fixtures. Synthetic easy-work chain, no mainnet claim; no network/wallet effects."

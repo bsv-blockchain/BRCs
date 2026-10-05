@@ -1,187 +1,32 @@
 {
   "version": 1,
-  "compilerCommit": "b3f08f2cc2349c311904d2c745dc19d65f23e8ca",
-  "compilerOptions": {
-    "fileName": "RevenueListing.runar.ts"
-  },
-  "sourceSHA256": "b512b955e21471552fc541a06b2de182eaa25767170364023546ff4d6a373a12",
-  "compilerProgramSHA256": "983d9bc4488f929c99e0b5d5f5cf9fc6600d0abb48e6bb299ff0cd641214f8f9",
-  "programSHA256": "ae47a6cc9bdc955d6aa73cdc459bbd6bbe493419dcf3ed3fc952a95c8c510716",
-  "normalization": {
-    "removeOpcodeAtByte": 2,
-    "opcode": "OP_CODESEPARATOR",
-    "replacements": [
-      {
-        "byte": 185,
-        "from": "OP_2MUL",
-        "to": [
-          "OP_2",
-          "OP_MUL"
-        ]
-      }
-    ]
-  },
-  "abi": {
-    "constructor": {
-      "params": []
+  "family": "https://bsv.brc.dev/tokens/0197#revenue-listing-v1",
+  "metadataBytes": 717,
+  "lockingPrefixHex": "4dcd02",
+  "dropOpcodeHex": "75",
+  "programs": {
+    "activation": {
+      "assembly": "activation.asm",
+      "assemblyFileSHA256": "0840b446b1de292b5278e255cb8007c07effacf3c537e9e1e9f6f25a8e7284ed",
+      "hex": "activation.hex",
+      "bytes": 32433,
+      "programSHA256": "d5c32bdf57d770d526a3ec3f02fef0151a4b2c303aaef08b01ca12f98bdd62f3",
+      "lockingBytes": 33154
     },
-    "methods": [
-      {
-        "name": "compact",
-        "params": [
-          {
-            "name": "cp_data",
-            "type": "ByteString"
-          },
-          {
-            "name": "cp_offset",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "width",
-        "params": [
-          {
-            "name": "vw_data",
-            "type": "ByteString"
-          },
-          {
-            "name": "vw_offset",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "lengthPrefix",
-        "params": [
-          {
-            "name": "lp_n",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "output",
-        "params": [
-          {
-            "name": "out_amount",
-            "type": "bigint"
-          },
-          {
-            "name": "out_script",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "reverse32",
-        "params": [
-          {
-            "name": "rv_data",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "point",
-        "params": [
-          {
-            "name": "pt_key",
-            "type": "ByteString"
-          },
-          {
-            "name": "pt_y",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "predecessor",
-        "params": [
-          {
-            "name": "pr_raw",
-            "type": "ByteString"
-          },
-          {
-            "name": "pr_outpoint",
-            "type": "ByteString"
-          },
-          {
-            "name": "pr_script",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "spend",
-        "params": [
-          {
-            "name": "preimage",
-            "type": "SigHashPreimage"
-          },
-          {
-            "name": "prevouts",
-            "type": "ByteString"
-          },
-          {
-            "name": "operation",
-            "type": "bigint"
-          },
-          {
-            "name": "receipt",
-            "type": "ByteString"
-          },
-          {
-            "name": "recipientY",
-            "type": "ByteString"
-          },
-          {
-            "name": "splitAmount",
-            "type": "bigint"
-          },
-          {
-            "name": "payoutUnits",
-            "type": "bigint"
-          },
-          {
-            "name": "otherPrevious",
-            "type": "ByteString"
-          },
-          {
-            "name": "newState",
-            "type": "ByteString"
-          },
-          {
-            "name": "newKeyYs",
-            "type": "ByteString"
-          },
-          {
-            "name": "adminSignature",
-            "type": "Sig"
-          },
-          {
-            "name": "consents",
-            "type": "ByteString"
-          },
-          {
-            "name": "changeHash",
-            "type": "ByteString"
-          },
-          {
-            "name": "changeAmount",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": true
-      }
-    ]
+    "active": {
+      "assembly": "active.asm",
+      "assemblyFileSHA256": "32656cf44621a66c3daccb75aca993b70b531b9055e5415037f3cc52364b47b4",
+      "hex": "active.hex",
+      "bytes": 4517,
+      "programSHA256": "6f595d528137d6a6a38893b645b7dc76762853a9ede4e06ee8e0d0ede22ddb3a",
+      "lockingBytes": 5238
+    }
+  },
+  "unlocking": {
+    "activationProofSlots": 9,
+    "valuesPerProofSlot": 11,
+    "commonValues": 15,
+    "activeValues": 15,
+    "sighashType": 65
   }
 }

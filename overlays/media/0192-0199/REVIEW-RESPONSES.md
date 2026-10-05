@@ -192,50 +192,48 @@ do not imply an automatic refund or fair-exchange mechanism.
 
 ## BRC-197
 
-**197.1 — Concrete family.** [Sections 1–5](../../../tokens/0197.md#1-descriptor-revenue-schedule-and-authorized-genesis)
-register exact executable bytes, metadata/inverse encoding, fourteen-argument ABI,
-integer/transaction bounds, authenticated preimage construction and pinned compiler/
-normalization hashes. Both interpreters execute all 42 frozen Script cases. The
-family is a proposed executable contract subject to independent review, not a
-seller-supplied opaque adapter or a completed production security audit.
+**197.1 — Concrete family.** [Sections 1–5](../../../tokens/0197.md#1-descriptor-derivation-and-genesis)
+register two literal Bitcoin Script programs, metadata/inverse encoding, the
+activation proof and fifteen-argument active ABI. Independent assemblers reproduce
+the frozen bytes. Both interpreters execute five connected complete transactions,
+an eight-recipient purchase/payout pair and 29 active/activation cases. The family
+remains subject to independent security
+review and production wallet/miner qualification.
 
-**197.2 — Wallet boundary.** Receipts now carry **one satoshi**, consistent with
-the pinned BRC-100 minimum. The two-phase createAction/signAction flow fixes input
-and output positions, final sequences, locktime and complete revalidation after
-wallet funding/signing; unsupported ordering/signing authority fails before spend.
-The corpus funds and signs real transactions with public fixture keys. A real
-BRC-100 funding-wallet integration remains an explicit implementation qualification
-item; these direct signatures are not mislabeled as that requested integration.
+**197.2 — Wallet boundary.** Receipts carry **one satoshi**. Two-phase
+createAction/signAction fixes input/output positions and requires exact final
+revalidation. The seller's transaction authority and recipient payout locks use
+one publicly derived child per identity; root identity scalars never sign raw
+transactions or receive payments. Public fixtures use separate funding scalars.
+Protected BRC-100 signer/consumer separation and fixed-child remittance remain
+explicit integration qualification. Exporting any such child scalar reveals its
+root and is prohibited.
 
-**197.3 — Script versus domain.** Script checks actual current/other prevouts,
-amounts, exact outputs/receipts, purchase recipient curve point, signatures and
-operation exclusivity. Genesis/asset authority, full ancestry, currentness and
-prepared-request association remain domain checks. A purchase for another valid
-recipient is Script-valid but wrong for the original acquisition. Negative
-transactions reconstruct preimages/signatures so failures exercise route rules,
-including changed amounts/scripts, malformed receipts, unauthorized payout and
-missing consent, rather than supplied boolean claims.
+**197.3 — Script versus domain.** Activation Script verifies public BKDS child
+links once, and active Script checks actual prevouts, amounts, exact outputs and
+receipts, purchase recipient curve point, child signatures where needed and route
+exclusivity. Genesis/asset authority, full ancestry, currentness and prepared
+request association remain domain checks. A purchase for another valid recipient
+is Script-valid but wrong for the original acquisition. Negative transactions use
+fresh preimages and signatures to exercise the economic and linkage predicates.
 
-**197.4 — Portable lineage and merges.** [Section 6](../../../tokens/0197.md#6-portable-lineage-and-domain-checks)
-defines a bounded package carrying descriptor, signed genesis and every predecessor
-path. Partial BEEFs resolve as one deduplicated DAG before validation. Eight listing
-transactions cover purchase, split, both branch purchases, merge, payout and
-amendment; retirement is a separately executed valid branch. Missing ancestry,
-forged genesis and copied-script descendants are rejected. Both implementations
-check the funded-copy boundary: identical scripts and conserved real value can
-pass Script while false same-genesis history fails domain validation. Such an
-administrative merge can lose catalogue eligibility, cannot create a purchase or
-license, and cannot retroactively remove valid earlier entitlements. Validate both
-lineages before requesting seller signatures.
+**197.4 — Portable lineage.** [Section 6](../../../tokens/0197.md#6-lineage-and-domain-checks)
+requires a bounded package carrying the descriptor, signed reserve-stage genesis,
+activation and every predecessor on the target's branch. Partial BEEFs resolve as
+one deduplicated graph before validation. A copied active Script or direct active
+output is not an authorized listing. The common packet exercises signed genesis,
+activation and successive purchases; the family graph adds split, payout and
+retirement. Missing ancestry remains unresolved rather than accepted by a matching
+Script prefix.
 
-**197.5 — Complete revenue consequences.** seller-v1 supports all five admin routes;
-none has no withdrawal and is ineligible for the collector profile. Actual seller
-transaction signatures are required. Split/merge conserve constrained value;
-payout distributes exact integer quanta and retains remainders; retirement uses
-an externally funded exact top-up. Changing shares/recipients requires **every
-current recipient's** consent plus the seller, with full value retained. Balance/
-ancestry exhaustion stops offering the listing without deleting historical rights.
-Every enabled route has positive and negative independent execution evidence.
+**197.5 — Complete revenue consequences.** Every active listing supports
+permissionless payout; no payout-less administration mode exists. Split conserves
+constrained value and requires the protected seller child. Payout distributes exact
+quanta to verified children without seller cooperation. Early retirement requires
+that child; after the committed height anyone can retire with an externally funded
+exact top-up. Merge and amendment are invalid in v1; a changed schedule needs a
+new signed lineage. Balance or ancestry exhaustion stops new offers without
+deleting historical rights. Every enabled route has two-interpreter execution.
 
 ## BRC-198
 
