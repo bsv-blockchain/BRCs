@@ -1,187 +1,236 @@
 {
   "version": 1,
-  "compilerCommit": "b3f08f2cc2349c311904d2c745dc19d65f23e8ca",
-  "compilerOptions": {
-    "fileName": "RevenueListing.runar.ts"
-  },
-  "sourceSHA256": "b512b955e21471552fc541a06b2de182eaa25767170364023546ff4d6a373a12",
-  "compilerProgramSHA256": "983d9bc4488f929c99e0b5d5f5cf9fc6600d0abb48e6bb299ff0cd641214f8f9",
-  "programSHA256": "ae47a6cc9bdc955d6aa73cdc459bbd6bbe493419dcf3ed3fc952a95c8c510716",
-  "normalization": {
-    "removeOpcodeAtByte": 2,
-    "opcode": "OP_CODESEPARATOR",
-    "replacements": [
-      {
-        "byte": 185,
-        "from": "OP_2MUL",
-        "to": [
-          "OP_2",
-          "OP_MUL"
-        ]
-      }
-    ]
-  },
-  "abi": {
-    "constructor": {
-      "params": []
+  "family": "https://bsv.brc.dev/tokens/0197#revenue-listing-v1",
+  "metadataBytes": 717,
+  "lockingPrefixHex": "4dcd02",
+  "dropOpcodeHex": "75",
+  "programs": {
+    "activation": {
+      "assembly": "activation.asm",
+      "assemblyFileSHA256": "ef3f2aee674f7b44e1e5f3d311cb7ef8a57a233f1e75cd118ee82a849e34bcbb",
+      "hex": "activation.hex",
+      "bytes": 33406,
+      "programSHA256": "5152517f75ac4159aa5d34211f45ce12cd85386a8d1414169886b0d64dac1dea",
+      "lockingBytes": 34127,
+      "components": [
+        {
+          "path": "components/activation/00-depth.asm",
+          "wordStart": 0,
+          "wordCount": 3,
+          "byteStart": 0,
+          "bytes": 4,
+          "sha256": "7e1eab72f36d0e1edc04c3440013b0eedc8644e9467cf79741a75acd16cde8ff"
+        },
+        {
+          "path": "components/shared/00-authenticate-preimage.asm",
+          "wordStart": 3,
+          "wordCount": 586,
+          "byteStart": 4,
+          "bytes": 1229,
+          "sha256": "899a206acce02ba7a0e569d172f5b23bf0f5f328a7a2435008306b49907e5332"
+        },
+        {
+          "path": "components/shared/01-parse-preimage.asm",
+          "wordStart": 589,
+          "wordCount": 154,
+          "byteStart": 1233,
+          "bytes": 191,
+          "sha256": "dbc6ce68b0e3f3ba60126e1689dbce0a395404dfa25f44282af11cf099f62478"
+        },
+        {
+          "path": "components/shared/02-parse-metadata.asm",
+          "wordStart": 743,
+          "wordCount": 158,
+          "byteStart": 1424,
+          "bytes": 199,
+          "sha256": "4baeba1d9a26a36294d2b9ee8d2b660b957e224d3a53e1273ef5242cdac7e56b"
+        },
+        {
+          "path": "components/activation/00-enter.asm",
+          "wordStart": 901,
+          "wordCount": 37,
+          "byteStart": 1623,
+          "bytes": 143,
+          "sha256": "96c1f88d0194199324cf2b189b0130bc4e2cd98c8411d4b283b8f39b6d261389"
+        },
+        {
+          "path": "components/activation/10-seller-link.asm",
+          "wordStart": 938,
+          "wordCount": 1207,
+          "byteStart": 1766,
+          "bytes": 2808,
+          "sha256": "237ea295847a269c05579db65ef3463bfb1c44ff7793e9fcef6ccb35a32c3ba5"
+        },
+        {
+          "path": "components/activation/20-recipient-1.asm",
+          "wordStart": 2145,
+          "wordCount": 1286,
+          "byteStart": 4574,
+          "bytes": 2987,
+          "sha256": "13be23bbee1c69b8d3b25e92dfc07c8ffa09beeebaf83a5a9b4b493f14cd35b7"
+        },
+        {
+          "path": "components/activation/21-recipient-2.asm",
+          "wordStart": 3431,
+          "wordCount": 1286,
+          "byteStart": 7561,
+          "bytes": 2937,
+          "sha256": "62dfa320961f76cb3133845bc3b9b8c66809fbee4892595626eefbc8eccd9688"
+        },
+        {
+          "path": "components/activation/22-recipient-3.asm",
+          "wordStart": 4717,
+          "wordCount": 1286,
+          "byteStart": 10498,
+          "bytes": 2932,
+          "sha256": "632c19e6821ee1743ada10e2318f3e99859930e772a4a4c315e33bbecaffa475"
+        },
+        {
+          "path": "components/activation/23-recipient-4.asm",
+          "wordStart": 6003,
+          "wordCount": 1286,
+          "byteStart": 13430,
+          "bytes": 2932,
+          "sha256": "6c7b112c6f0a9eb7d7fcc18aec9cfadd2ec6b5febfa35dea0ef3023e72c859d8"
+        },
+        {
+          "path": "components/activation/24-recipient-5.asm",
+          "wordStart": 7289,
+          "wordCount": 1286,
+          "byteStart": 16362,
+          "bytes": 2932,
+          "sha256": "d3d6d1f917517dfb0fdadcee10cff5e1277c5235e924711cce57773a2d9aa5e5"
+        },
+        {
+          "path": "components/activation/25-recipient-6.asm",
+          "wordStart": 8575,
+          "wordCount": 1286,
+          "byteStart": 19294,
+          "bytes": 2932,
+          "sha256": "4f9e94c4f00d474936c014f357484c7ae87f8cba5b3fa97cb3239796c16fbe7d"
+        },
+        {
+          "path": "components/activation/26-recipient-7.asm",
+          "wordStart": 9861,
+          "wordCount": 1286,
+          "byteStart": 22226,
+          "bytes": 2932,
+          "sha256": "cbca4a11d1d22cce8fd0eb22f90e90bd417461087e20fcca0664af0f03066b75"
+        },
+        {
+          "path": "components/activation/27-recipient-8.asm",
+          "wordStart": 11147,
+          "wordCount": 1286,
+          "byteStart": 25158,
+          "bytes": 2932,
+          "sha256": "929f46f51380e8978b5e12a7e23a9d90b943c69b5b29e987d565b451eead0593"
+        },
+        {
+          "path": "components/activation/90-weight-sum.asm",
+          "wordStart": 12433,
+          "wordCount": 104,
+          "byteStart": 28090,
+          "bytes": 130,
+          "sha256": "ce29b0a3ede45b1146e22ef9c7a82951c9852efcc051700708d01347329a6d88"
+        },
+        {
+          "path": "components/activation/99-create-active.asm",
+          "wordStart": 12537,
+          "wordCount": 230,
+          "byteStart": 28220,
+          "bytes": 5186,
+          "sha256": "f60f2714dcd0ce21d020fdf3611d48f67ab4c6fdd8064f0b8154e743fa412456"
+        }
+      ]
     },
-    "methods": [
-      {
-        "name": "compact",
-        "params": [
-          {
-            "name": "cp_data",
-            "type": "ByteString"
-          },
-          {
-            "name": "cp_offset",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "width",
-        "params": [
-          {
-            "name": "vw_data",
-            "type": "ByteString"
-          },
-          {
-            "name": "vw_offset",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "lengthPrefix",
-        "params": [
-          {
-            "name": "lp_n",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "output",
-        "params": [
-          {
-            "name": "out_amount",
-            "type": "bigint"
-          },
-          {
-            "name": "out_script",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "reverse32",
-        "params": [
-          {
-            "name": "rv_data",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "point",
-        "params": [
-          {
-            "name": "pt_key",
-            "type": "ByteString"
-          },
-          {
-            "name": "pt_y",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "predecessor",
-        "params": [
-          {
-            "name": "pr_raw",
-            "type": "ByteString"
-          },
-          {
-            "name": "pr_outpoint",
-            "type": "ByteString"
-          },
-          {
-            "name": "pr_script",
-            "type": "ByteString"
-          }
-        ],
-        "isPublic": false
-      },
-      {
-        "name": "spend",
-        "params": [
-          {
-            "name": "preimage",
-            "type": "SigHashPreimage"
-          },
-          {
-            "name": "prevouts",
-            "type": "ByteString"
-          },
-          {
-            "name": "operation",
-            "type": "bigint"
-          },
-          {
-            "name": "receipt",
-            "type": "ByteString"
-          },
-          {
-            "name": "recipientY",
-            "type": "ByteString"
-          },
-          {
-            "name": "splitAmount",
-            "type": "bigint"
-          },
-          {
-            "name": "payoutUnits",
-            "type": "bigint"
-          },
-          {
-            "name": "otherPrevious",
-            "type": "ByteString"
-          },
-          {
-            "name": "newState",
-            "type": "ByteString"
-          },
-          {
-            "name": "newKeyYs",
-            "type": "ByteString"
-          },
-          {
-            "name": "adminSignature",
-            "type": "Sig"
-          },
-          {
-            "name": "consents",
-            "type": "ByteString"
-          },
-          {
-            "name": "changeHash",
-            "type": "ByteString"
-          },
-          {
-            "name": "changeAmount",
-            "type": "bigint"
-          }
-        ],
-        "isPublic": true
-      }
-    ]
+    "active": {
+      "assembly": "active.asm",
+      "assemblyFileSHA256": "751aa0cd1175b4fe7b030464738dc9a5052c66a804d19461f7ace377b1c8e767",
+      "hex": "active.hex",
+      "bytes": 4906,
+      "programSHA256": "5aff350548d3b420bf1a47b48b38af34bb5ecf28be5c797921c4e2a2cddd8dea",
+      "lockingBytes": 5627,
+      "components": [
+        {
+          "path": "components/active/00-depth.asm",
+          "wordStart": 0,
+          "wordCount": 3,
+          "byteStart": 0,
+          "bytes": 3,
+          "sha256": "6b8dda31cf5a328edcb9f47c25a82f4710d26f6b30e91d4d17402f1b1948d86c"
+        },
+        {
+          "path": "components/shared/00-authenticate-preimage.asm",
+          "wordStart": 3,
+          "wordCount": 586,
+          "byteStart": 3,
+          "bytes": 1229,
+          "sha256": "899a206acce02ba7a0e569d172f5b23bf0f5f328a7a2435008306b49907e5332"
+        },
+        {
+          "path": "components/shared/01-parse-preimage.asm",
+          "wordStart": 589,
+          "wordCount": 154,
+          "byteStart": 1232,
+          "bytes": 191,
+          "sha256": "dbc6ce68b0e3f3ba60126e1689dbce0a395404dfa25f44282af11cf099f62478"
+        },
+        {
+          "path": "components/shared/02-parse-metadata.asm",
+          "wordStart": 743,
+          "wordCount": 158,
+          "byteStart": 1423,
+          "bytes": 199,
+          "sha256": "4baeba1d9a26a36294d2b9ee8d2b660b957e224d3a53e1273ef5242cdac7e56b"
+        },
+        {
+          "path": "components/active/10-purchase.asm",
+          "wordStart": 901,
+          "wordCount": 373,
+          "byteStart": 1622,
+          "bytes": 592,
+          "sha256": "aab00961ed0cdbbb888612d423bc9c99987b5584c433db8d7a8b7162b559745a"
+        },
+        {
+          "path": "components/active/20-split.asm",
+          "wordStart": 1274,
+          "wordCount": 234,
+          "byteStart": 2214,
+          "bytes": 461,
+          "sha256": "8b7cfbaf824544b4c308a13cd03c253766c0b80f0d6a94f0a7a05aa7396c1115"
+        },
+        {
+          "path": "components/active/30-payout.asm",
+          "wordStart": 1508,
+          "wordCount": 719,
+          "byteStart": 2675,
+          "bytes": 1099,
+          "sha256": "1d0bcdd72214a6ac9bd16629ed16988d09997f6b720e74afa552d748f9cb2e00"
+        },
+        {
+          "path": "components/active/40-retire.asm",
+          "wordStart": 2227,
+          "wordCount": 735,
+          "byteStart": 3774,
+          "bytes": 1125,
+          "sha256": "2229b06f60af7633f4e026405348c044d0ef32ef13bb5180a6a2573b1a122f68"
+        },
+        {
+          "path": "components/active/99-finish.asm",
+          "wordStart": 2962,
+          "wordCount": 7,
+          "byteStart": 4899,
+          "bytes": 7,
+          "sha256": "68abdf05759d7514b3b6ab865204e139d5e4e3df78bf8e3725749a8beaf256f2"
+        }
+      ]
+    }
+  },
+  "unlocking": {
+    "activationProofSlots": 9,
+    "valuesPerProofSlot": 11,
+    "commonValues": 15,
+    "activeValues": 15,
+    "sighashType": 65
   }
 }

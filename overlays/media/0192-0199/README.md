@@ -19,8 +19,8 @@ payment or admission. The conceptual discussion remains separately reviewable as
    identity and durable recovery obligations.
 5. [BRC-196](../../0196.md): prepared purchases, STEAK/POTATOES, attributable release
    evidence and explicit local uncertainty.
-6. [BRC-197](../../../tokens/0197.md): an exact executable listing Script family,
-   revenue distribution, unanimous amendments and independently checked lineage.
+6. [BRC-197](../../../tokens/0197.md): exact reserve-stage and active Bitcoin Scripts,
+   public child-key linkage, permissionless revenue payout and checked lineage.
 7. [BRC-198](../../../apps/0198.md): both complete LCH acquisition bindings,
    standing Offers, settlement and authenticated content playback.
 8. [BRC-199](../../0199.md): independent root-host advertisement suppression,
@@ -46,22 +46,19 @@ revisions are distinct, so durable pending verification cannot expose half of an
 atomic spend/successor group.
 
 Private publication, funding and delivery have explicit durable identities and
-states. A lost wallet or admission reply does not authorize another payment.
+states. BRC-197 purchase recovery groups independently verified txid variants by the full authenticated purchase preimage digest while retaining exact historical release evidence. A lost wallet or admission reply does not authorize another payment.
 An expired catalogue or rotated discovery manifest cannot erase an already
 accepted recovery obligation. Local rejection does not prove that a signed
 transaction can never be mined elsewhere. Delivery and usable decryption are
 separate outcomes; no atomic fair-exchange guarantee is claimed.
 
-BRC-197 registers a 39,580-byte program and exact 40,008-byte locking script,
-including metadata. Its purchase, split, merge, payout, retirement and amendment
-routes are executed by two interpreters against frozen transactions. Payouts
-retain remainders; retirement requires an explicit external top-up for exact
-shares; amendments require the seller and every current recipient. Script binds
-real predecessor values and constrains their successors. Full same-genesis
-provenance is a separate domain check. A seller-authorized merge with a real funded
-copy can conserve value in Script but fail lineage acceptance and stop further
-catalogue sales on that branch. No administrative merge creates a purchase or
-license. See the [family guide](../../../tokens/media/0197/README.md).
+BRC-197 registers literal activation and active Bitcoin Scripts. The 34,127-byte
+stage lock verifies BRC-42/BRC-29-shaped public root-to-child links once and
+creates the 5,627-byte active lock. Purchase, split, permissionless payout and
+retirement execute in two interpreters. Payouts retain remainders; expiry permits
+anyone to retire with an exact external top-up. No root identity transaction
+signature, seller-only payout, merge or amendment path exists. Full signed-genesis
+provenance remains a separate domain check. See the [family guide](../../../tokens/media/0197/README.md).
 
 LCH keeps its deterministic CBOR IDs and signed object types. The critical standing
 Offer profile binds the buyer in the signed Request, allowing successive buyers
@@ -84,7 +81,9 @@ npm ci --prefix overlays/media/0192-0199 --ignore-scripts
 python3 -m venv overlays/media/0192-0199/.venv
 overlays/media/0192-0199/.venv/bin/python -m pip install -r overlays/media/0192-0199/requirements-lock.txt
 npm test --prefix overlays/media/0192-0199
+node tokens/media/0197/verify-assembly.mjs
 overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-independent.py
+overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-proposal-query.py
 overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-traces.py
 overlays/media/0192-0199/.venv/bin/python overlays/media/0192-0199/verify-reconciliation.py
 overlays/media/0192-0199/.venv/bin/python tokens/media/0197/verify-script.py
@@ -96,10 +95,11 @@ requirements-lock.txt. The test scripts perform no network calls, wallet
 transactions, broadcasts or deployments. All private scalars, CEKs, nonces and
 funding outputs in the corpus are **public test material**.
 
-The normative frozen family build can also be reproduced using the pinned Rúnar
-checkout and command in the family guide. Test execution never recompiles or
-regenerates its expected transactions. Generators are separate authoring tools:
-`generate.mjs`, `generate-reconciliation.mjs`, `generate-digests.py` and the family transaction generator. Signature
+The normative family programs are literal Bitcoin Script opcode listings, independently
+assembled against frozen hex. Test execution never regenerates expected transactions.
+Generators are separate fixture authoring tools: `generate.mjs`,
+`generate-reconciliation.mjs`, `generate-proposal-query.mjs`,
+`generate-digests.py` and `tokens/media/0197/generate-vectors.py`. Signature
 randomness means regeneration may change corpus bytes; review the new bytes and
 re-run both independent verifiers before committing them. The published family
 program cannot be silently replaced under its existing IRI.
@@ -116,6 +116,12 @@ BEEF and CBOR contexts are checked against their own bounds. The corpus contains
   response transcripts, including handshake material and complete signed bodies.
 - Actual BEEF/Atomic BEEF, alternate valid proof bytes, verified spend links,
   private publication, exact BRC-29 funding and admission-linked recovery.
+- The shared BRC-192 reconciliation corpus imports the signed BRC-197
+  permissionless expiry-retirement transaction and verifies both inputs in the
+  SDK and BitcoinX. Two durable traces check that its listing remains unspent
+  before maturity and is consumed at the first eligible height under both
+  `nonFinal` settings. The height contexts are finality test inputs, not claims
+  of a mined retirement or a production chain view.
 - Three content acquisitions: two different buyers purchasing successive outputs
   under one standing Offer, and a BRC-105 paid lookup. Each includes authority,
   Header/Asset/Offer/Policy, signed Request, settlement, License/Agreement,
@@ -195,14 +201,29 @@ they do not qualify production scheduling, arbitrary dependency graphs, consensu
 validation, authorization or provider I/O. Source membership events start after
 transport/scope validation, whose separate byte/trace tests remain required.
 
-The family corpus contains 42 Script cases (12 accepted and 30 rejected), exact
-raw transactions/preimages, a signed genesis and a full split/merge ancestry DAG.
-Both SDK and BitcoinX execute the same immutable bytes. Negative cases include
-underpayment, false predecessors, reduced continuation value, payout redirection,
-wrong shares, missing consent, state revision changes, malformed receipts and
-incorrect retirement top-up. A separate real funded-copy merge demonstrates
-Script acceptance with domain-lineage rejection. See the family manifest for
-per-case sources, expected outcomes and reasons.
+The family Script corpus has five connected valid transactions and a separate
+eight-recipient purchase/payout pair, each with two fully checked inputs, plus
+29 active/activation acceptance or rejection vectors.
+Both SDK and BitcoinX execute the same immutable bytes. The connected graph
+covers stage activation, purchase, split, payout and expiry retirement with exact
+fees and a retirement top-up. Rejections include underpayment, payout redirection,
+missing child authority and forged public key links. The signed genesis packet,
+BEEF lineage and prepared-purchase domain association remain separate checks.
+
+[proposal-query-vectors.json](./proposal-query-vectors.json) adds three frozen
+BRC-77 signed proposal heads and four frozen selection digests for the optional
+BRC-194 `proposal-channel-heads-v1` query. The JavaScript and independent Python
+verifiers check signatures and digests, then execute 16 manually specified query
+mapping scenarios and 10 malformed-query rejections, including the 256-channel
+boundary. Snapshot ordering, private filtering, unknown predecessor history,
+atomic replacement, state-only expiry, retention removal, no-op writes and
+visibility resets are explicit. The `head` names in model expectations refer to
+the complete signed objects in that file; they are fixture notation, not an
+alternative observation wire format. A row's `readable` flag models an already
+evaluated host-access decision. These models do not validate a production
+policy implementation, durable journal/index/log transaction, history pin,
+authenticated transport or current disclosure gate. Those require the real
+provider/client qualification described in BRC-194 section 7.
 
 ## Conformance claims
 
@@ -222,9 +243,9 @@ policies, limits and relevant evidence. The following levels are distinct:
 - **Acquisition provider**: specifically BRC-195 and/or BRC-196 profiles and selected
   release policies, with protected storage, real wallet/admission reconciliation,
   durable recovery obligations and recipient isolation.
-- **Covenant family**: exact family bytes, inverse parsing, ABI and named routes,
-  independently executed transitions, plus the selected domain evidence checks.
-  Supporting purchase alone cannot claim complete seller-v1 administration.
+- **Covenant family**: exact activation and active bytes, inverse parsing, ABI and
+  all four routes, independently executed transitions and domain evidence checks.
+  Purchase alone cannot claim complete BRC-197 support.
 - **LCH binding**: explicit usage, payment, settlement, encryption and key-delivery
   mechanisms, authority checks and authenticated decryption for the selected mode.
 - **Integrated application**: actual user journeys, wallet permissions, compatible

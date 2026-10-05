@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencyCommit": "8f36bdf2eca8298ed1a269054f8c5054156dae95",
-  "compatibility": "Normative dependency bytes are pinned here. Later BRC revisions are not adopted silently; review their semantic compatibility and issue a new profile version if committed bytes or behavior change. SDK version is a test tool, not normative precedence.",
+  "compatibility": "Normative dependency bytes are pinned here. BRC-29 and BRC-42 include the explicit pre-adoption BRC-197 security amendments in this proposal; other baseline files remain from dependencyCommit. Later revisions are not adopted silently. SDK version is a test tool, not normative precedence.",
   "dependencies": [
     {
       "path": "wallet/0100.md",
@@ -29,7 +29,11 @@
     },
     {
       "path": "payments/0029.md",
-      "sha256": "4ded8e79ff4579f33ad8e7240327931bd6c5a49fb54939cf0861a39bc481b258"
+      "sha256": "340d205d297de4ce09ef39688480d4f35dbdcdf21dee0cc89277e4fbba90857f"
+    },
+    {
+      "path": "key-derivation/0042.md",
+      "sha256": "0a040431d1b88d9db22f3322f70e26fc6684761c89eb8c749af115e207776ba2"
     },
     {
       "path": "payments/0105.md",
@@ -135,6 +139,11 @@
       "immutable": true
     },
     {
+      "id": "https://bsv.brc.dev/overlays/0194#proposal-channel-heads-v1",
+      "definition": "overlays/0194.md",
+      "immutable": true
+    },
+    {
       "id": "https://bsv.brc.dev/overlays/0194#proposal-v1",
       "definition": "overlays/0194.md",
       "immutable": true
@@ -187,11 +196,7 @@
     "bitcoinX": "0.9",
     "cryptography": "46.0.3",
     "cbor2": "5.7.1",
-    "compiler": {
-      "repository": "https://github.com/icellan/runar",
-      "commit": "b3f08f2cc2349c311904d2c745dc19d65f23e8ca",
-      "artifact": "tokens/media/0197/artifact.json"
-    }
+    "bitcoinScriptArtifact": "tokens/media/0197/artifact.json"
   },
   "externalProtocolSources": [
     {

@@ -320,6 +320,11 @@ for a in v["acquisitions"]:
             tx.outputs[1].script_pubkey.to_bytes() == receipt
             and tx.outputs[1].value == 1
         )
+        purchase_preimage = list(tx.inputs[0].script_sig.ops())[0]
+        purchase_commitment = sha(sha(purchase_preimage)).hex()
+        assert st["body"]["purchaseCommitment"] == purchase_commitment
+        assert a["envelope"]["result"]["purchaseCommitment"] == purchase_commitment
+        assert a["envelope"]["result"]["potatoes"]["body"]["purchaseCommitment"] == purchase_commitment
         assert "buyer" not in offer["body"]["payment"]["pricing"]["requirements"][0]
     else:
         inv = (

@@ -1,190 +1,96 @@
-// Frozen bytes are consumed without signing or rewriting fixtures.
-import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import { gunzipSync } from "node:zlib";
-import {
-  Transaction,
-  evaluate,
-  decode,
-  encode,
-  stateBytes,
-} from "./family.mjs";
-import {
-  Beef,
-  SignedMessage,
-} from "../../../overlays/media/0192-0199/node_modules/@bsv/sdk/dist/esm/mod.js";
-import {
-  hex,
-  sha,
-  preimage,
-  digest,
-  canonical,
-} from "../../../overlays/media/0192-0199/protocol.mjs";
-const read = (p) => readFileSync(new URL(p, import.meta.url));
-const corpus = JSON.parse(read("./transactions.json"));
-const archive = read("./" + corpus.rawArchive);
-assert.equal(hex(sha(archive)), corpus.rawArchiveSHA256);
-const raw = JSON.parse(gunzipSync(archive));
-let accepted = 0,
-  rejected = 0;
-for (const c of corpus.traces) {
-  const tx = Transaction.fromHex(raw[c.txid]);
-  assert.equal(tx.id("hex"), c.txid);
-  const results = c.sources.map((s, i) => {
-    assert.equal(tx.inputs[i].sourceTXID, s.txid);
-    assert.equal(tx.inputs[i].sourceOutputIndex, s.index);
-    tx.inputs[i].sourceTransaction = Transaction.fromHex(raw[s.txid]);
-    try {
-      return evaluate(tx, i);
-    } catch {
-      return false;
-    }
-  });
-  assert.equal(results.every(Boolean), c.expected === "accept", c.name);
-  if (c.expected === "accept") accepted++;
-  else rejected++;
+import assert from 'node:assert/strict'
+import {readFileSync} from 'node:fs'
+import {gunzipSync} from 'node:zlib'
+import {Transaction,LockingScript,UnlockingScript,Spend} from '../../../overlays/media/0192-0199/node_modules/@bsv/sdk/dist/esm/mod.js'
+
+const read = name => readFileSync(new URL(name,import.meta.url))
+const graph=JSON.parse(read('lineage-vectors.json'))
+const transactions=[Transaction.fromHex(graph.genesis),...graph.funding.map(x=>Transaction.fromHex(x))]
+const byId=new Map(transactions.map(tx=>[tx.id('hex'),tx]))
+function check(tx,index,source){
+  const input=tx.inputs[index]
+  const spend=new Spend({sourceTXID:input.sourceTXID,sourceOutputIndex:input.sourceOutputIndex,
+    sourceSatoshis:source.satoshis,lockingScript:LockingScript.fromHex(source.lockingScript.toHex()),
+    transactionVersion:tx.version,
+    otherInputs:tx.inputs.filter((_,j)=>j!==index).map(x=>({...x,sourceTXID:x.sourceTXID})),
+    outputs:tx.outputs,inputIndex:index,unlockingScript:UnlockingScript.fromHex(input.unlockingScript.toHex()),
+    inputSequence:input.sequence,lockTime:tx.lockTime,memoryLimit:128*1024*1024})
+  try{return spend.validate()}catch{return false}
 }
-assert.deepEqual(
-  decode(encode(corpus.descriptor, corpus.state), corpus.descriptor),
-  corpus.state,
-);
-assert.equal(stateBytes(corpus.state).length, 305);
-console.log(
-  JSON.stringify({
-    scriptCases: accepted + rejected,
-    accepted,
-    rejected,
-    interpreter: "@bsv/sdk 2.8.10",
-    frozen: true,
-  }),
-);
-
-const packageBytes = gunzipSync(read("./" + corpus.lineagePackage));
-assert.equal(hex(sha(packageBytes)), corpus.lineagePackageSHA256);
-const pkg = JSON.parse(packageBytes);
-const checkpoint = corpus.chainCheckpoint;
-const tracker = {
-  isValidRootForHeight: async (root, height) =>
-    root === checkpoint.txid && height === 0,
-  currentHeight: async () => 101,
-};
-async function verifyLineage(p) {
-  assert.equal(canonical(p.descriptor), canonical(corpus.descriptor));
-  const sig = Buffer.from(p.genesis.signature, "base64");
-  assert.equal(hex(sig.subarray(4, 37)), p.descriptor.seller);
-  assert(
-    SignedMessage.verify(
-      [...preimage("sale-genesis", p.genesis.body)],
-      [...sig],
-    ),
-  );
-  assert.equal(p.genesis.body.listingId, digest("sale-listing", p.descriptor));
-  const combined = new Beef(),
-    ids = new Set();
-  for (const entry of p.transactions) {
-    assert(!ids.has(entry.txid));
-    ids.add(entry.txid);
-    const part = Beef.fromBinary([...Buffer.from(entry.beef, "base64")]);
-    assert.equal(part.atomicTxid, entry.txid);
-    combined.mergeBeef(part);
+for(const record of graph.records){
+  const tx=Transaction.fromHex(record.tx)
+  let funds=0
+  for(let index=0;index<tx.inputs.length;index++){
+    const input=tx.inputs[index]
+    const parent=byId.get(input.sourceTXID)
+    assert(parent,`${record.name} source ${index}`)
+    const source=parent.outputs[input.sourceOutputIndex]
+    assert(source)
+    funds+=source.satoshis
+    assert(check(tx,index,source),`${record.name} input ${index}`)
   }
-  const seen = new Set(),
-    active = new Set();
-  async function visit(id, index) {
-    const outpoint = id + ":" + index;
-    if (seen.has(outpoint)) return;
-    assert(!active.has(outpoint));
-    active.add(outpoint);
-    assert(ids.has(id), "missing listing path");
-    const tx = Transaction.fromBEEF(combined.toBinary(), id);
-    assert.equal(tx.id("hex"), id);
-    assert(await tx.verify(tracker, undefined, 128 * 1024 * 1024));
-    decode(tx.outputs[index].lockingScript, p.descriptor);
-    if (id === p.genesis.body.genesis.txid) {
-      assert.equal(index, 0);
-      assert.equal(tx.inputs[0].sourceTXID, p.descriptor.lineageAnchor.txid);
-      assert.equal(
-        tx.inputs[0].sourceOutputIndex,
-        p.descriptor.lineageAnchor.outputIndex,
-      );
-      assert.equal(tx.outputs[0].satoshis, Number(p.descriptor.reserve));
-      assert.equal(
-        tx.outputs[0].lockingScript.toHex(),
-        encode(p.descriptor, p.descriptor.initialRevenue).toHex(),
-      );
-    } else {
-      const receipt = tx.outputs.find(
-        (o) =>
-          o.lockingScript.toHex().startsWith("006a4c") &&
-          o.lockingScript.toHex().slice(8, 16) === "524f534c",
-      );
-      assert(receipt, "missing transition receipt");
-      const operation = receipt.lockingScript.toBinary()[9];
-      const m = operation === 3 ? 2 : 1;
-      for (let i = 0; i < m; i++) {
-        assert(evaluate(tx, i));
-        await visit(tx.inputs[i].sourceTXID, tx.inputs[i].sourceOutputIndex);
-      }
-    }
-    active.delete(outpoint);
-    seen.add(outpoint);
-  }
-  await visit(p.target.txid, p.target.outputIndex);
-  return seen;
+  assert.equal(funds-tx.outputs.reduce((sum,o)=>sum+o.satoshis,0),record.fee)
+  byId.set(tx.id('hex'),tx)
+  console.log(record.name,'all inputs valid')
 }
-const visited = await verifyLineage(pkg);
-assert.equal(visited.size, 9); // Both split outputs are distinct DAG vertices.
-const missing = structuredClone(pkg);
-missing.transactions = missing.transactions.filter(
-  (t) => t.txid !== corpus.traces.find((t) => t.name === "left-purchase").txid,
-);
-await assert.rejects(() => verifyLineage(missing));
-const forgedGenesis = structuredClone(pkg);
-forgedGenesis.genesis.body.genesis.txid = "11".repeat(32);
-await assert.rejects(() => verifyLineage(forgedGenesis));
-console.log(
-  JSON.stringify({
-    lineageTransactions: pkg.transactions.length,
-    distinctOutpoints: visited.size,
-    packageBytes: packageBytes.length,
-    missingParentRejected: true,
-    genesisSignatureVerified: true,
-  }),
-);
-
-const boundaryBytes = gunzipSync(read("./" + corpus.lineageBoundary));
-assert.equal(hex(sha(boundaryBytes)), corpus.lineageBoundarySHA256);
-const boundary = JSON.parse(boundaryBytes);
-const copy = structuredClone(pkg);
-copy.target.txid = boundary.copy.txid;
-copy.transactions.push(boundary.copy);
-assert.equal(
-  Transaction.fromBEEF([
-    ...Buffer.from(boundary.copy.beef, "base64"),
-  ]).outputs[0].lockingScript.toHex(),
-  encode(corpus.descriptor, corpus.state).toHex(),
-);
-await assert.rejects(() => verifyLineage(copy));
-console.log(JSON.stringify({ copiedScriptRejectedAsLineage: true }));
-
-const fundedMerge = Transaction.fromBEEF([
-  ...Buffer.from(boundary.merge.beef, "base64"),
-]);
-assert(evaluate(fundedMerge, 0) && evaluate(fundedMerge, 1));
-assert.equal(fundedMerge.outputs[1].lockingScript.toBinary()[9], 3);
-assert.equal(
-  fundedMerge.outputs[0].satoshis,
-  fundedMerge.inputs[0].sourceTransaction.outputs[0].satoshis +
-    fundedMerge.inputs[1].sourceTransaction.outputs[0].satoshis,
-);
-const claimedMerge = structuredClone(pkg);
-claimedMerge.target.txid = boundary.merge.txid;
-claimedMerge.transactions.push(boundary.copy, boundary.merge);
-await assert.rejects(() => verifyLineage(claimedMerge));
-console.log(
-  JSON.stringify({
-    fundedCopyMerge:
-      "Script accepts real conserved value; lineage rejects unrelated history",
-    noPurchaseEntitlement: true,
-  }),
-);
+for(const [name,stage] of [['negative.json.gz',false],['stage_negative.json.gz',true]]){
+  const cases=JSON.parse(gunzipSync(read(name)))
+  for(const item of cases){
+    const tx=Transaction.fromHex(item.transaction??item.tx)
+    const locking=LockingScript.fromHex(item.locking)
+    tx.inputs[0].unlockingScript=UnlockingScript.fromHex(item.unlocking??item.unlock)
+    const source={satoshis:stage?1:item.value,lockingScript:locking}
+    assert.equal(check(tx,0,source),item.expected,item.name)
+  }
+  console.log(name,cases.length,'expected results')
+}
+const malleabilityCases=JSON.parse(read('malleability-negative.json'))
+for(const item of malleabilityCases){
+  const tx=Transaction.fromHex(item.transaction)
+  const index=item.inputIndex??0
+  tx.inputs[index].unlockingScript=UnlockingScript.fromHex(item.unlocking)
+  assert.equal(check(tx,index,{satoshis:item.value,lockingScript:LockingScript.fromHex(item.locking)}),false,item.name)
+}
+console.log('malleability-negative.json',malleabilityCases.length,'expected rejections')
+const variant=JSON.parse(read('purchase-variant.json'))
+const originalPurchase=Transaction.fromHex(variant.original)
+const alternativePurchases=[variant.variant,variant.listingVariant].map(x=>Transaction.fromHex(x))
+assert.equal(new Set([originalPurchase,...alternativePurchases].map(tx=>tx.id('hex'))).size,3)
+for(const alternativePurchase of alternativePurchases)
+  assert.deepEqual(originalPurchase.outputs.map(o=>[o.satoshis,o.lockingScript.toHex()]),
+    alternativePurchase.outputs.map(o=>[o.satoshis,o.lockingScript.toHex()]))
+for(const tx of [originalPurchase,...alternativePurchases]){
+  for(const [index,source] of [
+    {satoshis:variant.listingValue,lockingScript:LockingScript.fromHex(variant.listingSource)},
+    {satoshis:variant.fundingValue,lockingScript:LockingScript.fromHex(variant.fundingSource)}
+  ].entries())assert(check(tx,index,source),`purchase variant input ${index}`)
+}
+console.log('purchase txid variants: three complete transactions valid')
+const max=JSON.parse(gunzipSync(read('max8-activation.json.gz')))
+const maxTx=Transaction.fromHex(max.transaction)
+maxTx.inputs[0].unlockingScript=UnlockingScript.fromHex(max.unlocking)
+const maxGenesis=Transaction.fromHex(max.genesis),maxFunder=Transaction.fromHex(max.funding)
+assert.equal(maxGenesis.outputs[0].lockingScript.toHex(),max.locking)
+for(const [index,source] of [maxGenesis.outputs[0],maxFunder.outputs[0]].entries())
+  assert(check(maxTx,index,source),`max8 activation input ${index}`)
+console.log('eight-recipient activation valid with complete funding input')
+const maxActive=JSON.parse(gunzipSync(read('max8-active.json.gz')))
+const maxParents=new Map([maxActive.parent,...maxActive.funding]
+  .map(raw=>{const tx=Transaction.fromHex(raw);return [tx.id('hex'),tx]}))
+for(const name of ['purchase','payout']){
+  const tx=Transaction.fromHex(maxActive[name])
+  let funds=0
+  assert.equal(tx.inputs.length,2)
+  for(let index=0;index<2;index++){
+    const input=tx.inputs[index]
+    const source=maxParents.get(input.sourceTXID)?.outputs[input.sourceOutputIndex]
+    assert(source,`${name} source ${index}`)
+    funds+=source.satoshis
+    assert(check(tx,index,source),`${name} input ${index}`)
+  }
+  assert(funds>tx.outputs.reduce((sum,out)=>sum+out.satoshis,0))
+  if(name==='payout')assert.equal(tx.outputs.length,11)
+  maxParents.set(tx.id('hex'),tx)
+}
+console.log('eight-recipient purchase and payout valid with complete funding inputs')
+console.log('SDK family verification passed')

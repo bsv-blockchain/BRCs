@@ -50,7 +50,7 @@ input_checks = 0
 for name, tx in txs.items():
     assert tx.hex_hash() == corpus["transactions"][name]["txid"]
     assert tx.to_bytes().hex() == corpus["transactions"][name]["raw"]
-    if name == "root":
+    if name == "root" or name in corpus["preverifiedRoots"]:
         continue
     assert len(set(inputs(name))) == len(tx.inputs)
     results, funds = [], 0
@@ -97,6 +97,24 @@ for label, view in corpus["views"].items():
     views[label] = dict(
         height=chain[0]["height"], mtp=times[len(times) // 2], chain=chain
     )
+for label, context in corpus["finalityContexts"].items():
+    views[label] = dict(context, chain=[])
+family = json.loads((HERE / "../../../tokens/media/0197/lineage-vectors.json").read_text())
+expiry = corpus["expiryRetirement"]
+retirement = txs[expiry["name"]]
+assert txs[expiry["listingParent"]].to_hex() == next(r["tx"] for r in family["records"] if r["name"] == "split")
+assert txs[expiry["fundingParent"]].to_hex() == family["funding"][4]
+assert retirement.to_hex() == next(r["tx"] for r in family["records"] if r["name"] == "retire")
+assert retirement.inputs[0].prev_hash[::-1].hex() == txs[expiry["listingParent"]].hex_hash()
+assert retirement.inputs[0].prev_idx == expiry["listingOutputIndex"]
+assert retirement.inputs[1].prev_hash[::-1].hex() == txs[expiry["fundingParent"]].hex_hash()
+parent_lock = txs[expiry["listingParent"]].outputs[expiry["listingOutputIndex"]].script_pubkey.to_bytes()
+assert int.from_bytes(parent_lock[3+86:3+90], "little") == expiry["expiryHeight"]
+assert retirement.locktime == expiry["expiryHeight"]
+assert retirement.inputs[0].sequence != 0xFFFFFFFF
+assert retirement.outputs[0].script_pubkey.to_bytes().startswith(bytes.fromhex("006a4c56524f534c0105"))
+assert list(retirement.inputs[0].script_sig.ops())[11] == b""
+assert valid[expiry["name"]]
 
 # Reuse only the independently written bounded byte reader, not its one-leaf
 # BEEF interpretation. This corpus adds explicit non-coinbase two-leaf paths.
@@ -273,7 +291,7 @@ class Model:
             )
 
     def snapshot(self, watch=()):
-        anchors, orders = {"root", "P"}, {}
+        anchors, orders = {"root", "P", *corpus["preverifiedRoots"]}, {}
 
         def ready(n):
             if n in anchors:

@@ -44,6 +44,7 @@ import {
   pub,
   pkh,
   le,
+  preimage as covenantPreimage,
   evaluate,
 } from "../../../tokens/media/0197/family.mjs";
 const read = (p) => readFileSync(new URL(p, import.meta.url)),
@@ -294,7 +295,8 @@ check("inverse family and initial genesis", () => {
     decode(initialScript, v.descriptor),
     v.descriptor.initialRevenue,
   );
-  const genesis = v.publication.request.evidence,
+  const authorization = v.packets.find((p) => p.type === "sale-genesis"),
+    genesis = authorization.body.genesis,
     tx = Transaction.fromHex(v.transactions[genesis.txid].raw);
   assert.equal(tx.inputs[0].sourceTXID, v.descriptor.lineageAnchor.txid);
   assert.equal(
@@ -303,12 +305,18 @@ check("inverse family and initial genesis", () => {
   );
   assert.equal(tx.outputs[0].satoshis, Number(v.descriptor.reserve));
   assert.equal(tx.outputs[0].lockingScript.toHex(), initialScript.toHex());
-  const authorization = v.packets.find((p) => p.type === "sale-genesis");
   assert.equal(authorization.body.genesis.txid, genesis.txid);
   assert.equal(
     authorization.body.listingId,
     digest("sale-listing", v.descriptor),
   );
+  const activationEvidence = v.publication.request.evidence;
+  const activation = Transaction.fromHex(v.transactions[activationEvidence.txid].raw);
+  assert.equal(activation.inputs[0].sourceTXID, genesis.txid);
+  assert.equal(activation.inputs[0].sourceOutputIndex, 0);
+  assert.equal(activation.outputs[0].lockingScript.toHex(),
+    encode(v.descriptor, v.descriptor.initialRevenue, "active").toHex());
+  assert.equal(activation.outputs[0].satoshis, Number(v.descriptor.reserve));
 });
 function decrypt(lic, buyer) {
   const enc = asset.representation.encryption,
@@ -510,6 +518,10 @@ for (const a of v.acquisitions) {
       );
       assert.equal(tx.outputs[1].satoshis, 1);
       assert.equal(r.txid, tx.id("hex"));
+      const commitment=hex(hash256(covenantPreimage(tx,0)));
+      assert.equal(r.purchaseCommitment,commitment);
+      assert.equal(a.envelope.result.purchaseCommitment,commitment);
+      assert.equal(a.envelope.result.potatoes.body.purchaseCommitment,commitment);
       assert.equal(
         a.envelope.result.potatoes.body.evidenceDigest,
         digest("release-evidence", release),
@@ -520,10 +532,14 @@ for (const a of v.acquisitions) {
         !Object.hasOwn(offer.body.payment.pricing.requirements[0], "buyer"),
       );
       assert.equal(offer.body.extensions[C].family, v.descriptor.scriptFamily);
+      assert.equal(offer.body.extensions[C].expiryHeight, v.descriptor.expiryHeight);
       assert.equal(
         offer.body.extensions[C].retirement,
-        "externally-funded-exact-top-up",
+        "seller-child-or-expiry-height-exact-top-up",
       );
+      assert.equal(offer.body.extensions[C].schedule, "immutable");
+      assert.equal(offer.body.extensions[C].derivation, "brc29-anyone-fixed");
+      assert.equal(offer.body.extensions[C].withdrawal, "permissionless-quanta");
       assert.deepEqual(
         offer.body.extensions[C].initialRevenue.recipients.map((x) => ({
           identity: hex(x.identity),

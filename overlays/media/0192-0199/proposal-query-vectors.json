@@ -1,0 +1,622 @@
+{
+  "version": 1,
+  "claim": "Signed examples and bounded query-mapping model only; not durable provider qualification.",
+  "service": "tm_listings",
+  "chain": {
+    "network": "brc-fixture-easy-work",
+    "genesisHash": "5f64d0c41ff7a0bfda7eaf203606d7b562e579f67e80921dd98df949a87fe309"
+  },
+  "principal": "025d045857332d5b9e541514731622af8d60c180165d971a61e06b70a9b3834765",
+  "rules": {
+    "id": "https://bsv.brc.dev/overlays/0194#proposal-channel-heads-v1",
+    "parameters": {
+      "policy": {
+        "id": "https://bsv.brc.dev/overlays/0194#author-document-v1",
+        "digest": "cc5528c9be36e60311eb49ea019c48360d15d65edefa50f89286cbd14b8ec795"
+      }
+    }
+  },
+  "rulesDigest": "85d6c4c3cb425497ef4468b7d5b35ca1bbb5a7457d70cc0fcca7623e917cfc52",
+  "queries": [
+    {
+      "query": {},
+      "digest": "33dc129cb95bda8de221431790bebb56c70ed116c579b38f9be87cd8cc9b09d3"
+    },
+    {
+      "query": {
+        "channels": [
+          "1111111111111111111111111111111111111111111111111111111111111111"
+        ]
+      },
+      "digest": "313139013889dbd35850004d73e9f02732c9226dafdf283ab7132efb0cbbaeda"
+    },
+    {
+      "query": {
+        "channels": [
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "2222222222222222222222222222222222222222222222222222222222222222"
+        ]
+      },
+      "digest": "11e40b018c05ee40f10578af0f11fe7fc39dae6689ef777e48016e4f71edd6f6"
+    }
+  ],
+  "heads": {
+    "a0": {
+      "body": {
+        "version": 1,
+        "service": "tm_listings",
+        "chain": {
+          "network": "brc-fixture-easy-work",
+          "genesisHash": "5f64d0c41ff7a0bfda7eaf203606d7b562e579f67e80921dd98df949a87fe309"
+        },
+        "policy": {
+          "id": "https://bsv.brc.dev/overlays/0194#author-document-v1",
+          "digest": "cc5528c9be36e60311eb49ea019c48360d15d65edefa50f89286cbd14b8ec795"
+        },
+        "channel": "1111111111111111111111111111111111111111111111111111111111111111",
+        "revision": "0",
+        "previous": null,
+        "author": "025d045857332d5b9e541514731622af8d60c180165d971a61e06b70a9b3834765",
+        "recipients": [
+          "025d045857332d5b9e541514731622af8d60c180165d971a61e06b70a9b3834765",
+          "037a9375ad6167ad54aa74c6348cc54d344cc5dc9487d847049d5eabb0fa03c8fb"
+        ],
+        "anchors": [],
+        "issuedAt": "1790611200",
+        "expiresAt": "1790611260",
+        "operation": "update",
+        "payload": "eyJ0ZXh0IjoiQSBzaGFyZWQgcHJvcG9zZWQgZG9jdW1lbnQuIn0="
+      },
+      "signature": "QkIzAQJdBFhXMy1bnlQVFHMWIq+NYMGAFl2XGmHga3Cps4NHZQA/h6Q8DhADlgHK2Onv+TVxmNBvn7SbBSo90HfuY9xE6jBEAiApkdzavcmjcc5pe2JLN1/z80FHD1FW7Nrv9RqMNJG1YwIgP5Px/v2jIGhEXXx2xqCBVPAUUrzOEQqespwqguY4g4Y="
+    },
+    "a1": {
+      "body": {
+        "version": 1,
+        "service": "tm_listings",
+        "chain": {
+          "network": "brc-fixture-easy-work",
+          "genesisHash": "5f64d0c41ff7a0bfda7eaf203606d7b562e579f67e80921dd98df949a87fe309"
+        },
+        "policy": {
+          "id": "https://bsv.brc.dev/overlays/0194#author-document-v1",
+          "digest": "cc5528c9be36e60311eb49ea019c48360d15d65edefa50f89286cbd14b8ec795"
+        },
+        "channel": "1111111111111111111111111111111111111111111111111111111111111111",
+        "revision": "1",
+        "previous": "c139ea6d67ab1d85c01ce2ad7b53814fd30e18ff195e17cd4bcb61e420fb7880",
+        "author": "025d045857332d5b9e541514731622af8d60c180165d971a61e06b70a9b3834765",
+        "recipients": [
+          "025d045857332d5b9e541514731622af8d60c180165d971a61e06b70a9b3834765",
+          "037a9375ad6167ad54aa74c6348cc54d344cc5dc9487d847049d5eabb0fa03c8fb"
+        ],
+        "anchors": [],
+        "issuedAt": "1790611200",
+        "expiresAt": "1790611260",
+        "operation": "update",
+        "payload": "eyJ0ZXh0IjoiQSBuZXcgY3VycmVudCBkb2N1bWVudC4ifQ=="
+      },
+      "signature": "QkIzAQJdBFhXMy1bnlQVFHMWIq+NYMGAFl2XGmHga3Cps4NHZQBZ0sSe33prc1XRDN5ouFzZd7JV3SCs5Aez8NoJ88DAYzBFAiEAj81rsA+EoqGw7N3FnBlxzeT2kMhop/Ie7ylSgQhjVVYCIBztb7EHJrrDXbRO4Djg7fyxYY3Ya0amvovfEqJNzWf3"
+    },
+    "b0": {
+      "body": {
+        "version": 1,
+        "service": "tm_listings",
+        "chain": {
+          "network": "brc-fixture-easy-work",
+          "genesisHash": "5f64d0c41ff7a0bfda7eaf203606d7b562e579f67e80921dd98df949a87fe309"
+        },
+        "policy": {
+          "id": "https://bsv.brc.dev/overlays/0194#author-document-v1",
+          "digest": "cc5528c9be36e60311eb49ea019c48360d15d65edefa50f89286cbd14b8ec795"
+        },
+        "channel": "2222222222222222222222222222222222222222222222222222222222222222",
+        "revision": "0",
+        "previous": null,
+        "author": "025d045857332d5b9e541514731622af8d60c180165d971a61e06b70a9b3834765",
+        "recipients": [
+          "025d045857332d5b9e541514731622af8d60c180165d971a61e06b70a9b3834765",
+          "037a9375ad6167ad54aa74c6348cc54d344cc5dc9487d847049d5eabb0fa03c8fb"
+        ],
+        "anchors": [],
+        "issuedAt": "1790611200",
+        "expiresAt": "1790611260",
+        "operation": "update",
+        "payload": "eyJ0ZXh0IjoiQSBzaGFyZWQgcHJvcG9zZWQgZG9jdW1lbnQuIn0="
+      },
+      "signature": "QkIzAQJdBFhXMy1bnlQVFHMWIq+NYMGAFl2XGmHga3Cps4NHZQC9xGE2ZfUJHuDe3xPF9Jb0ci21tU4O4pHErLXHHQs8EjBEAiAGLwAlYbnaxFMLoCxO/zHF0sUVbjTi0gBeVHgzjMASJQIgLfQMdePVlae7gTgLyx6isRm+fepZs8d5Hj+IoIuMRZc="
+    }
+  },
+  "cases": [
+    {
+      "name": "snapshot orders channels by key",
+      "rows": [
+        {
+          "head": "b0",
+          "state": {
+            "status": "active",
+            "recordedAt": "1790611200"
+          },
+          "readable": true
+        },
+        {
+          "head": "a0",
+          "state": {
+            "status": "active",
+            "recordedAt": "1790611200"
+          },
+          "readable": true
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal",
+            "head": "a0"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          }
+        ],
+        [
+          {
+            "kind": "proposal",
+            "head": "b0"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "b0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "snapshot retains expired signed intent as history",
+      "rows": [
+        {
+          "head": "a1",
+          "state": {
+            "status": "expired",
+            "recordedAt": "1790611260"
+          },
+          "readable": true
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal",
+            "head": "a1"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "a1",
+            "state": {
+              "status": "expired",
+              "recordedAt": "1790611260"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "snapshot can begin with an unknown predecessor",
+      "rows": [
+        {
+          "head": "a1",
+          "state": {
+            "status": "active",
+            "recordedAt": "1790611200"
+          },
+          "readable": true
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal",
+            "head": "a1"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "a1",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "selected channel filters other heads",
+      "query": {
+        "channels": [
+          "2222222222222222222222222222222222222222222222222222222222222222"
+        ]
+      },
+      "rows": [
+        {
+          "head": "a0",
+          "state": {
+            "status": "active",
+            "recordedAt": "1790611200"
+          },
+          "readable": true
+        },
+        {
+          "head": "b0",
+          "state": {
+            "status": "active",
+            "recordedAt": "1790611200"
+          },
+          "readable": true
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal",
+            "head": "b0"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "b0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "private unreadable rows disclose nothing",
+      "rows": [
+        {
+          "head": "a0",
+          "state": {
+            "status": "active",
+            "recordedAt": "1790611200"
+          },
+          "readable": false
+        }
+      ],
+      "expected": []
+    },
+    {
+      "name": "nonrecipient sees no signed head",
+      "principal": "02049370a4b5f43412ea25f514e8ecdad05266115e4a7ecb1387231808f8b45963",
+      "rows": [
+        {
+          "head": "a0",
+          "state": {
+            "status": "active",
+            "recordedAt": "1790611200"
+          },
+          "readable": true
+        }
+      ],
+      "expected": []
+    },
+    {
+      "name": "anonymous reads fail even for an empty snapshot",
+      "principal": null,
+      "rows": [],
+      "error": "unauthorized"
+    },
+    {
+      "name": "new visible channel enters without a reset",
+      "changes": [
+        {
+          "before": null,
+          "after": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal",
+            "head": "a0"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "replacement is one ordered atomic group",
+      "changes": [
+        {
+          "before": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          },
+          "after": {
+            "head": "a1",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal-remove",
+            "head": "a0"
+          },
+          {
+            "kind": "proposal",
+            "head": "a1"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "a1",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "lifecycle expiry retains exact signed head",
+      "changes": [
+        {
+          "before": {
+            "head": "a1",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          },
+          "after": {
+            "head": "a1",
+            "state": {
+              "status": "expired",
+              "recordedAt": "1790611260"
+            },
+            "readable": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal",
+            "head": "a1"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "a1",
+            "state": {
+              "status": "expired",
+              "recordedAt": "1790611260"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "retention removal is only a membership assertion",
+      "changes": [
+        {
+          "before": {
+            "head": "a1",
+            "state": {
+              "status": "expired",
+              "recordedAt": "1790611260"
+            },
+            "readable": true
+          },
+          "after": null
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal-remove",
+            "head": "a1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "unchanged state produces no observation",
+      "changes": [
+        {
+          "before": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          },
+          "after": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "name": "multiple channels remain one canonically ordered group",
+      "changes": [
+        {
+          "before": null,
+          "after": {
+            "head": "b0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          }
+        },
+        {
+          "before": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          },
+          "after": {
+            "head": "a1",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          }
+        }
+      ],
+      "expected": [
+        [
+          {
+            "kind": "proposal-remove",
+            "head": "a0"
+          },
+          {
+            "kind": "proposal",
+            "head": "a1"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "a1",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          },
+          {
+            "kind": "proposal",
+            "head": "b0"
+          },
+          {
+            "kind": "proposal-state",
+            "head": "b0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "name": "narrowed access resets before disclosing removal",
+      "changes": [
+        {
+          "before": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          },
+          "after": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": false
+          }
+        }
+      ],
+      "error": "reset-required"
+    },
+    {
+      "name": "widened access cannot silently edit captured selection",
+      "changes": [
+        {
+          "before": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": false
+          },
+          "after": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          }
+        }
+      ],
+      "error": "reset-required"
+    },
+    {
+      "name": "excluded channel changes are irrelevant",
+      "query": {
+        "channels": [
+          "2222222222222222222222222222222222222222222222222222222222222222"
+        ]
+      },
+      "changes": [
+        {
+          "before": {
+            "head": "a0",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          },
+          "after": {
+            "head": "a1",
+            "state": {
+              "status": "active",
+              "recordedAt": "1790611200"
+            },
+            "readable": true
+          }
+        }
+      ],
+      "expected": []
+    }
+  ]
+}

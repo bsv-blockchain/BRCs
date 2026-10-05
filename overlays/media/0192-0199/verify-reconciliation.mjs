@@ -27,7 +27,7 @@ let inputChecks = 0;
 for (const [n, tx] of Object.entries(txs)) {
   assert.equal(tx.id("hex"), corpus.transactions[n].txid);
   assert.equal(tx.toHex(), corpus.transactions[n].raw);
-  if (n === "root") continue;
+  if (n === "root" || corpus.preverifiedRoots.includes(n)) continue;
   assert.equal(new Set(inputs(n)).size, tx.inputs.length);
   let funds = 0,
     ok = true;
@@ -78,6 +78,21 @@ for (const [id, v] of Object.entries(corpus.views)) {
     chain,
   };
 }
+for(const [id,context] of Object.entries(corpus.finalityContexts))
+  views[id]={id,...context,chain:[]}
+const family=JSON.parse(readFileSync(new URL("../../../tokens/media/0197/lineage-vectors.json",import.meta.url)))
+const expiry=corpus.expiryRetirement,retirement=txs[expiry.name]
+assert.equal(txs[expiry.listingParent].toHex(),family.records.find(r=>r.name==="split").tx)
+assert.equal(txs[expiry.fundingParent].toHex(),family.funding[4])
+assert.equal(retirement.toHex(),family.records.find(r=>r.name==="retire").tx)
+assert.equal(retirement.inputs[0].sourceTXID,txs[expiry.listingParent].id("hex"))
+assert.equal(retirement.inputs[0].sourceOutputIndex,expiry.listingOutputIndex)
+assert.equal(retirement.inputs[1].sourceTXID,txs[expiry.fundingParent].id("hex"))
+assert.equal(Buffer.from(txs[expiry.listingParent].outputs[expiry.listingOutputIndex].lockingScript.toBinary()).readUInt32LE(3+86),expiry.expiryHeight)
+assert.equal(retirement.lockTime,expiry.expiryHeight)
+assert.notEqual(retirement.inputs[0].sequence,0xffffffff)
+assert.ok(retirement.outputs[0].lockingScript.toHex().startsWith("006a4c56524f534c0105"))
+assert.equal(scriptValid[expiry.name],true)
 for (const anchor of [...corpus.anchors, corpus.inclusion]) {
   const t = Transaction.fromAtomicBEEF(Buffer.from(anchor.beef, "base64"));
   assert.equal(t.id("hex"), corpus.transactions[anchor.name].txid);
@@ -218,7 +233,7 @@ class Model {
     }
   }
   snapshot(watch = []) {
-    const anchor = new Set(["root", "P"]),
+    const anchor = new Set(["root", "P",...corpus.preverifiedRoots]),
       order = {},
       pending = new Set(),
       state = {};

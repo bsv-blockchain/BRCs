@@ -1,5 +1,5 @@
 // Authoring tool only. PUBLIC fixture scalar; no network or wallet operations.
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import {
   Transaction,
@@ -114,6 +114,17 @@ await spend("timeBoundary", [["P", 7]], [8997], [1], 500000000);
 const bad = Transaction.fromHex(txs.A.toHex());
 bad.inputs[0].unlockingScript = UnlockingScript.fromHex("00");
 keep("badSignature", bad);
+// Reuse the independently executed BRC-197 family fixture, including both
+// signed inputs of its permissionless expiry retirement.
+const family = JSON.parse(readFileSync(new URL("../../../tokens/media/0197/lineage-vectors.json", import.meta.url)));
+const familyParent = keep("brc197Parent", Transaction.fromHex(family.records.find(r=>r.name==="split").tx));
+const familyFunding = keep("brc197Funding", Transaction.fromHex(family.funding[4]));
+const familyRetirement = keep("brc197Retire", Transaction.fromHex(family.records.find(r=>r.name==="retire").tx));
+const expiryHeight = Buffer.from(familyParent.outputs[1].lockingScript.toBinary()).readUInt32LE(3+86);
+if (expiryHeight !== familyRetirement.lockTime ||
+    familyRetirement.inputs[0].sourceTXID !== familyParent.id("hex") ||
+    familyRetirement.inputs[1].sourceTXID !== familyFunding.id("hex"))
+  throw Error("BRC-197 expiry fixture dependency mismatch");
 const h2 = (b) =>
   createHash("sha256").update(createHash("sha256").update(b).digest()).digest();
 const headers = [];
@@ -181,7 +192,7 @@ bProof.merklePath = bPath;
 const corpus = {
   version: 1,
   warning:
-    "PUBLIC test key 63; signed P2PKH transactions and synthetic easy-PoW headers. Not mainnet, a full consensus node, BRC-197 scripts or a production adapter.",
+    "PUBLIC test keys; signed P2PKH transactions, one frozen BRC-197 expiry retirement and synthetic easy-PoW headers. Not mainnet, a full consensus node or a production adapter.",
   transactions: Object.fromEntries(
     Object.entries(txs).map(([name, tx]) => [
       name,
@@ -198,6 +209,15 @@ const corpus = {
     included: { tipHash: branch },
     fork: { tipHash: fork },
     mature: { tipHash: mature },
+  },
+  preverifiedRoots: ["brc197Parent", "brc197Funding"],
+  finalityContexts: {
+    expiryBefore: { height: expiryHeight-1, mtp: 1000000000 },
+    expiryEligible: { height: expiryHeight, mtp: 1000000000 },
+  },
+  expiryRetirement: {
+    name: "brc197Retire", listingParent: "brc197Parent", listingOutputIndex: 1,
+    fundingParent: "brc197Funding", expiryHeight,
   },
   anchors: [
     {
@@ -218,6 +238,8 @@ const corpus = {
     beef: Buffer.from(bProof.toAtomicBEEF()).toString("base64"),
   },
   finality: [
+    { name: "brc197Retire", height: expiryHeight-1, mtp: 1000000000, expected: false },
+    { name: "brc197Retire", height: expiryHeight, mtp: 1000000000, expected: true },
     { name: "N", height: 108, mtp: 1000000000, expected: false },
     { name: "N", height: 109, mtp: 1000000000, expected: false },
     { name: "N", height: 110, mtp: 1000000000, expected: true },
