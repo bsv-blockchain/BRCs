@@ -116,6 +116,12 @@ BEEF and CBOR contexts are checked against their own bounds. The corpus contains
   response transcripts, including handshake material and complete signed bodies.
 - Actual BEEF/Atomic BEEF, alternate valid proof bytes, verified spend links,
   private publication, exact BRC-29 funding and admission-linked recovery.
+- The shared BRC-192 reconciliation corpus imports the signed BRC-197
+  permissionless expiry-retirement transaction and verifies both inputs in the
+  SDK and BitcoinX. Two durable traces check that its listing remains unspent
+  before maturity and is consumed at the first eligible height under both
+  `nonFinal` settings. The height contexts are finality test inputs, not claims
+  of a mined retirement or a production chain view.
 - Three content acquisitions: two different buyers purchasing successive outputs
   under one standing Offer, and a BRC-105 paid lookup. Each includes authority,
   Header/Asset/Offer/Policy, signed Request, settlement, License/Agreement,

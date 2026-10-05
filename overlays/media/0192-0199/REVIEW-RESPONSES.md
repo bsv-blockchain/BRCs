@@ -346,9 +346,10 @@ approved this revision or that the subsequent implementation checkpoint is compl
 verified transaction inputs, with dependencies, Script/value checks, selected-chain
 context and separate domain lineage. A late parent or catalogue re-entry cannot
 resurrect a consumed output. A domain-invalid successor can still consume a real
-input; BRCs 197/198 explicitly apply this to the funded-copy merge boundary. The
-existing complete lineage corpus remains unchanged. The new cross-host and
-same-batch ancestry traces use actual signed parent/child transactions.
+input; a copied BRC-197 active Script without signed genesis and activation may
+pass its local Script but fail lineage. The existing complete lineage corpus remains
+unchanged. The cross-host and same-batch ancestry traces use actual signed
+parent/child transactions.
 
 **F2 — Durable first-seen and eligibility.** The local journal supplies trusted
 positions before workers start; raw receipt, complete support, selectable frontier
@@ -369,10 +370,12 @@ replacement before maturation and finality-reversing reorgs are specified and
 exercised. A child cannot attach to a version already replaced while non-final.
 The Genesis and BSV node sources are pinned and hashed in registry.json. Their
 locktime equality discrepancy is explicitly resolved in favor of the node's strict
-comparison, using tip+1 height and selected-chain MTP. Fifteen boundary cases and
-eleven replacement comparisons supplement the stateful traces. BRC-194 proposals
-are not verified spends; BRC-197 remains final-sequence/zero-locktime only and its
-program hash has not changed.
+comparison, using tip+1 height and selected-chain MTP. The actual BRC-197
+permissionless expiry-retirement transaction now enters the shared reconciliation
+corpus: before maturity it is nonfinal intent (or unsupported under nonFinal=false),
+and at maturity it is a final consuming spend in both settings. The other BRC-197
+routes retain zero-locktime/all-final domain requirements. BRC-194 proposals are
+not verified spends; no BRC-197 program byte changes for this correction.
 
 **F4 — Accepted-chain override and reorg.** Inclusion must resolve to the selected
 verified header chain; it supersedes conflicting unconfirmed choices and their
@@ -392,10 +395,10 @@ two sources, delayed membership verification, multiple snapshot groups sharing W
 ordered changes within a group and old work after generation replacement. Both
 journal and projection are committed atomically in the SQLite model.
 
-Validation is reproducible with the packet guide commands: 27 frozen raw
-transactions, 40 input Script checks, 113 synthetic headers, actual Atomic BEEF,
-32 reconciliation scenarios and 52 named checkpoints in each reducer. Python adds
-64 memory/SQLite adapter runs, 104 checkpoints, 42 full-state restart comparisons
+Validation is reproducible with the packet guide commands: 30 frozen raw
+transactions, 42 input Script checks, 113 synthetic headers, actual Atomic BEEF,
+34 reconciliation scenarios and 56 named checkpoints in each reducer. Python adds
+68 memory/SQLite adapter runs, 112 checkpoints, 50 full-state restart comparisons
 and two actual subprocess crash boundaries. Expected observations are manually
 specified separately from the reducers. These bounded models complement the prior
 wire, crypto, covenant and crash suites; they do not certify arbitrary production

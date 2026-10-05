@@ -1731,5 +1731,129 @@
       }
     ],
     "nonFinal": false
+  },
+  {
+    "name": "brc197-expiry-retirement-final-only",
+    "nonFinal": false,
+    "watch": [
+      "brc197Parent:1"
+    ],
+    "steps": [
+      {
+        "op": "view",
+        "id": "expiryBefore"
+      },
+      {
+        "op": "receive",
+        "names": [
+          "brc197Retire"
+        ],
+        "source": "host-expiry"
+      },
+      {
+        "op": "verify",
+        "names": [
+          "brc197Retire"
+        ]
+      },
+      {
+        "op": "expect",
+        "value": {
+          "states": [
+            "brc197Retire:unsupported"
+          ],
+          "spent": [],
+          "current": [
+            "brc197Parent:1"
+          ],
+          "walletActions": 0
+        }
+      },
+      {
+        "op": "restart"
+      },
+      {
+        "op": "view",
+        "id": "expiryEligible"
+      },
+      {
+        "op": "expect",
+        "value": {
+          "states": [
+            "brc197Retire:selected-final"
+          ],
+          "spent": [
+            "brc197Parent:1->brc197Retire"
+          ],
+          "current": [],
+          "walletActions": 0
+        }
+      },
+      {
+        "op": "restart"
+      }
+    ]
+  },
+  {
+    "name": "brc197-expiry-retirement-provisional",
+    "nonFinal": true,
+    "watch": [
+      "brc197Parent:1"
+    ],
+    "steps": [
+      {
+        "op": "view",
+        "id": "expiryBefore"
+      },
+      {
+        "op": "receive",
+        "names": [
+          "brc197Retire"
+        ],
+        "source": "host-expiry"
+      },
+      {
+        "op": "verify",
+        "names": [
+          "brc197Retire"
+        ]
+      },
+      {
+        "op": "expect",
+        "value": {
+          "states": [
+            "brc197Retire:selected-non-final"
+          ],
+          "spent": [],
+          "current": [
+            "brc197Parent:1"
+          ],
+          "walletActions": 0
+        }
+      },
+      {
+        "op": "restart"
+      },
+      {
+        "op": "view",
+        "id": "expiryEligible"
+      },
+      {
+        "op": "expect",
+        "value": {
+          "states": [
+            "brc197Retire:selected-final"
+          ],
+          "spent": [
+            "brc197Parent:1->brc197Retire"
+          ],
+          "current": [],
+          "walletActions": 0
+        }
+      },
+      {
+        "op": "restart"
+      }
+    ]
   }
 ]
