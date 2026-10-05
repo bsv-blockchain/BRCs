@@ -44,6 +44,28 @@ for(const [name,stage] of [['negative.json.gz',false],['stage_negative.json.gz',
   }
   console.log(name,cases.length,'expected results')
 }
+const malleabilityCases=JSON.parse(read('malleability-negative.json'))
+for(const item of malleabilityCases){
+  const tx=Transaction.fromHex(item.transaction)
+  const index=item.inputIndex??0
+  tx.inputs[index].unlockingScript=UnlockingScript.fromHex(item.unlocking)
+  assert.equal(check(tx,index,{satoshis:item.value,lockingScript:LockingScript.fromHex(item.locking)}),false,item.name)
+}
+console.log('malleability-negative.json',malleabilityCases.length,'expected rejections')
+const variant=JSON.parse(read('purchase-variant.json'))
+const originalPurchase=Transaction.fromHex(variant.original)
+const alternativePurchases=[variant.variant,variant.listingVariant].map(x=>Transaction.fromHex(x))
+assert.equal(new Set([originalPurchase,...alternativePurchases].map(tx=>tx.id('hex'))).size,3)
+for(const alternativePurchase of alternativePurchases)
+  assert.deepEqual(originalPurchase.outputs.map(o=>[o.satoshis,o.lockingScript.toHex()]),
+    alternativePurchase.outputs.map(o=>[o.satoshis,o.lockingScript.toHex()]))
+for(const tx of [originalPurchase,...alternativePurchases]){
+  for(const [index,source] of [
+    {satoshis:variant.listingValue,lockingScript:LockingScript.fromHex(variant.listingSource)},
+    {satoshis:variant.fundingValue,lockingScript:LockingScript.fromHex(variant.fundingSource)}
+  ].entries())assert(check(tx,index,source),`purchase variant input ${index}`)
+}
+console.log('purchase txid variants: three complete transactions valid')
 const max=JSON.parse(gunzipSync(read('max8-activation.json.gz')))
 const maxTx=Transaction.fromHex(max.transaction)
 maxTx.inputs[0].unlockingScript=UnlockingScript.fromHex(max.unlocking)

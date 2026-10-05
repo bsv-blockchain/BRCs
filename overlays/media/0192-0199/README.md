@@ -46,15 +46,15 @@ revisions are distinct, so durable pending verification cannot expose half of an
 atomic spend/successor group.
 
 Private publication, funding and delivery have explicit durable identities and
-states. A lost wallet or admission reply does not authorize another payment.
+states. BRC-197 purchase recovery groups independently verified txid variants by the full authenticated purchase preimage digest while retaining exact historical release evidence. A lost wallet or admission reply does not authorize another payment.
 An expired catalogue or rotated discovery manifest cannot erase an already
 accepted recovery obligation. Local rejection does not prove that a signed
 transaction can never be mined elsewhere. Delivery and usable decryption are
 separate outcomes; no atomic fair-exchange guarantee is claimed.
 
-BRC-197 registers literal activation and active Bitcoin Scripts. The 33,154-byte
+BRC-197 registers literal activation and active Bitcoin Scripts. The 34,127-byte
 stage lock verifies BRC-42/BRC-29-shaped public root-to-child links once and
-creates the 5,238-byte active lock. Purchase, split, permissionless payout and
+creates the 5,627-byte active lock. Purchase, split, permissionless payout and
 retirement execute in two interpreters. Payouts retain remainders; expiry permits
 anyone to retire with an exact external top-up. No root identity transaction
 signature, seller-only payout, merge or amendment path exists. Full signed-genesis

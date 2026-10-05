@@ -44,6 +44,7 @@ import {
   pub,
   pkh,
   le,
+  preimage as covenantPreimage,
   evaluate,
 } from "../../../tokens/media/0197/family.mjs";
 const read = (p) => readFileSync(new URL(p, import.meta.url)),
@@ -517,6 +518,10 @@ for (const a of v.acquisitions) {
       );
       assert.equal(tx.outputs[1].satoshis, 1);
       assert.equal(r.txid, tx.id("hex"));
+      const commitment=hex(hash256(covenantPreimage(tx,0)));
+      assert.equal(r.purchaseCommitment,commitment);
+      assert.equal(a.envelope.result.purchaseCommitment,commitment);
+      assert.equal(a.envelope.result.potatoes.body.purchaseCommitment,commitment);
       assert.equal(
         a.envelope.result.potatoes.body.evidenceDigest,
         digest("release-evidence", release),

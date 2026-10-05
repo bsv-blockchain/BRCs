@@ -4,7 +4,7 @@ The normative programs remain the exact bytes in `activation.hex` and `active.he
 
 ## Ordered assembly
 
-Both programs start with the same three fragments:
+Each program begins with its own exact stack-depth fragment: [stage depth](./components/activation/00-depth.asm) requires 114 stack items (4 bytes) and [active depth](./components/active/00-depth.asm) requires 15 stack items (3 bytes). They then share these three fragments:
 
 | Component | Bytes | Purpose |
 | --- | ---: | --- |
@@ -12,16 +12,16 @@ Both programs start with the same three fragments:
 | [`01-parse-preimage.asm`](./components/shared/01-parse-preimage.asm) | 191 | Check input-zero prevouts, canonical scriptCode length, input amount, sequence, locktime, hash type and hashOutputs fields. |
 | [`02-parse-metadata.asm`](./components/shared/02-parse-metadata.asm) | 199 | Read the executed script's metadata and check marker, profile, positive price/reserve, expiry and recipient count. |
 
-Activation then concatenates [`00-enter.asm`](./components/activation/00-enter.asm), [`10-seller-link.asm`](./components/activation/10-seller-link.asm), eight ordered [`recipient-*.asm`](./components/activation/20-recipient-1.asm) branches, [`90-weight-sum.asm`](./components/activation/90-weight-sum.asm), and [`99-create-active.asm`](./components/activation/99-create-active.asm). Entry requires operation 0 and exactly the reserve value. The seller and each used recipient branch check the root/child curve coordinates, the point-addition slope, public BRC-42 HMAC tweak and two fixed-nonce signatures for `D=tG`. An unused recipient branch requires a zero metadata slot. The final fragment checks the aggregate weight and constructs the exact active output plus optional change. It embeds the frozen 4,517-byte active program; that explains most of its 4,797 bytes.
+Activation then concatenates [`00-enter.asm`](./components/activation/00-enter.asm), [`10-seller-link.asm`](./components/activation/10-seller-link.asm), eight ordered [`recipient-*.asm`](./components/activation/20-recipient-1.asm) branches, [`90-weight-sum.asm`](./components/activation/90-weight-sum.asm), and [`99-create-active.asm`](./components/activation/99-create-active.asm). Entry requires operation 0 and exactly the reserve value. The seller and each used recipient branch check the root/child curve coordinates, the point-addition slope, public BRC-42 HMAC tweak and two fixed-nonce signatures for `D=tG`. An unused recipient branch requires a zero metadata slot. The final fragment checks the aggregate weight and constructs the exact active output plus optional change. It embeds the frozen 4,906-byte active program; that explains most of its 5,186 bytes.
 
-The active program concatenates [`10-purchase.asm`](./components/active/10-purchase.asm), [`20-split.asm`](./components/active/20-split.asm), [`30-payout.asm`](./components/active/30-payout.asm), [`40-retire.asm`](./components/active/40-retire.asm) and [`99-finish.asm`](./components/active/99-finish.asm) after the shared prefix. Each route fragment contains its selector and exact output reconstruction. The final fragment rejects every other operation and closes the nested selectors. The route fragments are respectively 582, 339, 972, 998 and 7 bytes. The complete active program is 4,517 bytes.
+The active program first checks its exact depth, then concatenates [`10-purchase.asm`](./components/active/10-purchase.asm), [`20-split.asm`](./components/active/20-split.asm), [`30-payout.asm`](./components/active/30-payout.asm), [`40-retire.asm`](./components/active/40-retire.asm) and [`99-finish.asm`](./components/active/99-finish.asm) after the shared prefix. Each route fragment contains its selector and exact output reconstruction. The final fragment rejects every other operation and closes the nested selectors. The route fragments are respectively 592, 461, 1,099, 1,125 and 7 bytes. The complete active program is 4,906 bytes.
 
 ```text
-activation = shared.authenticate || shared.parse-preimage || shared.parse-metadata
+activation = stage.depth || shared.authenticate || shared.parse-preimage || shared.parse-metadata
           || stage.enter || stage.seller-link || stage.recipient-link[1..8]
           || stage.weight-sum || stage.create-active
 
-active     = shared.authenticate || shared.parse-preimage || shared.parse-metadata
+active     = active.depth || shared.authenticate || shared.parse-preimage || shared.parse-metadata
           || route.purchase || route.split || route.payout || route.retire
           || route.finish
 ```
@@ -51,11 +51,11 @@ Activation executes two transaction binders plus two linkage signature checks fo
 | Item | Bytes | Status |
 | --- | ---: | --- |
 | Metadata push and drop | 721 | Exact family framing: 4-byte push/drop overhead and 717 metadata bytes. |
-| Activation program / complete lock | 32,433 / 33,154 | Exact frozen v1 bytes. |
-| Active program / complete lock | 4,517 / 5,238 | Exact frozen v1 bytes. |
-| Eight-recipient activation unlocking Script | 37,796 | Observed largest corpus witness; not a universal maximum for every valid encoding. |
-| Eight-recipient activation transaction | 43,278 | Observed complete two-input corpus transaction. |
-| Ordinary active purchase unlocking Script / transaction | 5,846 / 11,509 | Observed two-input corpus transaction; size varies with signatures and change. |
+| Activation program / complete lock | 33,406 / 34,127 | Exact frozen v1 bytes. |
+| Active program / complete lock | 4,906 / 5,627 | Exact frozen v1 bytes. |
+| Eight-recipient activation unlocking Script | 38,703 | Observed largest corpus witness; not a universal maximum for every valid encoding. |
+| Eight-recipient activation transaction | 44,575 | Observed complete two-input corpus transaction. |
+| Ordinary active purchase unlocking Script / transaction | 6,235 / 12,287 | Observed two-input corpus transaction; size varies with signatures and change. |
 
 The [Genesis specification](https://github.com/bitcoin-sv-specs/protocol/blob/master/updates/genesis-spec.md) removes the fixed consensus Script-size ceiling; transaction size, stack memory and node policy still matter. The published [BSV node policy defaults](https://github.com/bitcoin-sv/bitcoin-sv/wiki/Consensus-Limits) are **500 KB per Script** and **10 MB per transaction** for relay/mining, not universal consensus guarantees. These examples are below those defaults, but target miner acceptance, fee rate, execution time and wallet construction require direct qualification. The corpus's small synthetic fees are arithmetic fixtures, not a production fee recommendation.
 

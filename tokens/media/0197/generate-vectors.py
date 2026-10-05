@@ -99,7 +99,8 @@ def listing_unlock(tx,source,op,units=0,admin=False,acq=b'\x33'*32,request=b'\x4
         assert len(proofs)==len(PROOF_NAMES)
     else: proofs=[]
     adminsig=PrivateKey.from_int((41+seller[3])%N).sign(pre,hasher=h256)+b'\x41' if admin else b''
-    vals=proofs+[pre,prevouts,op,acq,request,buyer.to_bytes(compressed=True),*buyer.to_point(),
+    buyer_fields=[acq,request,buyer.to_bytes(compressed=True),*buyer.to_point()] if op==1 else [bytes(32),bytes(32),bytes(33),0,0]
+    vals=proofs+[pre,prevouts,op,*buyer_fields,
                  units,changehash,change_amount,adminsig,z,sig(2,z,1),sig(3,z,1)]
     tx.inputs[0].script_sig=unlock(vals)
 def funding_unlock(tx,source):
@@ -130,6 +131,59 @@ purchase,pf=make_tx(activation,0,[TxOutput(1002,active),TxOutput(1,purchase_rece
 listing_unlock(purchase,activation.outputs[0],1,change_amount=8990)
 funding_unlock(purchase,pf.outputs[0]);verify(purchase,[activation.outputs[0],pf.outputs[0]],'purchase')
 
+# A third party can change the funding input's unlocking Script without changing
+# either SIGHASH_ALL|FORKID preimage. Both complete transactions remain valid.
+purchase_variant=Tx.from_hex(purchase.to_hex())
+purchase_variant.inputs[1].script_sig=Script(b'\x00'+purchase.inputs[1].script_sig.to_bytes())
+listing_variant=Tx.from_hex(purchase.to_hex())
+listing_variant.inputs[0].script_sig=Script(b'\x00\x75'+purchase.inputs[0].script_sig.to_bytes())
+assert purchase_variant.hash()!=purchase.hash()
+assert listing_variant.hash() not in (purchase.hash(),purchase_variant.hash())
+assert [o.value for o in purchase_variant.outputs]==[o.value for o in purchase.outputs]
+assert [o.script_pubkey.to_bytes() for o in purchase_variant.outputs]==[o.script_pubkey.to_bytes() for o in purchase.outputs]
+commitment=h256(preimage(purchase,0,activation.outputs[0])[0])
+assert commitment==h256(preimage(purchase_variant,0,activation.outputs[0])[0])
+assert commitment==h256(preimage(listing_variant,0,activation.outputs[0])[0])
+for candidate in (purchase_variant,listing_variant):
+    for index,source in enumerate((activation.outputs[0],pf.outputs[0])):
+        limits=InterpreterLimits(MinerPolicy(1048576,128,128*1024*1024,1000000,8),is_genesis_enabled=True,is_consensus=False)
+        state=InterpreterState(limits,TxInputContext(candidate,index,source))
+        state.evaluate_script(candidate.inputs[index].script_sig)
+        state.evaluate_script(source.script_pubkey)
+        assert state.stack[-1],('purchase-variant',index)
+(HERE/'purchase-variant.json').write_text(json.dumps({
+    'original':purchase.to_hex(),'variant':purchase_variant.to_hex(),
+    'listingVariant':listing_variant.to_hex(),
+    'commitment':commitment.hex(),'listingSource':activation.outputs[0].script_pubkey.to_bytes().hex(),
+    'listingValue':activation.outputs[0].value,'fundingSource':pf.outputs[0].script_pubkey.to_bytes().hex(),
+    'fundingValue':pf.outputs[0].value},indent=2)+'\n')
+
+def push_spans(raw):
+    spans=[];p=0
+    while p<len(raw):
+        start=p;opcode=raw[p];p+=1
+        if opcode<=75: p+=opcode
+        elif opcode==76: length=raw[p];p+=1+length
+        elif opcode==77: length=int.from_bytes(raw[p:p+2],'little');p+=2+length
+        elif opcode==78: length=int.from_bytes(raw[p:p+4],'little');p+=4+length
+        elif opcode>96: raise ValueError('not a push-only unlocking script')
+        assert p<=len(raw)
+        spans.append(raw[start:p])
+    return spans
+purchase_pushes=push_spans(purchase.inputs[0].script_sig.to_bytes())
+assert len(purchase_pushes)==15 and purchase_pushes[8]==b'\x00'
+bad_units=b''.join(purchase_pushes[:8]+[b'\x51']+purchase_pushes[9:])
+bad_extra=b'\x00'+purchase.inputs[0].script_sig.to_bytes()
+negative_extra=[{
+    'name':'purchase-unused-units-nonzero','transaction':purchase.to_hex(),
+    'locking':activation.outputs[0].script_pubkey.to_bytes().hex(),
+    'unlocking':bad_units.hex(),'value':1,'expected':False
+},{
+    'name':'purchase-extra-listing-push','transaction':purchase.to_hex(),
+    'locking':activation.outputs[0].script_pubkey.to_bytes().hex(),
+    'unlocking':bad_extra.hex(),'value':1,'expected':False,'preimageIndex':1
+}]
+
 split,sf=make_tx(purchase,0,[TxOutput(500,active),TxOutput(502,active),TxOutput(1,receipt(2,listing_id,n=2)),
     TxOutput(9990,change_script)],'split')
 listing_unlock(split,purchase.outputs[0],2,units=500,admin=True,change_amount=9990)
@@ -146,6 +200,36 @@ retire,retfund=make_tx(split,1,[TxOutput(1,receipt(5,listing_id,504,0,retire_com
     *retire_items,TxOutput(9990,change_script)],'retire',0xfffffffe,123456)
 listing_unlock(retire,split.outputs[1],5,change_amount=9990)
 funding_unlock(retire,retfund.outputs[0]);verify(retire,[split.outputs[1],retfund.outputs[0]],'retire')
+
+for name,tx,source,position,replacement in [
+    ('purchase-unused-admin-signature',purchase,activation.outputs[0],11,b'\x51'),
+    ('split-unused-acquisition',split,purchase.outputs[0],3,b'\x20'+bytes([1])*32),
+    ('payout-unused-admin-signature',payout,split.outputs[0],11,b'\x51'),
+    ('retire-unused-units',retire,split.outputs[1],8,b'\x51'),
+    ('activation-unused-proof-slot',activation,genesis.outputs[0],33,b'\x51'),
+]:
+    spans=push_spans(tx.inputs[0].script_sig.to_bytes())
+    assert spans[position] in (b'\x00',b'\x20'+bytes(32)),name
+    negative_extra.append({'name':name,'transaction':tx.to_hex(),
+        'locking':source.script_pubkey.to_bytes().hex(),'unlocking':
+        b''.join(spans[:position]+[replacement]+spans[position+1:]).hex(),
+        'value':source.value,'expected':False,
+        **({'preimageIndex':99} if name.startswith('activation') else {})})
+# A second family listing at input one cannot pass the authenticated
+# first-prevout/current-outpoint equality, even with genuine binder signatures.
+dual=Tx(2,[TxInput(split.hash(),0,Script(),0xffffffff),
+           TxInput(split.hash(),1,Script(),0xffffffff)],
+        [TxOutput(1001,active),TxOutput(1,purchase_receipt)],0)
+dual_pre,dual_prevouts,dual_z=preimage(dual,1,split.outputs[1])
+dual_vals=[dual_pre,dual_prevouts,1,b'\x33'*32,b'\x44'*32,
+           buyer.to_bytes(compressed=True),*buyer.to_point(),0,bytes(20),0,b'',
+           dual_z,sig(2,dual_z,1),sig(3,dual_z,1)]
+dual.inputs[1].script_sig=unlock(dual_vals)
+negative_extra.append({'name':'second-listing-input-index-one',
+    'transaction':dual.to_hex(),'locking':split.outputs[1].script_pubkey.to_bytes().hex(),
+    'unlocking':dual.inputs[1].script_sig.to_bytes().hex(),
+    'inputIndex':1,'value':split.outputs[1].value,'expected':False})
+(HERE/'malleability-negative.json').write_text(json.dumps(negative_extra,indent=2)+'\n')
 
 (HERE/'lineage-vectors.json').write_text(json.dumps(dict(
     genesis=genesis.to_hex(),funding=[x.to_hex() for x in (af,pf,sf,payfund,retfund)],

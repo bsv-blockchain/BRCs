@@ -42,6 +42,7 @@ import {
   le,
   output,
   unlock,
+  preimage as covenantPreimage,
   evaluate,
   stateBytes,
 } from "../../../tokens/media/0197/family.mjs";
@@ -833,6 +834,7 @@ for (const [buyerName, nonce, fundingIndex] of [
   tx.inputs[1].unlockingScript = await new P2PKH().unlock(keys[buyerName+"Funding"]).sign(tx, 1);
   retain(tx, buyerName + " purchase");
   assert(evaluate(tx, 0));
+  const purchaseCommitment = hex(hash256(covenantPreimage(tx, 0)));
   const release = releases(tx);
   const settlement = packet(
     "lch-covenant-settlement",
@@ -849,6 +851,7 @@ for (const [buyerName, nonce, fundingIndex] of [
       previous: listing,
       successor: { chain, txid: tx.id("hex"), outputIndex: 0 },
       txid: tx.id("hex"),
+      purchaseCommitment,
       satoshis: "1001",
       releasePolicy,
       releaseEvidenceDigest: digest("release-evidence", release),
@@ -896,6 +899,7 @@ for (const [buyerName, nonce, fundingIndex] of [
       recipient: pub(buyer),
       topic: "tm_listings",
       txid: tx.id("hex"),
+      purchaseCommitment,
       assetId: hex(assetId),
       termsDigest: descriptor.termsDigest,
       releasePolicy,
@@ -911,6 +915,7 @@ for (const [buyerName, nonce, fundingIndex] of [
     version: 1,
     acquisitionId,
     txid: tx.id("hex"),
+    purchaseCommitment,
     status: "delivered",
     steak: {
       tm_listings: {
@@ -939,6 +944,7 @@ for (const [buyerName, nonce, fundingIndex] of [
         version: 1,
         acquisitionId,
         txid: tx.id("hex"),
+        purchaseCommitment,
         status: "admitted-delivery-pending",
         steak: result.steak,
         recoveryUntil: recovery,

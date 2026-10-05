@@ -161,17 +161,17 @@ backup qualification is not claimed by this offline corpus.
 ## BRC-196
 
 **196.1 — Local outcomes and global uncertainty.** [Section 5](../../0196.md#5-reservation-release-and-recovery-details)
-retains txid, reason/evidence, policy and globalOutcome=unknown after local failure.
+retains the selected txid, purchase commitment, reason/evidence, policy and globalOutcome=unknown after local failure.
 A timeout, missing result or local conflict does not authorize automatic repayment
 or prove global impossibility. Replacement risk requires explicit buyer authority.
-The protocol separates recovery of the exact candidate from a new preparation;
+The protocol separates recovery of an equivalent verified purchase candidate from a new preparation;
 chain-currentness changes do not erase historical delivery.
 
 **196.2 — Ordered lifecycle and bindings.** Preparation, validation, candidate
 reservation, admission intent, topical result and private delivery are one explicit
 state machine. It binds every chain/seller/recipient/topic/listing/asset/request/
 terms/domain field before reservation. Invalid-before-reservation candidates do
-not bind a txid; pinned uncertain work does. Private fulfillment reservation is
+not bind a purchase commitment; pinned uncertain work does. Private fulfillment reservation is
 not exclusive UTXO reservation. The registered listing-purchase-v1 domain selects
 the concrete revenue-listing-v1 family and portable lineage package.
 
@@ -190,13 +190,23 @@ re-satisfy historical release before recovering an issued capability. Independen
 playback checks verify grants, commitments and authenticated plaintext; failures
 do not imply an automatic refund or fair-exchange mechanism.
 
+**196.5 — Transaction ID malleability and recovery.** A valid external input
+unlocking Script can change a purchase txid without changing its outputs or the
+authenticated listing-input preimage. BRC-196 now reserves the full 32-byte
+purchase commitment and retains independently verified txid aliases, while
+keeping signed release evidence tied to its actual historical transaction. A
+mined alias can be admitted and selected before mined-policy release. A later
+mined alias under a weaker prior release changes currentness without reissuing
+rights or rewriting the signed License. Unconfirmed alias caps cannot strand a
+verified selected-chain variant.
+
 ## BRC-197
 
 **197.1 — Concrete family.** [Sections 1–5](../../../tokens/0197.md#1-descriptor-derivation-and-genesis)
 register two literal Bitcoin Script programs, metadata/inverse encoding, the
 activation proof and fifteen-argument active ABI. Independent assemblers reproduce
 the frozen bytes. Both interpreters execute five connected complete transactions,
-an eight-recipient purchase/payout pair and 29 active/activation cases. The family
+an eight-recipient purchase/payout pair and 37 active/activation rejection cases. The family
 remains subject to independent security
 review and production wallet/miner qualification.
 
@@ -234,6 +244,14 @@ that child; after the committed height anyone can retire with an externally fund
 exact top-up. Merge and amendment are invalid in v1; a changed schedule needs a
 new signed lineage. Balance or ancestry exhaustion stops new offers without
 deleting historical rights. Every enabled route has two-interpreter execution.
+
+**197.6 — Exact stack and unused fields.** Both programs require their exact
+entry depth. Purchase rejects nonzero `units` and `adminSignature`; routes that
+do not use buyer fields require canonical zero or empty values; unused activation
+proof slots are empty. Eight new rejection cases exercise these guards. Positive three-txid vectors change the external funding unlock or add a
+stack-neutral listing-input opcode pair and prove why exact transaction identity
+cannot be inferred from this Script. Full commitment,
+transaction and lineage verification remain mandatory for any alias.
 
 ## BRC-198
 

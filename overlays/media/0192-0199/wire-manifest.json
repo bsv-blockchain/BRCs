@@ -1,8 +1,8 @@
 {
   "version": 1,
   "archive": "wire-vectors.json.gz",
-  "sha256": "5a30970058074d16f5a35591120525b1e26ceb202ce5a45cfc402b33be16f317",
-  "decodedBytes": 20199019,
+  "sha256": "a8f130d7b0fd89fb301e9327ecef2eb5f39374efb6ade9d7fc0b88c11c63e2eb",
+  "decodedBytes": 20845879,
   "clock": 1790611200,
   "chain": {
     "network": "brc-fixture-easy-work",

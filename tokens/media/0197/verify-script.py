@@ -80,7 +80,7 @@ def test_negative(filename,stage):
         tx.inputs[0].script_sig=unlock
         amount=1 if stage else case['value']
         source=TxOutput(amount,script)
-        pre=list(unlock.ops())[99 if stage else 0]
+        pre=list(unlock.ops())[case.get('preimageIndex',99 if stage else 0)]
         assert isinstance(pre,bytes)
         assert h256(pre)==tx.signature_hash(0,amount,script,SigHash(0x41)),case['name']
         try:
@@ -91,6 +91,31 @@ def test_negative(filename,stage):
     print(filename,len(cases),'expected results')
 test_negative('negative.json.gz',False)
 test_negative('stage_negative.json.gz',True)
+malleability_cases=json.loads((HERE/'malleability-negative.json').read_text())
+for case in malleability_cases:
+    tx=Tx.from_hex(case['transaction'])
+    index=case.get('inputIndex',0)
+    tx.inputs[index].script_sig=Script(bytes.fromhex(case['unlocking']))
+    source=TxOutput(case['value'],Script(bytes.fromhex(case['locking'])))
+    pre=list(tx.inputs[index].script_sig.ops())[case.get('preimageIndex',0)]
+    assert h256(pre)==tx.signature_hash(index,source.value,source.script_pubkey,SigHash(0x41))
+    try: accepted=execute(tx,index,source)
+    except Exception: accepted=False
+    assert accepted is False,case['name']
+print('malleability-negative.json',len(malleability_cases),'expected rejections')
+variant=json.loads((HERE/'purchase-variant.json').read_text())
+original=Tx.from_hex(variant['original'])
+alternatives=[Tx.from_hex(variant[name]) for name in ('variant','listingVariant')]
+assert len({tx.hash() for tx in [original,*alternatives]})==3
+for alternative in alternatives:
+    assert [(o.value,o.script_pubkey.to_bytes()) for o in original.outputs]==[(o.value,o.script_pubkey.to_bytes()) for o in alternative.outputs]
+sources=[TxOutput(variant['listingValue'],Script(bytes.fromhex(variant['listingSource']))),
+         TxOutput(variant['fundingValue'],Script(bytes.fromhex(variant['fundingSource'])))]
+for tx in [original,*alternatives]:
+    pre=next(item for item in tx.inputs[0].script_sig.ops() if isinstance(item,bytes) and len(item)>100)
+    assert h256(pre).hex()==variant['commitment']
+    for index,source in enumerate(sources): assert execute(tx,index,source)
+print('purchase txid variants: three complete transactions valid with identical commitment')
 maximum=json.loads(gzip.decompress((HERE/'max8-activation.json.gz').read_bytes()))
 max_tx=Tx.from_hex(maximum['transaction'])
 max_lock=Script(bytes.fromhex(maximum['locking']))
