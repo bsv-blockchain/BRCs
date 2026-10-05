@@ -1,6 +1,6 @@
 # BRC-197 revenue-listing-v1 executable family
 
-This directory freezes two literal Bitcoin Script programs: [activation.asm](./activation.asm) and [active.asm](./active.asm). Their exact bytes are [activation.hex](./activation.hex) and [active.hex](./active.hex). [BRC-197](../../0197.md) defines the 717-byte metadata, unlocking ABI, route semantics and domain checks. No contract compiler or generated high-level source is part of this family.
+This directory freezes two literal Bitcoin Script programs: [activation.asm](./activation.asm) and [active.asm](./active.asm). Their exact bytes are [activation.hex](./activation.hex) and [active.hex](./active.hex). The [component guide](./COMPONENTS.md) presents their ordered opcode fragments, byte offsets and size profile for review. [BRC-197](../../0197.md) defines the 717-byte metadata, unlocking ABI, route semantics and domain checks. No contract compiler or generated high-level source is part of this family.
 
 ## Reproduction
 
@@ -12,7 +12,7 @@ node tokens/media/0197/test-family.mjs
 overlays/media/0192-0199/.venv/bin/python tokens/media/0197/verify-script.py
 ```
 
-The assembly check independently assembles both opcode listings with the BSV SDK and compares the full bytes, lengths and hashes in [artifact.json](./artifact.json). The Python verifier independently uses BitcoinX 0.9 with post-Genesis rules. All examples execute complete transaction inputs, including external P2PKH funding inputs. The fixed-key children match independent BRC-42 derivation for the disclosed fixture roots.
+The assembly check independently assembles every literal component and both complete opcode listings with the BSV SDK, then compares the composition, offsets, bytes, lengths and hashes in [artifact.json](./artifact.json). The Python verifier independently repeats those checks with BitcoinX 0.9 under post-Genesis rules. All examples execute complete transaction inputs, including external P2PKH funding inputs. The fixed-key children match independent BRC-42 derivation for the disclosed fixture roots.
 
 The scripts use ordinary post-Genesis operations including OP_CAT, OP_SPLIT, OP_MUL, OP_MOD, OP_XOR and CHECKSIGVERIFY. They use no OP_CODESEPARATOR, disabled opcode, OP_CHECKLOCKTIMEVERIFY or OP_CHECKSEQUENCEVERIFY. The 33,154-byte activation lock is below the published BSV node default 500 kB post-Genesis script-size policy, but a target miner's current fee, time and resource policy still requires direct qualification. The active lock is 5,238 bytes. Interpreters use a 128 MiB memory bound and 128-byte Script-number bound, disclosed as test limits rather than universal miner settings.
 

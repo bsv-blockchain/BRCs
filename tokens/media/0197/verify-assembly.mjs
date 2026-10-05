@@ -16,14 +16,38 @@ function scriptNumber(value) {
   else if (negative) bytes[bytes.length - 1] |= 128
   return Buffer.from(bytes).toString('hex')
 }
+function binaryFromSource(source) {
+  const words = source.split(/\s+/).filter(Boolean)
+  const normalized = words.map(word => word.startsWith('x:') ? minimalPush(word.slice(2))
+    : /^-?\d+$/.test(word) ? scriptNumber(word) : word)
+  return Buffer.from(Script.fromASM(normalized.join(' ')).toBinary())
+}
 function assemble(name) {
   const source = readFileSync(new URL(`${name}.asm`, root), 'utf8')
   const artifact = manifest.programs[name]
   assert.equal(createHash('sha256').update(source).digest('hex'), artifact.assemblyFileSHA256)
   const words = source.split(/\s+/).filter(Boolean)
-  const normalized = words.map(word => word.startsWith('x:') ? minimalPush(word.slice(2))
-    : /^-?\d+$/.test(word) ? scriptNumber(word) : word)
-  const binary = Buffer.from(Script.fromASM(normalized.join(' ')).toBinary())
+  const binary = binaryFromSource(source)
+  const parts = [], partWords = []
+  let byteStart = 0, wordStart = 0
+  for (const component of artifact.components) {
+    assert(component.path.startsWith('components/') && !component.path.includes('..'))
+    const partSource = readFileSync(new URL(component.path, root), 'utf8')
+    const currentWords = partSource.split(/\s+/).filter(Boolean)
+    const bytes = binaryFromSource(partSource)
+    assert.equal(component.wordStart, wordStart, `${name}: ${component.path} word start`)
+    assert.equal(component.wordCount, currentWords.length, `${name}: ${component.path} word count`)
+    assert.equal(component.byteStart, byteStart, `${name}: ${component.path} byte start`)
+    assert.equal(component.bytes, bytes.length, `${name}: ${component.path} byte length`)
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), component.sha256,
+      `${name}: ${component.path} SHA-256`)
+    partWords.push(...currentWords)
+    parts.push(bytes)
+    wordStart += currentWords.length
+    byteStart += bytes.length
+  }
+  assert.deepEqual(partWords, words, `${name}: component opcode composition`)
+  assert(Buffer.concat(parts).equals(binary), `${name}: component byte composition`)
   const expected = readFileSync(new URL(`${name}.hex`, root), 'utf8').trim()
   const actual = binary.toString('hex')
   if (actual !== expected) {

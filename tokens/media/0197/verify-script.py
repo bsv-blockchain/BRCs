@@ -19,6 +19,17 @@ for name in ('activation','active'):
     program=bytes.fromhex((HERE/(name+'.hex')).read_text().strip())
     assert sha(asm.encode())==art['assemblyFileSHA256']
     assert assemble(asm)==program
+    part_words=[];part_bytes=[];word_start=0;byte_start=0
+    for component in art['components']:
+        assert component['path'].startswith('components/') and '..' not in component['path']
+        source=(HERE/component['path']).read_text()
+        words=source.split();wire=assemble(source)
+        assert component['wordStart']==word_start and component['wordCount']==len(words)
+        assert component['byteStart']==byte_start and component['bytes']==len(wire)
+        assert sha(wire)==component['sha256']
+        part_words.extend(words);part_bytes.append(wire)
+        word_start+=len(words);byte_start+=len(wire)
+    assert part_words==asm.split() and b''.join(part_bytes)==program
     assert len(program)==art['bytes'] and sha(program)==art['programSHA256']
     programs[name]=program
     print(name,'assembled',len(program),sha(program))

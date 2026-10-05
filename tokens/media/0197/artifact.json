@@ -11,7 +11,129 @@
       "hex": "activation.hex",
       "bytes": 32433,
       "programSHA256": "d5c32bdf57d770d526a3ec3f02fef0151a4b2c303aaef08b01ca12f98bdd62f3",
-      "lockingBytes": 33154
+      "lockingBytes": 33154,
+      "components": [
+        {
+          "path": "components/shared/00-authenticate-preimage.asm",
+          "wordStart": 0,
+          "wordCount": 586,
+          "byteStart": 0,
+          "bytes": 1229,
+          "sha256": "899a206acce02ba7a0e569d172f5b23bf0f5f328a7a2435008306b49907e5332"
+        },
+        {
+          "path": "components/shared/01-parse-preimage.asm",
+          "wordStart": 586,
+          "wordCount": 154,
+          "byteStart": 1229,
+          "bytes": 191,
+          "sha256": "dbc6ce68b0e3f3ba60126e1689dbce0a395404dfa25f44282af11cf099f62478"
+        },
+        {
+          "path": "components/shared/02-parse-metadata.asm",
+          "wordStart": 740,
+          "wordCount": 158,
+          "byteStart": 1420,
+          "bytes": 199,
+          "sha256": "4baeba1d9a26a36294d2b9ee8d2b660b957e224d3a53e1273ef5242cdac7e56b"
+        },
+        {
+          "path": "components/activation/00-enter.asm",
+          "wordStart": 898,
+          "wordCount": 9,
+          "byteStart": 1619,
+          "bytes": 11,
+          "sha256": "8fe623b23d045325d41fc9066d9c844465f0134ad143f40e34b0d4eeac940656"
+        },
+        {
+          "path": "components/activation/10-seller-link.asm",
+          "wordStart": 907,
+          "wordCount": 1207,
+          "byteStart": 1630,
+          "bytes": 2808,
+          "sha256": "237ea295847a269c05579db65ef3463bfb1c44ff7793e9fcef6ccb35a32c3ba5"
+        },
+        {
+          "path": "components/activation/20-recipient-1.asm",
+          "wordStart": 2114,
+          "wordCount": 1242,
+          "byteStart": 4438,
+          "bytes": 2924,
+          "sha256": "7d08b011c248da318c0f94db41762d5f37cdb8f8f9b9605004ec121f1c4f2c43"
+        },
+        {
+          "path": "components/activation/21-recipient-2.asm",
+          "wordStart": 3356,
+          "wordCount": 1242,
+          "byteStart": 7362,
+          "bytes": 2882,
+          "sha256": "a36cc189ada0798d1dcd6e83172d323201338c85a95e5f5f303ceeebcd5dafc3"
+        },
+        {
+          "path": "components/activation/22-recipient-3.asm",
+          "wordStart": 4598,
+          "wordCount": 1242,
+          "byteStart": 10244,
+          "bytes": 2877,
+          "sha256": "714a4e261142e89f43462ebc02c2d93298d180f58360abcf6d88314971933395"
+        },
+        {
+          "path": "components/activation/23-recipient-4.asm",
+          "wordStart": 5840,
+          "wordCount": 1242,
+          "byteStart": 13121,
+          "bytes": 2877,
+          "sha256": "58137e47b0669ee4daef36af573936c5a54d8d585c998a691789e72e0a8f4347"
+        },
+        {
+          "path": "components/activation/24-recipient-5.asm",
+          "wordStart": 7082,
+          "wordCount": 1242,
+          "byteStart": 15998,
+          "bytes": 2877,
+          "sha256": "c6b2121e4ae2b367f0abab827fd087ba2021f560b8be0e083f69fb12d3fcca42"
+        },
+        {
+          "path": "components/activation/25-recipient-6.asm",
+          "wordStart": 8324,
+          "wordCount": 1242,
+          "byteStart": 18875,
+          "bytes": 2877,
+          "sha256": "0ef965bfde5adc795bcc8bc2953544dda4ec0aebbf18aaefcbe5902f08680d34"
+        },
+        {
+          "path": "components/activation/26-recipient-7.asm",
+          "wordStart": 9566,
+          "wordCount": 1242,
+          "byteStart": 21752,
+          "bytes": 2877,
+          "sha256": "749f8db9b88b13f3620911ccfbff139bb3d4564ad670620224aff37fe3845153"
+        },
+        {
+          "path": "components/activation/27-recipient-8.asm",
+          "wordStart": 10808,
+          "wordCount": 1242,
+          "byteStart": 24629,
+          "bytes": 2877,
+          "sha256": "ca5a435241c4dcb46f8fe1d4e489aebf74c4dcbfd762e2bd287fcafa989f087f"
+        },
+        {
+          "path": "components/activation/90-weight-sum.asm",
+          "wordStart": 12050,
+          "wordCount": 104,
+          "byteStart": 27506,
+          "bytes": 130,
+          "sha256": "ce29b0a3ede45b1146e22ef9c7a82951c9852efcc051700708d01347329a6d88"
+        },
+        {
+          "path": "components/activation/99-create-active.asm",
+          "wordStart": 12154,
+          "wordCount": 230,
+          "byteStart": 27636,
+          "bytes": 4797,
+          "sha256": "6fc524b75907c1e740a0899a318110f9ff4fd1c2d438c65c8e47e29f84807e49"
+        }
+      ]
     },
     "active": {
       "assembly": "active.asm",
@@ -19,7 +141,73 @@
       "hex": "active.hex",
       "bytes": 4517,
       "programSHA256": "6f595d528137d6a6a38893b645b7dc76762853a9ede4e06ee8e0d0ede22ddb3a",
-      "lockingBytes": 5238
+      "lockingBytes": 5238,
+      "components": [
+        {
+          "path": "components/shared/00-authenticate-preimage.asm",
+          "wordStart": 0,
+          "wordCount": 586,
+          "byteStart": 0,
+          "bytes": 1229,
+          "sha256": "899a206acce02ba7a0e569d172f5b23bf0f5f328a7a2435008306b49907e5332"
+        },
+        {
+          "path": "components/shared/01-parse-preimage.asm",
+          "wordStart": 586,
+          "wordCount": 154,
+          "byteStart": 1229,
+          "bytes": 191,
+          "sha256": "dbc6ce68b0e3f3ba60126e1689dbce0a395404dfa25f44282af11cf099f62478"
+        },
+        {
+          "path": "components/shared/02-parse-metadata.asm",
+          "wordStart": 740,
+          "wordCount": 158,
+          "byteStart": 1420,
+          "bytes": 199,
+          "sha256": "4baeba1d9a26a36294d2b9ee8d2b660b957e224d3a53e1273ef5242cdac7e56b"
+        },
+        {
+          "path": "components/active/10-purchase.asm",
+          "wordStart": 898,
+          "wordCount": 365,
+          "byteStart": 1619,
+          "bytes": 582,
+          "sha256": "e9dfefa04f7ca90c6120b05a9de2e76e8b15b85bd77f179028e3e06f21f77e32"
+        },
+        {
+          "path": "components/active/20-split.asm",
+          "wordStart": 1263,
+          "wordCount": 214,
+          "byteStart": 2201,
+          "bytes": 339,
+          "sha256": "8bd1bb9cae82cb8365a660e97444d99b909c7bb6776b03826668b438b97451dd"
+        },
+        {
+          "path": "components/active/30-payout.asm",
+          "wordStart": 1477,
+          "wordCount": 695,
+          "byteStart": 2540,
+          "bytes": 972,
+          "sha256": "938d95f574950d71724267ecffefc567480379e1792c5c487f2d19f983e6e451"
+        },
+        {
+          "path": "components/active/40-retire.asm",
+          "wordStart": 2172,
+          "wordCount": 711,
+          "byteStart": 3512,
+          "bytes": 998,
+          "sha256": "3bd6e3e05fd66149c67ddd5c9724ac04db26040a7af845ac0e5df3b71d03f652"
+        },
+        {
+          "path": "components/active/99-finish.asm",
+          "wordStart": 2883,
+          "wordCount": 7,
+          "byteStart": 4510,
+          "bytes": 7,
+          "sha256": "68abdf05759d7514b3b6ab865204e139d5e4e3df78bf8e3725749a8beaf256f2"
+        }
+      ]
     }
   },
   "unlocking": {
