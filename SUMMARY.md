@@ -205,6 +205,7 @@
 * [BRC-52 Encrypted Certificate Profile for Verifiable Credential Interoperability](./peer-to-peer/0203.md)
 * [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./peer-to-peer/0225.md)
 * [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
+* [Unsolicited Transaction Delivery to a BRC-169 Mailbox](./peer-to-peer/0232.md)
 * [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
 ## Key Derivation

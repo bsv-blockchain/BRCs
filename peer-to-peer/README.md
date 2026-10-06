@@ -26,4 +26,5 @@ BRC | Standard
 203  | [BRC-52 Encrypted Certificate Profile for Verifiable Credential Interoperability](./0203.md)
 225  | [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./0225.md)
 231  | [Binary Encoding for the Message Relay Interface](./0231.md)
+232  | [Unsolicited Transaction Delivery to a BRC-169 Mailbox](./0232.md)
 369  | [Keyed Content and Conditional Key Release](./0369.md)
