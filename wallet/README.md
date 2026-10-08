@@ -48,5 +48,6 @@ BRC | Standard
 188  | [User Management Protocol (UMP)](./0188.md)
 189  | [Identity, Certificates, Discovery, and Personal Trust in Applications](./0189.md)
 204  | [Agent Allowances](./0204.md)
+206  | [BRC-100 Wallet Discovery and Chooser](./0206.md)
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./0229.md)
