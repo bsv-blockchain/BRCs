@@ -63,6 +63,7 @@
 * [Agent Allowances](./wallet/0204.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
+* [Device Login and Recovery](./wallet/0250.md)
 
 ## Transactions
 
