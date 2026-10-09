@@ -17,7 +17,7 @@ BRC | Standard
 159  | [1Sat Ordinals — Single-Satoshi Tokens and Origin Tracking](./0159.md)
 160  | [1Sat Ordinals — Inscription Envelopes](./0160.md)
 161  | [BSV-21 Fungible Tokens (JSON / Legacy)](./0161.md)
-162  | [Mandala Tokens](./0162.md)
+162  | [Colored Tokens](./0162.md)
 163  | [BSV-21 Basket Profile for BRC-46 / BRC-100](./0163.md)
 165  | [P1Sat Permission Scheme for Basket `1sat`](./0165.md)
 174  | [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./0174.md)
