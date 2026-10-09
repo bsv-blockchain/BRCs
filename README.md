@@ -269,6 +269,7 @@ BRC | Standard
 203  | [BRC-52 Encrypted Certificate Profile for Verifiable Credential Interoperability](./peer-to-peer/0203.md)
 204  | [Agent Allowances](./wallet/0204.md)
 207  | [1Color Wallet Module](./wallet/0207.md)
+209  | [1Color Minimal Resource Profile](./wallet/0209.md)
 210  | [Derived Collectibles](./apps/0210.md)
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
 219  | [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)

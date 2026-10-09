@@ -62,6 +62,7 @@
 * [Identity, Certificates, Discovery, and Personal Trust in Applications](./wallet/0189.md)
 * [Agent Allowances](./wallet/0204.md)
 * [1Color Wallet Module](./wallet/0207.md)
+* [1Color Minimal Resource Profile](./wallet/0209.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 
