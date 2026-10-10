@@ -50,3 +50,4 @@ BRC | Standard
 204  | [Agent Allowances](./0204.md)
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./0229.md)
+249  | [Vault Account Holding Across Devices](./0249.md)
