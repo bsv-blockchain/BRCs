@@ -200,6 +200,16 @@ mined alias under a weaker prior release changes currentness without reissuing
 rights or rewriting the signed License. Unconfirmed alias caps cannot strand a
 verified selected-chain variant.
 
+**196.6 — Recovery after local rejection.** The state table explicitly permits
+authorized recovery from admission-rejected under the same immutable candidate
+identity. Newly eligible evidence, including a verified mined alias, can reserve
+durable admission/reconciliation work; existing durable admission instead links
+the saved STEAK without repeating effects. Original terms/deadlines, per-txid
+operations and rejection history remain retained. Incomplete or unchanged evidence
+does not restart rejected work, and no alias authorizes another payment or release.
+This is a specification clarification; the frozen vectors are unchanged and do
+not establish implementation coverage for these recovery transitions.
+
 ## BRC-197
 
 **197.1 — Concrete family.** [Sections 1–5](../../../tokens/0197.md#1-descriptor-derivation-and-genesis)
@@ -373,9 +383,14 @@ locktime equality discrepancy is explicitly resolved in favor of the node's stri
 comparison, using tip+1 height and selected-chain MTP. The actual BRC-197
 permissionless expiry-retirement transaction now enters the shared reconciliation
 corpus: before maturity it is nonfinal intent (or unsupported under nonFinal=false),
-and at maturity it is a final consuming spend in both settings. The other BRC-197
-routes retain zero-locktime/all-final domain requirements. BRC-194 proposals are
-not verified spends; no BRC-197 program byte changes for this correction.
+and at maturity it is a final consuming spend in both settings. BRC-197 now uses
+ordinary Bitcoin finality for every route; zero-locktime/all-final sequences are
+an ordinary construction recommendation, not an additional domain acceptance
+condition. Script-valid alternatives preserve lineage when final, and previously
+non-final transitions are not excluded once validly settled. Permissionless expiry
+retirement retains its Script-enforced route conditions. BRC-194 proposals remain
+distinct from verified spends. This domain clarification changes no Script,
+vector or fixture bytes and does not claim new frozen-corpus coverage.
 
 **F4 — Accepted-chain override and reorg.** Inclusion must resolve to the selected
 verified header chain; it supersedes conflicting unconfirmed choices and their
