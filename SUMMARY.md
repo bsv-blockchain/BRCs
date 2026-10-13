@@ -184,6 +184,7 @@
 * [Simple 402 Payments](./payments/0121.md)
 * [PeerPay URI Scheme for BRC-29 Payments](./payments/0125.md)
 * [P2PKH Payments for HTTP 402](./payments/0166.md)
+* [1Color Offline Peer-to-Peer Payments](./payments/0175.md)
 * [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 
 ## Peer-to-Peer

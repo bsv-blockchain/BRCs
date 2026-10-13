@@ -240,6 +240,7 @@ BRC | Standard
 172  | [Giving an AI Agent Control of a Delivery Vehicle Without Giving It a Wallet](./state-machines/0172.md)
 173  | [Bitcoin Script to and from Bitcoin BASIC — a compiler and a decompiler](./scripts/0173.md)
 174  | [Consensus-Unique Name Tokens — Identity Binding and Verified Resolution](./tokens/0174.md)
+175  | [1Color Offline Peer-to-Peer Payments](./payments/0175.md)
 176  | [BSV-21 — Validity Proofs](./tokens/0176.md)
 177  | [Wallet-Enforced Expiry for `noSend` Actions](./wallet/0177.md)
 178  | [Race-Settled Collection Markets for Overlay Lookups and Message Boxes](./overlays/0178.md)
