@@ -64,6 +64,7 @@
 * [Extensible Wallet Version Strings and Account Labels](./wallet/0205.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
+* [Vault Account Holding Across Devices](./wallet/0249.md)
 
 ## Transactions
 

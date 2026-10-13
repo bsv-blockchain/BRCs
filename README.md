@@ -281,6 +281,7 @@ BRC | Standard
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 231  | [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
 233  | [Subject BEEF](./transactions/0233.md)
+249  | [Vault Account Holding Across Devices](./wallet/0249.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
 ## License
