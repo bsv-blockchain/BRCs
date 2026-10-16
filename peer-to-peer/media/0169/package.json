@@ -1,0 +1,7 @@
+{
+  "name": "brc-169-vectors",
+  "private": true,
+  "type": "module",
+  "scripts": { "vectors": "node vectors.mjs" },
+  "dependencies": { "@bsv/sdk": "2.8.10", "@ipld/dag-cbor": "9.2.5", "canonicalize": "2.1.0" }
+}
