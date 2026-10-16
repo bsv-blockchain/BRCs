@@ -277,6 +277,7 @@ BRC | Standard
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
 219  | [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 220  | [NotaryHash — Privacy-Preserving Signed-Hash Notarization with SPV-Verifiable Certificates](./apps/0220.md)
+222  | [Consent Envelope: Verifiable Multi-Party Document Signing with On-Chain Signing Order](./apps/0222.md)
 224  | [Block Media Format (BMF) — Composable On-Chain Audio/Video](./apps/0224.md)
 225  | [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./peer-to-peer/0225.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
