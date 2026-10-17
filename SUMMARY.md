@@ -145,6 +145,7 @@
 * [BSV-21 — Validity Proofs](./tokens/0176.md)
 * [Accumulating Right-of-Sale Listings and Purchase Orders](./tokens/0197.md)
 * [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
+* [Peer-to-Peer Fungible Tokens (P2P-FT)](./tokens/0251.md)
 
 ## Overlays
 

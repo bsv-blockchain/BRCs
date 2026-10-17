@@ -288,6 +288,7 @@ BRC | Standard
 231  | [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
 233  | [Subject BEEF](./transactions/0233.md)
 248  | [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
+251  | [Peer-to-Peer Fungible Tokens (P2P-FT)](./tokens/0251.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
 ## License
