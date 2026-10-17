@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 486" width="760" height="486" role="img" aria-labelledby="t d">
+<title id="t">The loopback permission prompt, unprimed and primed</title>
+<desc id="d">A looping wireframe in two phases. First, the browser's permission bubble appears under the address bar with no warning, offering one irreversible answer. Then the same moment under this document: the reader operates a control low in the page, a primer appears where the browser's question will appear and explains that the question is broader than the use, and only then does the browser ask, with a non-blocking line saying where to look.</desc>
+
+<style>
+  .f  { fill: none; stroke: #8b8b8b; stroke-width: 1.4; }
+  .fd { fill: none; stroke: #8b8b8b; stroke-width: 1.4; stroke-dasharray: 4 3; }
+  .s  { fill: #8b8b8b; }
+  .t  { fill: #8b8b8b; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12px; }
+  .tb { fill: #8b8b8b; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+  .tm { fill: #8b8b8b; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; }
+  .cap{ fill: #8b8b8b; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 13px; }
+  .ph { fill: #8b8b8b; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; letter-spacing: 1.6px; }
+</style>
+
+<!-- browser frame, static -->
+<rect class="f" x="40" y="30" width="680" height="330" rx="7"/>
+<line class="f" x1="40" y1="68" x2="720" y2="68"/>
+<circle class="s" cx="59" cy="49" r="3.2"/>
+<circle class="s" cx="72" cy="49" r="3.2"/>
+<circle class="s" cx="85" cy="49" r="3.2"/>
+<rect class="f" x="104" y="40" width="330" height="19" rx="9.5"/>
+<text class="tm" x="116" y="54">example.com</text>
+
+<!-- page content, static, kept clear of the prompt anchor -->
+<rect class="f" x="72" y="232" width="200" height="9" rx="4.5"/>
+<rect class="f" x="72" y="254" width="420" height="7" rx="3.5"/>
+<rect class="f" x="72" y="270" width="380" height="7" rx="3.5"/>
+<rect class="f" x="72" y="286" width="300" height="7" rx="3.5"/>
+
+<!-- ================= PHASE A: unprimed ================= -->
+<g opacity="0">
+  <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+    keyTimes="0;0.04;0.42;0.46;1" values="0;1;1;0;0" calcMode="linear"/>
+
+  <text class="ph" x="40" y="20">TODAY</text>
+
+  <g opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.11;0.115;0.42;0.46;1" values="0;0;1;1;0;0" calcMode="linear"/>
+    <rect class="f" x="104" y="88" width="330" height="116" rx="7"/>
+    <path class="f" d="M 128 88 l 9 -9 l 9 9"/>
+    <text class="tb" x="122" y="112">example.com wants to</text>
+    <rect class="f" x="122" y="128" width="16" height="13" rx="2"/>
+    <text class="t" x="150" y="139">Access other apps and services on</text>
+    <text class="t" x="150" y="155">this device</text>
+    <rect class="f" x="248" y="170" width="78" height="22" rx="4"/>
+    <text class="t" x="276" y="185">Block</text>
+    <rect class="f" x="336" y="170" width="78" height="22" rx="4"/>
+    <text class="t" x="364" y="185">Allow</text>
+  </g>
+
+  <g class="f" opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.11;0.125;0.2;1" values="0;0;1;0;0" calcMode="linear"/>
+    <line x1="452" y1="116" x2="472" y2="109"/>
+    <line x1="456" y1="137" x2="478" y2="137"/>
+    <line x1="452" y1="158" x2="472" y2="165"/>
+  </g>
+
+  <text class="cap" x="40" y="400" opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.15;0.42;0.46;1" values="0;1;1;0;0" calcMode="linear"/>
+    No warning, and nothing on the page has mentioned a wallet.
+  </text>
+  <text class="cap" x="40" y="420" opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.19;0.42;0.46;1" values="0;1;1;0;0" calcMode="linear"/>
+    Block is permanent for this origin. One answer, unrecoverable.
+  </text>
+</g>
+
+<!-- ================= PHASE B: primed ================= -->
+<g opacity="0">
+  <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+    keyTimes="0;0.46;0.5;0.95;1" values="0;0;1;1;0" calcMode="linear"/>
+
+  <text class="ph" x="40" y="20">THIS DOCUMENT</text>
+
+  <!-- the control the reader operates, low in the page -->
+  <rect class="f" x="72" y="310" width="104" height="26" rx="4"/>
+  <text class="t" x="94" y="327">Buy this</text>
+  <circle class="f" cx="124" cy="323" r="0" opacity="0">
+    <animate attributeName="r" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.52;0.575;1" values="4;4;30;30" calcMode="linear"/>
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.52;0.53;0.575;1" values="0;0;1;0;0" calcMode="linear"/>
+  </circle>
+
+  <!-- attention has to travel from the control to the browser's anchor -->
+  <path class="fd" d="M 180 316 C 300 300 320 230 236 210" opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.555;0.585;0.76;0.79;1" values="0;0;1;1;0;0" calcMode="linear"/>
+  </path>
+
+  <!-- the primer, where the question will appear -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.57;0.60;0.76;0.79;1" values="0;0;1;1;0;0" calcMode="linear"/>
+    <rect class="fd" x="104" y="88" width="330" height="124" rx="7"/>
+    <text class="tb" x="118" y="112">Your browser's question is broader</text>
+    <text class="tb" x="118" y="128">than this site needs</text>
+    <text class="t" x="118" y="150">It covers everything running here. This</text>
+    <text class="t" x="118" y="166">site looks for one thing, your wallet.</text>
+    <rect class="f" x="118" y="178" width="112" height="22" rx="4"/>
+    <text class="t" x="132" y="193">Connect wallet</text>
+    <rect class="f" x="240" y="178" width="112" height="22" rx="4"/>
+    <text class="t" x="254" y="193">Other ways</text>
+  </g>
+
+  <!-- then the browser's own question, now expected -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.79;0.82;0.95;1" values="0;0;1;1;0" calcMode="linear"/>
+    <rect class="f" x="104" y="88" width="330" height="116" rx="7"/>
+    <path class="f" d="M 128 88 l 9 -9 l 9 9"/>
+    <text class="tb" x="122" y="112">example.com wants to</text>
+    <rect class="f" x="122" y="128" width="16" height="13" rx="2"/>
+    <text class="t" x="150" y="139">Access other apps and services on</text>
+    <text class="t" x="150" y="155">this device</text>
+    <rect class="f" x="248" y="170" width="78" height="22" rx="4"/>
+    <text class="t" x="276" y="185">Block</text>
+    <rect class="f" x="336" y="170" width="78" height="22" rx="4"/>
+    <text class="t" x="364" y="185">Allow</text>
+  </g>
+
+  <!-- non-blocking waiting line, pointing at the anchor -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.82;0.85;0.95;1" values="0;0;1;1;0" calcMode="linear"/>
+    <rect class="fd" x="468" y="132" width="228" height="48" rx="5"/>
+    <path class="f" d="M 492 168 l 0 -22 m -5 5 l 5 -5 l 5 5"/>
+    <text class="t" x="510" y="154">Look near the top of your</text>
+    <text class="t" x="510" y="170">browser window. No time limit.</text>
+  </g>
+
+  <text class="cap" x="40" y="400" opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.60;0.95;1" values="0;1;1;0" calcMode="linear"/>
+    The reader acted first, and was told what the question covers
+  </text>
+  <text class="cap" x="40" y="420" opacity="0">
+    <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+      keyTimes="0;0.63;0.95;1" values="0;1;1;0" calcMode="linear"/>
+    before meeting it. Declining the first panel costs nothing.
+  </text>
+</g>
+
+<!-- footer, static -->
+<line class="f" x1="40" y1="444" x2="720" y2="444" stroke-dasharray="2 4"/>
+<text class="tm" x="40" y="466">BRC-325, sections 5 and 9</text>
+<text class="tm" x="578" y="466">wireframe, 12s loop</text>
+</svg>
