@@ -66,6 +66,7 @@
 * [1Color Wallet Module](./wallet/0207.md)
 * [Vault Sub-Accounts](./wallet/0208.md)
 * [1Color Minimal Resource Profile](./wallet/0209.md)
+* [Native UTXO-Chain Coins in a BRC-100 Wallet](./wallet/0213.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 

@@ -276,6 +276,7 @@ BRC | Standard
 209  | [1Color Minimal Resource Profile](./wallet/0209.md)
 210  | [Derived Collectibles](./apps/0210.md)
 211  | [Signed On-Chain Reachability Manifest](./overlays/0211.md)
+213  | [Native UTXO-Chain Coins in a BRC-100 Wallet](./wallet/0213.md)
 218  | [Chat-Native Command Grammar for the Metanet](./apps/0218.md)
 219  | [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 220  | [NotaryHash — Privacy-Preserving Signed-Hash Notarization with SPV-Verifiable Certificates](./apps/0220.md)
