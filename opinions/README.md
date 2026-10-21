@@ -19,3 +19,4 @@ BRC  | Standard
 186  | [Thoughts on UTXO-Driven Applications and Private Overlays](./0186.md)
 187  | [Thoughts on Declarative Stewardship](./0187.md)
 191  | [Thoughts on Identity, Privacy and Recovery on the Metanet](./0191.md)
+234  | [A Shared Schedule for Reducing Free Blockchain Index Coverage](./0234.md)

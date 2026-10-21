@@ -290,6 +290,7 @@ BRC | Standard
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 231  | [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
 233  | [Subject BEEF](./transactions/0233.md)
+234  | [A Shared Schedule for Reducing Free Blockchain Index Coverage](./opinions/0234.md)
 248  | [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
 326  | [Wallet Failure Presentation](./wallet/0326.md)
