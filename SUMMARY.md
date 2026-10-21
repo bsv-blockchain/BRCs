@@ -65,6 +65,7 @@
 * [Identity, Certificates, Discovery, and Personal Trust in Applications](./wallet/0189.md)
 * [Agent Allowances](./wallet/0204.md)
 * [Extensible Wallet Version Strings and Account Labels](./wallet/0205.md)
+* [Wallet-Native Rabin Signatures as a BRC-98 Module](./wallet/0206.md)
 * [1Color Wallet Module](./wallet/0207.md)
 * [Vault Sub-Accounts](./wallet/0208.md)
 * [1Color Minimal Resource Profile](./wallet/0209.md)

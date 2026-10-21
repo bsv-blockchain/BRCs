@@ -271,6 +271,7 @@ BRC | Standard
 203  | [BRC-52 Encrypted Certificate Profile for Verifiable Credential Interoperability](./peer-to-peer/0203.md)
 204  | [Agent Allowances](./wallet/0204.md)
 205  | [Extensible Wallet Version Strings and Account Labels](./wallet/0205.md)
+206  | [Wallet-Native Rabin Signatures as a BRC-98 Module](./wallet/0206.md)
 207  | [1Color Wallet Module](./wallet/0207.md)
 208  | [Vault Sub-Accounts](./wallet/0208.md)
 209  | [1Color Minimal Resource Profile](./wallet/0209.md)
