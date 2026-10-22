@@ -1,0 +1,73 @@
+warning: bnt-step-script@0.1.0: rustc +succinct --version: "rustc 1.96.0-dev\n"
+warning: bnt-step-script@0.1.0: bnt-step-program built at 2026-10-20 17:18:25
+warning: type `Batch<'a>` is more private than the item `synthetic_batch`
+  --> src/bin/prove.rs:74:1
+   |
+74 | pub fn synthetic_batch<'a>(length: usize) -> Batch<'a> {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function `synthetic_batch` is reachable at visibility `pub`
+   |
+note: but type `Batch<'a>` is only usable at visibility `pub(crate)`
+  --> src/bin/prove.rs:37:1
+   |
+37 | struct Batch<'a> {
+   | ^^^^^^^^^^^^^^^^
+   = note: `#[warn(private_interfaces)]` on by default
+
+warning: `bnt-step-script` (bin "prove") generated 1 warning
+    Finished `release` profile [optimized] target(s) in 0.70s
+     Running `target/release/prove batch 100`
+setup 4.2 s, key 0x00743a85773cc14bbf0e2e494d6e199bab319550586afe0aba3185ea8aacd3e1
+proving batch-100 (100 transactions)…
+stdout: cycle-tracker-start: read
+stdout: cycle-tracker-end: read
+stdout: cycle-tracker-start: claims
+stdout: cycle-tracker-end: claims
+stdout: cycle-tracker-start: batch
+stdout: cycle-tracker-end: batch
+batch-100: 483.0 s, 1272656 bytes, verified
+{
+  "batches": [
+    {
+      "bytes": 1272656,
+      "seconds": 181.01922525,
+      "txs": 10
+    },
+    {
+      "bytes": 1272656,
+      "seconds": 482.983692959,
+      "txs": 100
+    }
+  ],
+  "merge": {
+    "bytes": 1272656,
+    "seconds": 350.522565208,
+    "txid": "0f9c13ade73d3708b850a316a69352bc83a7638eb8b8558295336cd2f9a5ed21",
+    "verifies": "split"
+  },
+  "mode": "compressed",
+  "sp1": "v6.1.0",
+  "split": {
+    "bytes": 1272656,
+    "seconds": 154.509418708,
+    "txid": "42128ed2c4dabef2b8b0d1b76ba7b9e6b06d232f947dc6f26821020e5a738fc5"
+  },
+  "vkey": "0x00743a85773cc14bbf0e2e494d6e199bab319550586afe0aba3185ea8aacd3e1"
+}
+      521.10 real      1145.70 user       227.04 sys
+          2806317056  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+            21926555  page reclaims
+                3530  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+             1061988  voluntary context switches
+            15447849  involuntary context switches
+       9609327636117  instructions retired
+       3524901842720  cycles elapsed
+         15175315336  peak memory footprint

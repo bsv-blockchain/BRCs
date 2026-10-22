@@ -1,0 +1,20 @@
+[package]
+name = "bnt-step-script"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+# Its own workspace: sp1-sdk is heavy and the step crate's tests must not build it.
+[workspace]
+
+[dependencies]
+bnt-step = { path = "../crates/bnt-step" }
+hex = "0.4"
+serde_json = "1"
+sp1-sdk = { version = "6.9", features = ["blocking"] }
+
+[build-dependencies]
+sp1-build = "6.9"
+
+[profile.release]
+opt-level = 3

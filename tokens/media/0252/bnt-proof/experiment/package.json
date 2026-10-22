@@ -1,0 +1,12 @@
+{
+  "name": "bnt-e2e-experiment",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fetch": "node fetch.mjs",
+    "test": "node --test chain.test.mjs"
+  },
+  "dependencies": {
+    "@bsv/sdk": "2.8.11"
+  }
+}

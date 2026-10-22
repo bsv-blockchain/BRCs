@@ -1,0 +1,9 @@
+$ cd script && cargo run --release --bin bnt-step-script
+batch                      txs proofs        cycles      per tx
+chain of 1                   1      0         83776       83776
+chain of 10                 10      0        503362       50336
+chain of 100               100      0       4894762       48947
+chain of 1000             1000      0      50451583       50451
+transfer                     1      0         83776       83776
+split into 16                1      1       1480635     1480635
+merge of 16                  1     16       3320314     3320314

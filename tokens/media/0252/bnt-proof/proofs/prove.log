@@ -1,0 +1,55 @@
+warning: bnt-step-script@0.1.0: rustc +succinct --version: "rustc 1.96.0-dev\n"
+warning: bnt-step-script@0.1.0: bnt-step-program built at 2026-10-20 17:07:46
+    Finished `release` profile [optimized] target(s) in 1.25s
+     Running `target/release/prove`
+setup 3.0 s, key 0x00743a85773cc14bbf0e2e494d6e199bab319550586afe0aba3185ea8aacd3e1
+proving split (1 transactions)…
+stdout: cycle-tracker-start: read
+stdout: cycle-tracker-end: read
+stdout: cycle-tracker-start: claims
+stdout: cycle-tracker-end: claims
+stdout: cycle-tracker-start: batch
+stdout: cycle-tracker-end: batch
+split: 154.5 s, 1272656 bytes, verified
+proving merge (1 transactions)…
+stdout: cycle-tracker-start: read
+stdout: cycle-tracker-end: read
+stdout: cycle-tracker-start: claims
+stdout: cycle-tracker-end: claims
+stdout: cycle-tracker-start: batch
+stdout: cycle-tracker-end: batch
+merge: 350.5 s, 1272656 bytes, verified
+{
+  "merge": {
+    "bytes": 1272656,
+    "seconds": 350.522565208,
+    "txid": "0f9c13ade73d3708b850a316a69352bc83a7638eb8b8558295336cd2f9a5ed21",
+    "verifies": "split"
+  },
+  "mode": "compressed",
+  "sp1": "v6.1.0",
+  "split": {
+    "bytes": 1272656,
+    "seconds": 154.509418708,
+    "txid": "42128ed2c4dabef2b8b0d1b76ba7b9e6b06d232f947dc6f26821020e5a738fc5"
+  },
+  "vkey": "0x00743a85773cc14bbf0e2e494d6e199bab319550586afe0aba3185ea8aacd3e1"
+}
+      550.25 real      1230.41 user       241.30 sys
+          2737176576  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+            25564274  page reclaims
+                5677  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+             1334035  voluntary context switches
+            15551084  involuntary context switches
+      10685770996323  instructions retired
+       3825309667978  cycles elapsed
+         18497714672  peak memory footprint
