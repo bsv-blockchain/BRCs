@@ -28,3 +28,4 @@ BRC | Standard
 196  | [STEAK with POTATOES](./0196.md)
 199  | [SHIP and SLAP Root-Host Output Eviction Coordination](./0199.md)
 211  | [Signed On-Chain Reachability Manifest](./0211.md)
+257  | [Proving Service for Bitcoin Native Tokens, 1Sat Ordinals and BSV-21](./0257.md)

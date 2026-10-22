@@ -175,6 +175,7 @@
 * [STEAK with POTATOES](./overlays/0196.md)
 * [SHIP and SLAP Root-Host Output Eviction Coordination](./overlays/0199.md)
 * [Signed On-Chain Reachability Manifest](./overlays/0211.md)
+* [Proving Service for Bitcoin Native Tokens, 1Sat Ordinals and BSV-21](./overlays/0257.md)
 
 ## Payments
 
