@@ -24,3 +24,4 @@ BRC | Standard
 176  | [BSV-21 — Validity Proofs](./0176.md)
 197  | [Accumulating Right-of-Sale Listings and Purchase Orders](./0197.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./0226.md)
+254  | [Market Offers and Direct Swaps for Wallet Assets](./0254.md)
