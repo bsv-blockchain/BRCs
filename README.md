@@ -285,6 +285,7 @@ BRC | Standard
 224  | [Block Media Format (BMF) — Composable On-Chain Audio/Video](./apps/0224.md)
 225  | [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./peer-to-peer/0225.md)
 226  | [Miner-Enforced Resale-Royalty Covenant Tokens (OP_PUSH_TX)](./tokens/0226.md)
+255  | [Bitcoin Native Tokens (BNT): Compact Format](./tokens/0255.md)
 227  | [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
 228  | [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
