@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node countersign.mjs" },
+  "dependencies": { "@bsv/sdk": "2.8.1" }
+}
