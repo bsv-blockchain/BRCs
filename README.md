@@ -291,6 +291,7 @@ BRC | Standard
 231  | [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
 233  | [Subject BEEF](./transactions/0233.md)
 248  | [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
+256  | [Cross-Chain Atomic Swaps Between Wallets](./payments/0256.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
 326  | [Wallet Failure Presentation](./wallet/0326.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
