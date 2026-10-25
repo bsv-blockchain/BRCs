@@ -276,6 +276,7 @@ BRC | Standard
 209  | [1Color Minimal Resource Profile](./wallet/0209.md)
 210  | [Derived Collectibles](./apps/0210.md)
 211  | [Signed On-Chain Reachability Manifest](./overlays/0211.md)
+212  | [Compact Wallet Feature Flags in `getVersion`](./wallet/0212.md)
 215  | [Block-Height Deadline Covenant Templates (OP_PUSH_TX)](./scripts/0215.md)
 216  | [Dead-Man Timed Reveal of a Sealed Secret](./apps/0216.md)
 217  | [Authenticated 1Sat Inscription](./tokens/0217.md)
