@@ -71,6 +71,7 @@
 * [1Color Minimal Resource Profile](./wallet/0209.md)
 * [Compact Wallet Feature Flags in `getVersion`](./wallet/0212.md)
 * [Native UTXO-Chain Coins in a BRC-100 Wallet](./wallet/0213.md)
+* [Wallet Asset Profiles](./wallet/0214.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Deterministic, Order-Independent Coin Selection for Privacy Wallets](./wallet/0221.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)

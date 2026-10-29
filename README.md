@@ -278,6 +278,7 @@ BRC | Standard
 211  | [Signed On-Chain Reachability Manifest](./overlays/0211.md)
 212  | [Compact Wallet Feature Flags in `getVersion`](./wallet/0212.md)
 213  | [Native UTXO-Chain Coins in a BRC-100 Wallet](./wallet/0213.md)
+214  | [Wallet Asset Profiles](./wallet/0214.md)
 215  | [Block-Height Deadline Covenant Templates (OP_PUSH_TX)](./scripts/0215.md)
 216  | [Dead-Man Timed Reveal of a Sealed Secret](./apps/0216.md)
 217  | [Authenticated 1Sat Inscription](./tokens/0217.md)
