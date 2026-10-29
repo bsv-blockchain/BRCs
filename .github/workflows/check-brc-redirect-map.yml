@@ -1,0 +1,17 @@
+name: Check BRC short-link map
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  check-brc-redirect-map:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fail when a BRC file is missing from the short-link map
+        run: python3 scripts/brc_redirect_map.py check

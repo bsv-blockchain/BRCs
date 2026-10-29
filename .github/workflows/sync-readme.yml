@@ -1,4 +1,4 @@
-name: Sync README on Merge
+name: Sync BRC short links
 
 on:
   push:
@@ -9,14 +9,15 @@ jobs:
   sync-readme:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait 5 minutes after merge
-        run: sleep 300
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Trigger README sync
-        run: |
-          curl -f 'https://brc.dev/sync/readme' \
-            -H 'accept: */*' \
-            -H 'content-type: application/json' \
-            --data-raw "{\"key\":\"$BRC_AUTH_KEY\"}"
+      # Publish from numbered BRC files. POST /sync/readme on brc.dev skips any
+      # README row whose text contains both "BRC" and "Standard", which drops
+      # BRC-87 ("Standardized ... BRC-22") and leaves /87 redirecting to
+      # https://bsv.brc.devnull. The checkout is the commit that just landed,
+      # so this does not wait for raw.githubusercontent.com.
+      - name: Publish brc.dev short links
         env:
           BRC_AUTH_KEY: ${{ secrets.BRC_AUTH_KEY }}
+        run: python3 scripts/brc_redirect_map.py publish
