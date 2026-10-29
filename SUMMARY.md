@@ -68,6 +68,7 @@
 * [1Color Wallet Module](./wallet/0207.md)
 * [Vault Sub-Accounts](./wallet/0208.md)
 * [1Color Minimal Resource Profile](./wallet/0209.md)
+* [Compact Wallet Feature Flags in `getVersion`](./wallet/0212.md)
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Deterministic, Order-Independent Coin Selection for Privacy Wallets](./wallet/0221.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
