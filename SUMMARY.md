@@ -201,6 +201,7 @@
 * [P2PKH Payments for HTTP 402](./payments/0166.md)
 * [1Color Offline Peer-to-Peer Payments](./payments/0175.md)
 * [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
+* [Paymail Public Profile Lookup](./payments/0235.md)
 * [Cross-Chain Atomic Swaps Between Wallets](./payments/0256.md)
 
 ## Peer-to-Peer
