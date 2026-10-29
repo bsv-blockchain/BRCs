@@ -50,6 +50,7 @@ BRC | Standard
 189  | [Identity, Certificates, Discovery, and Personal Trust in Applications](./0189.md)
 204  | [Agent Allowances](./0204.md)
 205  | [Extensible Wallet Version Strings and Account Labels](./0205.md)
+206  | [Wallet-Native Rabin Signatures as a BRC-98 Module](./0206.md)
 207  | [1Color Wallet Module](./0207.md)
 208  | [Vault Sub-Accounts](./0208.md)
 209  | [1Color Minimal Resource Profile](./0209.md)
