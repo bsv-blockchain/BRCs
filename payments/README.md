@@ -12,6 +12,7 @@ Current orientation:
 - [BRC-175](./0175.md) lets a wallet accept 1Color token payments offline, using overlay admission attestations as evidence and settling later.
 - [BRC-228](./0228.md) is a sender-side profile of BRC-29 that remits a per-payment ephemeral key instead of the originator's long-term identity key.
 - [BRC-235](./0235.md) adds two Paymail capabilities that resolve `handle@domain` to a self-signed identity profile and back, for BRC-29 payments; a host may serve them without any legacy Paymail capability.
+- [BRC-236](./0236.md) adds the Paymail capability that registers, updates and releases those profiles with a signed certificate as the only authorisation, plus an advisory availability check.
 
 HTTP `402 Payment Required` remains a reserved status code in RFC 9110; these BRCs define ecosystem conventions layered on top of that reserved code.
 
@@ -33,4 +34,5 @@ BRC | Standard
 175  | [1Color Offline Peer-to-Peer Payments](./0175.md)
 228  | [Unlinkable Payments under the Identity Paradigm](./0228.md)
 235  | [Paymail Public Profile Lookup](./0235.md)
+236  | [Paymail Public Profile Registration](./0236.md)
 256  | [Cross-Chain Atomic Swaps Between Wallets](./0256.md)
