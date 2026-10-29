@@ -28,5 +28,6 @@ BRC | Standard
 231  | [Binary Encoding for the Message Relay Interface](./0231.md)
 232  | [Unsolicited Transaction Delivery to a BRC-169 Mailbox](./0232.md)
 246  | [Session Upgrade: BRC-33 Messages over WebRTPay](./0246.md)
+247  | [Identity-Key Issuer Attestation](./0247.md)
 248  | [Offline Issuer Identity Packages](./0248.md)
 369  | [Keyed Content and Conditional Key Release](./0369.md)

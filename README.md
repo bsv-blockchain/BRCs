@@ -297,6 +297,7 @@ BRC | Standard
 234  | [A Shared Schedule for Reducing Free Blockchain Index Coverage](./opinions/0234.md)
 235  | [Paymail Public Profile Lookup](./payments/0235.md)
 246  | [Session Upgrade: BRC-33 Messages over WebRTPay](./peer-to-peer/0246.md)
+247  | [Identity-Key Issuer Attestation](./peer-to-peer/0247.md)
 248  | [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
 251  | [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./tokens/0251.md)
 252  | [Short Proofs for Bitcoin Native Tokens](./tokens/0252.md)
