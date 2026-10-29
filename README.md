@@ -304,6 +304,7 @@ BRC | Standard
 255  | [Bitcoin Native Tokens (BNT): Compact Format](./tokens/0255.md)
 256  | [Cross-Chain Atomic Swaps Between Wallets](./payments/0256.md)
 257  | [Proving Service for Bitcoin Native Tokens, 1Sat Ordinals and BSV-21](./overlays/0257.md)
+300  | [Sponsored Onboarding and Wallet Choice](./apps/0300.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
 326  | [Wallet Failure Presentation](./wallet/0326.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)

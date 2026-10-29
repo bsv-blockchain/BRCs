@@ -19,3 +19,4 @@ BRC   | Standard
 222   | [Consent Envelope: Verifiable Multi-Party Document Signing with On-Chain Signing Order](./0222.md)
 224   | [Block Media Format (BMF) — Composable On-Chain Audio/Video](./0224.md)
 227   | [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./0227.md)
+300   | [Sponsored Onboarding and Wallet Choice](./0300.md)

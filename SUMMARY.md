@@ -25,6 +25,7 @@
 * [Consent Envelope: Verifiable Multi-Party Document Signing with On-Chain Signing Order](./apps/0222.md)
 * [Block Media Format (BMF) — Composable On-Chain Audio/Video](./apps/0224.md)
 * [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
+* [Sponsored Onboarding and Wallet Choice](./apps/0300.md)
 
 ## Wallet
 
