@@ -232,6 +232,7 @@
 * [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./peer-to-peer/0225.md)
 * [Binary Encoding for the Message Relay Interface](./peer-to-peer/0231.md)
 * [Unsolicited Transaction Delivery to a BRC-169 Mailbox](./peer-to-peer/0232.md)
+* [Session Upgrade: BRC-33 Messages over WebRTPay](./peer-to-peer/0246.md)
 * [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
 * [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
