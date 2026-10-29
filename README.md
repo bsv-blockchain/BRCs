@@ -295,6 +295,7 @@ BRC | Standard
 233  | [Subject BEEF](./transactions/0233.md)
 234  | [A Shared Schedule for Reducing Free Blockchain Index Coverage](./opinions/0234.md)
 235  | [Paymail Public Profile Lookup](./payments/0235.md)
+236  | [Paymail Public Profile Registration](./payments/0236.md)
 248  | [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
 251  | [Bitcoin Native Tokens (BNT): Definition and Wallet Duties](./tokens/0251.md)
 252  | [Short Proofs for Bitcoin Native Tokens](./tokens/0252.md)
