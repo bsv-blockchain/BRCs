@@ -158,6 +158,7 @@
 * [Issuer-Permissioned Tokens (IPT): Countersigned Tokens and Items](./tokens/0253.md)
 * [Market Offers and Direct Swaps for Wallet Assets](./tokens/0254.md)
 * [Bitcoin Native Tokens (BNT): Compact Format](./tokens/0255.md)
+* [Sealed 1Sat Ordinal Reveal](./tokens/0370.md)
 
 ## Overlays
 

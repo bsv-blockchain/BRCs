@@ -306,6 +306,7 @@ BRC | Standard
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
 326  | [Wallet Failure Presentation](./wallet/0326.md)
 369  | [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
+370  | [Sealed 1Sat Ordinal Reveal](./tokens/0370.md)
 
 ## License
 
