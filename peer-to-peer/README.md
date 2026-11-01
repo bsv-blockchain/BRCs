@@ -27,6 +27,7 @@ BRC | Standard
 225  | [Animated-QR Air-Gap Transport for Arbitrary Payloads (TKQR1)](./0225.md)
 231  | [Binary Encoding for the Message Relay Interface](./0231.md)
 232  | [Unsolicited Transaction Delivery to a BRC-169 Mailbox](./0232.md)
+239  | [Canonical JSON for Signed Objects](./0239.md)
 246  | [Session Upgrade: BRC-33 Messages over WebRTPay](./0246.md)
 247  | [Identity-Key Issuer Attestation](./0247.md)
 248  | [Offline Issuer Identity Packages](./0248.md)

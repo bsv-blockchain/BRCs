@@ -1,0 +1,173 @@
+{
+  "description": "Test vectors for canonical JSON for signed objects: RFC 8785 restricted to ASCII member names and integers within ±(2^53 − 1). input is JSON text; canonical is the canonical form, canonicalHex its UTF-8 bytes, sha256 their hash, and signatureHex a DER ECDSA signature (secp256k1, one SHA-256 of the bytes, low-S, RFC 6979) by the test key. A vector with result \"refuse\" MUST be refused; one with result \"accept-or-refuse\" MAY be refused, and if accepted MUST canonicalize as given.",
+  "signer": {
+    "keyLabel": "canonical-json-profile/signer",
+    "privateKeyHex": "7f21cf9f5dd52954a33044e36ccc6a26571fba00f3b0c7b70dadeb72d791dffe",
+    "publicKey": "034e0a1dd164500bcff9b73e3dc3d7913df58602024f2271c1e225e4967b2c2c3a",
+    "note": "The private key is SHA-256 of the UTF-8 label. TEST ONLY: never fund this key."
+  },
+  "vectors": [
+    {
+      "label": "member names sort at the top level",
+      "input": "{\"c\":3,\"b\":1,\"a\":2}",
+      "result": "accept",
+      "canonical": "{\"a\":2,\"b\":1,\"c\":3}",
+      "canonicalHex": "7b2261223a322c2262223a312c2263223a337d",
+      "sha256": "e145110e712e3ed0a6b233551b27a90aa39b4c93ed67e111ba2002d16e5ed1fa",
+      "signatureHex": "3045022100c2640d6e2e1ae43641b380d07bcd6245b12bedd39a6a88907968a9d90adb2a1002202a395145842d021a4aa5ff735cca2e3dfeb2a0358cc55514c05bdde39280bc5c"
+    },
+    {
+      "label": "member names sort at every depth; array order is kept",
+      "input": "{\"z\":{\"y\":1,\"x\":2},\"a\":[3,2,1]}",
+      "result": "accept",
+      "canonical": "{\"a\":[3,2,1],\"z\":{\"x\":2,\"y\":1}}",
+      "canonicalHex": "7b2261223a5b332c322c315d2c227a223a7b2278223a322c2279223a317d7d",
+      "sha256": "00284ff64ddee4ecd1b3c76fde9524200571a90c53d8c79e5e36e08d8d1d7d1c",
+      "signatureHex": "3045022100fdfd75c7a86db60aeddb3fb16ec02ac954c0b7aa0cdfdd756a285e69a3026f3b02205882f8539418c5ab5c99d2823fd2e0e7f19ce16930c01b2849d0942cd32fb542"
+    },
+    {
+      "label": "integer-like member names sort as strings: \"1\" < \"10\" < \"2\" < \"b\"",
+      "input": "{\"b\":0,\"2\":\"b\",\"10\":\"a\",\"1\":\"c\"}",
+      "result": "accept",
+      "canonical": "{\"1\":\"c\",\"10\":\"a\",\"2\":\"b\",\"b\":0}",
+      "canonicalHex": "7b2231223a2263222c223130223a2261222c2232223a2262222c2262223a307d",
+      "sha256": "a9fda66e61ecc7e748896fb4b9174e20ceb7827d0fda44e499edabbe6c6b3464",
+      "signatureHex": "3044022076c0798d0b589ca9dfd35fcdbac947e281139ad567488ad92c7a170d4b54252302206843e85e1017f41d3da6ebcfd50f2aa3f730e5e0dd400f424fca483eccf31600"
+    },
+    {
+      "label": "upper case sorts before lower case; \"-\" and \"_\" sort by code",
+      "input": "{\"a_b\":4,\"a-b\":3,\"a\":2,\"B\":1}",
+      "result": "accept",
+      "canonical": "{\"B\":1,\"a\":2,\"a-b\":3,\"a_b\":4}",
+      "canonicalHex": "7b2242223a312c2261223a322c22612d62223a332c22615f62223a347d",
+      "sha256": "a65835d480adfd84582e4bfc1dbe78bf4bac80bde573fce6440c6c7eeb0faf07",
+      "signatureHex": "3045022100b9871d4c9e9947d9db8bdab9edd73166c7390278d608dca6278067d05e5875e102206454cfb4d65becb2b870951be3a34dc6f680aaeef190fed58ba996cd144a591c"
+    },
+    {
+      "label": "a member named __proto__ is an ordinary member",
+      "input": "{\"a\":2,\"__proto__\":1}",
+      "result": "accept",
+      "canonical": "{\"__proto__\":1,\"a\":2}",
+      "canonicalHex": "7b225f5f70726f746f5f5f223a312c2261223a327d",
+      "sha256": "0c4b7a2b4e04ba308e5674b61f20266799172c87f78917e58b19408cbce2121a",
+      "signatureHex": "3045022100c41c2c7998aa07aaa8d2494e0f78ed0e757d5f1c4e50f29e7a4da6b88f856e6c02201d3d38a358c2ead0443984013e3b1c6b21dbf2ae3327dc0fb5f4bffe51ebf667"
+    },
+    {
+      "label": "non-ASCII string values are written as raw UTF-8, not escaped",
+      "input": "{\"city\":\"Zürich\",\"kanji\":\"東京\",\"emoji\":\"😀\"}",
+      "result": "accept",
+      "canonical": "{\"city\":\"Zürich\",\"emoji\":\"😀\",\"kanji\":\"東京\"}",
+      "canonicalHex": "7b2263697479223a225ac3bc72696368222c22656d6f6a69223a22f09f9880222c226b616e6a69223a22e69db1e4baac227d",
+      "sha256": "88dc0810bd25fe4b4713e9e15e0652ce29098593be2697c74072846ff91c1b51",
+      "signatureHex": "3044022050e45ffb0498e170305274660c94b3fa66ec6636e1b0050de7ed07b9d74ef1ad02207887bc83667f0b5b8c437467c63d21ab200e6dcbaab327c5f799100e1212e6b8"
+    },
+    {
+      "label": "quote, backslash and solidus: the first two escape, \"/\" does not",
+      "input": "{\"s\":\"a\\\"b\\\\c/d\"}",
+      "result": "accept",
+      "canonical": "{\"s\":\"a\\\"b\\\\c/d\"}",
+      "canonicalHex": "7b2273223a22615c22625c5c632f64227d",
+      "sha256": "8bc0c38b54488748f10993b678e6de8080032f56fec6e5657b2597286ff89fe5",
+      "signatureHex": "3045022100c18f69768d4d015cf47373ecda29fe97cf8c53caef0949ab36c617c36e6ebe120220655e3ebe792a96f8234a877b8c42320fc06d71ebd6652cca0676dbc27f7bef31"
+    },
+    {
+      "label": "control characters: \\b \\t \\n \\f \\r short forms, others as lower-case \\u00xx; DEL is raw",
+      "input": "{\"s\":\"\\u0008\\u0009\\u000a\\u000c\\u000d\\u0001\\u001f\\u007f\"}",
+      "result": "accept",
+      "canonical": "{\"s\":\"\\b\\t\\n\\f\\r\\u0001\\u001f\"}",
+      "canonicalHex": "7b2273223a225c625c745c6e5c665c725c75303030315c75303031667f227d",
+      "sha256": "1b21e9fd01225a72cba6747f49210c98e0af3d55ab6c7ada5a41e67a74379dd1",
+      "signatureHex": "3044022063ced1e2a12e1726da7eff9c2bd60ae65cf8ca576b5c900fbba6b5ef6721a46102202c0e573830757abfa9cfd39da97ac30f3b17bf3c49e221dde17281de8dddaaba"
+    },
+    {
+      "label": "U+2028 and U+2029 are written raw",
+      "input": "{\"s\":\"\\u2028\\u2029\"}",
+      "result": "accept",
+      "canonical": "{\"s\":\"  \"}",
+      "canonicalHex": "7b2273223a22e280a8e280a9227d",
+      "sha256": "37291683554efe5b232ef434c7f2ed8b3f39ce37f4a2d8db100eb4224e48edcd",
+      "signatureHex": "3045022100e368d5970e569fa22d8a1606201fc255dcb90e166f538385c007711246688a7b02205ab731e3b016a67d24accb74d3981f675d5f27ccb9453f250838e41044693d65"
+    },
+    {
+      "label": "integers: zero, negative, and the largest safe integers",
+      "input": "{\"max\":9007199254740991,\"min\":-9007199254740991,\"n\":-42,\"z\":0}",
+      "result": "accept",
+      "canonical": "{\"max\":9007199254740991,\"min\":-9007199254740991,\"n\":-42,\"z\":0}",
+      "canonicalHex": "7b226d6178223a393030373139393235343734303939312c226d696e223a2d393030373139393235343734303939312c226e223a2d34322c227a223a307d",
+      "sha256": "7a339a7046cfb6ad479d74ee25e984bad6976d119514f6a43eedd399e8bb3615",
+      "signatureHex": "3045022100a87d4e2702b3fea3578c6795152b4da123fd3d8659b3c9105698801e2797f7d10220758047be1a289e948310ab3514015912acb27b2cb327251e68dc0416f6b7c5a3"
+    },
+    {
+      "label": "booleans, null, empty object, empty array",
+      "input": "{\"t\":true,\"f\":false,\"n\":null,\"o\":{},\"a\":[]}",
+      "result": "accept",
+      "canonical": "{\"a\":[],\"f\":false,\"n\":null,\"o\":{},\"t\":true}",
+      "canonicalHex": "7b2261223a5b5d2c2266223a66616c73652c226e223a6e756c6c2c226f223a7b7d2c2274223a747275657d",
+      "sha256": "d54540f64e29451bbaaa55d8bc3247297964620eabc523c71e2c1cc504565e2f",
+      "signatureHex": "3045022100d818f6c5d8765dfcfc19340ab818da0081e2a60e8534693a0bed708c2c1fc3d802200dc9a3cf584fb8b6081ba3b4c49083830c619963c77e1169537cb80e2e9768e2"
+    },
+    {
+      "label": "insignificant whitespace in the input is dropped",
+      "input": "{ \"b\" : [ 1 , 2 ] ,\n  \"a\" : { } }",
+      "result": "accept",
+      "canonical": "{\"a\":{},\"b\":[1,2]}",
+      "canonicalHex": "7b2261223a7b7d2c2262223a5b312c325d7d",
+      "sha256": "4b42ac649a6785637796cda3552634658d54c4c3fccd17337b11d34ba6f1361e",
+      "signatureHex": "3045022100e5a7d196936713ad63ecc00f2cc6affb0a8f1d8976b3cbe20f63da5ff2ff7435022043e343a46b2a0016da1fb408609777fa97ac6916acb3fe4e82677a86e4a72478"
+    },
+    {
+      "label": "negative zero is written as 0",
+      "input": "{\"z\":-0}",
+      "result": "accept-or-refuse",
+      "note": "a parser that keeps the number's text MAY refuse -0, which is not how 0 is written",
+      "canonical": "{\"z\":0}",
+      "canonicalHex": "7b227a223a307d",
+      "sha256": "e313adcae40818c4a48a6f5a32c7ab937365ffb0962282a5bf1a629f8d456b63",
+      "signatureHex": "3045022100878cea50502a04954ebba663b8b2968d50866ba74a9e40f75b04640a6b05cb0f022048fbd979f56043f1267a602fd4f31f6e57e289652b2d9578541fa6ab73a6d3f5"
+    },
+    {
+      "label": "an integer written with a fraction is the integer",
+      "input": "{\"n\":1.0}",
+      "result": "accept-or-refuse",
+      "note": "a parser that keeps the number's text MAY refuse a fraction or exponent",
+      "canonical": "{\"n\":1}",
+      "canonicalHex": "7b226e223a317d",
+      "sha256": "2bfd14f43d17fc7cea24e0917a8879b4b2f880b8baeec1b9d90fbaad655e71bd",
+      "signatureHex": "3045022100fb250fe0db424787549bf8ffb68d36bdcd1b5bfc241f2a96946da7967c16b7d7022078a61acc595f70f64ea6a2c5c71fce7a41f0067a72bb70c55f7b39d517484a7f"
+    },
+    {
+      "label": "an integer written with an exponent is the integer",
+      "input": "{\"n\":1e2}",
+      "result": "accept-or-refuse",
+      "note": "a parser that keeps the number's text MAY refuse a fraction or exponent",
+      "canonical": "{\"n\":100}",
+      "canonicalHex": "7b226e223a3130307d",
+      "sha256": "b39022c4ed96525c42cd0e7ce55308533962a655f1c19d5dac2f03e9dd995b2c",
+      "signatureHex": "3044022022bc1ddf41599eda58f9b6422b39ab0887d32975a6ee00c9aa5c13aa9dd58c4d022018f49fe580f2c9021833bacc07d2b1c3f1b1038c2ac553b316f004d7d043f230"
+    },
+    {
+      "label": "refused: a fraction",
+      "input": "{\"n\":1.5}",
+      "result": "refuse",
+      "reason": "a number that is not an integer within ±(2^53 − 1)"
+    },
+    {
+      "label": "refused: an integer just past 2^53 − 1",
+      "input": "{\"n\":9007199254740992}",
+      "result": "refuse",
+      "reason": "a number that is not an integer within ±(2^53 − 1)"
+    },
+    {
+      "label": "refused: a non-ASCII member name",
+      "input": "{\"é\":1}",
+      "result": "refuse",
+      "reason": "a member name that is not ASCII"
+    },
+    {
+      "label": "refused: a non-ASCII member name nested in an array",
+      "input": "[{\"a\":{\"ß\":1}}]",
+      "result": "refuse",
+      "reason": "a member name that is not ASCII"
+    }
+  ]
+}
