@@ -1,0 +1,56 @@
+{
+  "description": "Test vectors for BRC-77 signed messages, as @bsv/sdk 2.0.13 SignedMessage makes them: the envelope, the invoice, and the signing child key the verifier derives. TEST-ONLY keys; key IDs from a seeded generator.",
+  "sdkVersion": "2.0.13",
+  "version": "42423301",
+  "anyonePub": "0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+  "signed": [
+    {
+      "label": "directed to a verifier",
+      "messageHex": "7061792031303020746f20626f62",
+      "signerSk": "00000000000000000000000000000000000000000000000000000000000a11ce",
+      "signerPub": "02a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102",
+      "verifierSk": "0000000000000000000000000000000000000000000000000000000000000b0b",
+      "verifierPub": "035d45cb81aa765d69ca52e3869491ecf0e8fdf6a63d64e65b5213647ee4973ae5",
+      "keyIDHex": "193e3ab51f37d0bf39b8eeb4d33cb85f8ade7d3fbfded8a21c49ea8ee174a69a",
+      "invoice": "2-message signing-GT46tR830L85uO600zy4X4refT+/3tiiHEnqjuF0ppo=",
+      "signingChildPub": "03002662890a65757d00d64ef0513aafba71634fd86ee40e3ab0116a3e1a8d99ba",
+      "wireHex": "4242330102a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102035d45cb81aa765d69ca52e3869491ecf0e8fdf6a63d64e65b5213647ee4973ae5193e3ab51f37d0bf39b8eeb4d33cb85f8ade7d3fbfded8a21c49ea8ee174a69a3045022100f3d13008f31b20e1f654d71bcde33f86af02a4e5b08a17725d60caf2cf95315702200d1df551e0dad1518f2bf9e9544255d108ae471d21e263518a8a9292680a9332"
+    },
+    {
+      "label": "to anyone (verifier byte 0x00)",
+      "messageHex": "7075626c69632073746174656d656e7420e28094205a6fc3ab",
+      "signerSk": "00000000000000000000000000000000000000000000000000000000000a11ce",
+      "signerPub": "02a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102",
+      "verifierSk": null,
+      "verifierPub": null,
+      "keyIDHex": "6b41c77a7e7eaedf9d7329b476653da6db74cefd7d440f6877e529b894982ec0",
+      "invoice": "2-message signing-a0HHen5+rt+dcym0dmU9ptt0zv19RA9od+UpuJSYLsA=",
+      "signingChildPub": "038364350692f00464ae854c1ab40b895abf5a5cc671f24fe04943bc20bb948154",
+      "wireHex": "4242330102a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102006b41c77a7e7eaedf9d7329b476653da6db74cefd7d440f6877e529b894982ec03044022050d600d26f1e3b0cbbf886be1c5f47598610338ce82e226a448982d5550e5db602207a883973e66866a9641d40442c2f06f85cc9e09a5351fa55aedb4e3bb8649d69"
+    },
+    {
+      "label": "directed, an empty message",
+      "messageHex": "",
+      "signerSk": "00000000000000000000000000000000000000000000000000000000000a11ce",
+      "signerPub": "02a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102",
+      "verifierSk": "0000000000000000000000000000000000000000000000000000000000000b0b",
+      "verifierPub": "035d45cb81aa765d69ca52e3869491ecf0e8fdf6a63d64e65b5213647ee4973ae5",
+      "keyIDHex": "53cfe2ecb0ab2cbdcbb7c7c0872b7601059ffbe084a486d81b6cf1691c090ff8",
+      "invoice": "2-message signing-U8/i7LCrLL3Lt8fAhyt2AQWf++CEpIbYG2zxaRwJD/g=",
+      "signingChildPub": "03429be3966482b5ad73f0ef43eac3b08b0d4d2918fb857e335c1ee9cf88a57ce4",
+      "wireHex": "4242330102a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102035d45cb81aa765d69ca52e3869491ecf0e8fdf6a63d64e65b5213647ee4973ae553cfe2ecb0ab2cbdcbb7c7c0872b7601059ffbe084a486d81b6cf1691c090ff8304402205e57398052504ab5be6b56bd6f701af7d137815a9317f1d416a19e95ea7492ce022071136c0a530463bf171c4917841d9de6d1893f33e2953bd96a85e97553c69767"
+    },
+    {
+      "label": "to anyone, binary",
+      "messageHex": "000102fdfeff",
+      "signerSk": "00000000000000000000000000000000000000000000000000000000000a11ce",
+      "signerPub": "02a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102",
+      "verifierSk": null,
+      "verifierPub": null,
+      "keyIDHex": "1b0cedddcaa1bd429d0cdebfa935e0554fb3d7788365bb8f16bb301b4de11dc1",
+      "invoice": "2-message signing-Gwzt3cqhvUKdDN6/qTXgVU+z13iDZbuPFrswG03hHcE=",
+      "signingChildPub": "026b1fbe5cd28176a576f4ac1a991dfbc4a6f690c4ac7d1031b9d6de3d8bdf830f",
+      "wireHex": "4242330102a64db41e2968c849c2a5615ba0d6e816734a6d3e6ea6ecd6f3acb7d59daa9102001b0cedddcaa1bd429d0cdebfa935e0554fb3d7788365bb8f16bb301b4de11dc1304402205fcf6defc4da31ad8b07190216c80ab04f45b839f0e43c59184291a32f13410402203a3cffde324b13bc12158f298cffadf2eca0f0f386bc0d855f242882f54277bc"
+    }
+  ]
+}
