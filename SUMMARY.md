@@ -211,6 +211,7 @@
 * [1Color Offline Peer-to-Peer Payments](./payments/0175.md)
 * [Unlinkable Payments under the Identity Paradigm](./payments/0228.md)
 * [Paymail Public Profile Lookup](./payments/0235.md)
+* [Deterministic, Recoverable Derivation Values for BRC-29 Payments](./payments/0238.md)
 * [Cross-Chain Atomic Swaps Between Wallets](./payments/0256.md)
 
 ## Peer-to-Peer

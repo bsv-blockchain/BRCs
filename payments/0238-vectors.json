@@ -1,0 +1,172 @@
+{
+  "description": "Test vectors for deterministic BRC-29 derivation values. K is the BRC-2 symmetric key for protocol [2, \"brc29 deterministic\"], key ID \"1\", between payer and recipient. prefix = base64(HMAC-SHA256(K, \"prefix\" || u32be(epoch) || u32be(slot) || u32be(m))[0..16]) for payment m; suffix = base64(HMAC-SHA256(K, \"suffix\" || u32be(epoch) || u32be(slot) || u32be(m) || u32be(j))[0..16]) for its output j; the HMAC key is K encoded as BRC-56 specifies (minimal-length big-endian), which is what BRC-100 createHmac uses. keyID is \"<prefix> <suffix>\" under the BRC-29 protocol [2, \"3241645161d8\"]; recipientChildPubKey is the key the payer pays and the recipient spends with.",
+  "keys": "Each private key is SHA-256 of the UTF-8 label beside it. TEST ONLY: never fund these keys.",
+  "generatedWith": "@bsv/sdk 2.0.13 (ProtoWallet.createHmac and getPublicKey)",
+  "profileProtocol": [
+    2,
+    "brc29 deterministic"
+  ],
+  "profileKeyID": "1",
+  "brc29Protocol": [
+    2,
+    "3241645161d8"
+  ],
+  "pairs": [
+    {
+      "label": "ordinary",
+      "payerKeyLabel": "brc29-det-kat/payer",
+      "payerPrivateKeyHex": "ab34468af5c20f4a5ef13252c878845b1f93033f319c4c5ac23a5f02827ab5d1",
+      "payerIdentityKey": "027e48f9f7c686f90caf9f58610429bdc283a94b44c19cc9ad99adc5c154852930",
+      "recipientKeyLabel": "brc29-det-kat/recipient",
+      "recipientPrivateKeyHex": "c8ae2c527067ba650cab398d9c7788d11f6332ebf7b7c4fa6c180d5ea3984760",
+      "recipientIdentityKey": "03faa2139e5acfbdfe4ad7d2bd6c9729e0a80b77148f824fb789b54abd30c823b7",
+      "symmetricKeyHex": "ce6d3937747ef652cba3dddc18422a85279947a7c9341400ded36409a7c2d0c7",
+      "hmacKeyLength": 32,
+      "vectors": [
+        {
+          "epoch": 0,
+          "slot": 0,
+          "m": 0,
+          "j": 0,
+          "prefixHmac": "7d04ea4fb92004717067940ee39cf4eb6ba53f5dd795eedc5128d47530cb18ed",
+          "suffixHmac": "fe7babbbee92f4b2a94eed6659746268d5d78a212d623983b6b7df51216c813e",
+          "prefix": "fQTqT7kgBHFwZ5QO45z06w==",
+          "suffix": "/nuru+6S9LKpTu1mWXRiaA==",
+          "keyID": "fQTqT7kgBHFwZ5QO45z06w== /nuru+6S9LKpTu1mWXRiaA==",
+          "recipientChildPubKey": "03068fbe9f91bfffd4886efb089db1c06962d0c791f16aeaae3684f882b74bc776",
+          "recipientChildHash160": "c8ddfcaefc1b4d49a55efbf0feb5ac2bec01cfce"
+        },
+        {
+          "epoch": 0,
+          "slot": 0,
+          "m": 0,
+          "j": 1,
+          "prefixHmac": "7d04ea4fb92004717067940ee39cf4eb6ba53f5dd795eedc5128d47530cb18ed",
+          "suffixHmac": "02884dfdde59fd0cb5a7137d3698a08940a203aaf378e1a62c498a61437b8967",
+          "prefix": "fQTqT7kgBHFwZ5QO45z06w==",
+          "suffix": "AohN/d5Z/Qy1pxN9NpigiQ==",
+          "keyID": "fQTqT7kgBHFwZ5QO45z06w== AohN/d5Z/Qy1pxN9NpigiQ==",
+          "recipientChildPubKey": "03a3584e34918c49c57c3985853281f8d4557c4a580a51a74a98d0b3fc1ec2e332",
+          "recipientChildHash160": "c761c0aa590c28ed8ac4e06adb67c7e7e03203c2"
+        },
+        {
+          "epoch": 0,
+          "slot": 0,
+          "m": 1,
+          "j": 0,
+          "prefixHmac": "4c58605f1b98b5ec15bf7aff170bf495649eb611b7bb7959ed71c211570c0e53",
+          "suffixHmac": "c42607cf206283e11e9252a25efebe18b597cb67132d7c8582e22ee918386495",
+          "prefix": "TFhgXxuYtewVv3r/Fwv0lQ==",
+          "suffix": "xCYHzyBig+EeklKiXv6+GA==",
+          "keyID": "TFhgXxuYtewVv3r/Fwv0lQ== xCYHzyBig+EeklKiXv6+GA==",
+          "recipientChildPubKey": "03960f012fa5cc3a48ad09601881a7f205bfaa0bdd863a1bd47320857e18815919",
+          "recipientChildHash160": "52d2bf60515d6b0e1996d982a5ae11e5164c49ef"
+        },
+        {
+          "epoch": 0,
+          "slot": 0,
+          "m": 2,
+          "j": 0,
+          "prefixHmac": "285702831233302a1a74df8470cd4d3f03195301d84a59a0222622403594097d",
+          "suffixHmac": "26169c8cfeb5e1b1921dd527044639d0d27213f43c528dca1f375777b23afca3",
+          "prefix": "KFcCgxIzMCoadN+EcM1NPw==",
+          "suffix": "JhacjP614bGSHdUnBEY50A==",
+          "keyID": "KFcCgxIzMCoadN+EcM1NPw== JhacjP614bGSHdUnBEY50A==",
+          "recipientChildPubKey": "028ed6635478cc80587f17727ce2d29b1db30e637470ff5c1f8ae12a62910ba9db",
+          "recipientChildHash160": "e1ee8df4b12720d51372d47e220a37f3ce0881d2"
+        },
+        {
+          "epoch": 0,
+          "slot": 1,
+          "m": 0,
+          "j": 0,
+          "prefixHmac": "1c4a431fae2f32cedd4a2d81682db4f765af32a40a34c71bcc581cc9e6b89fc8",
+          "suffixHmac": "aca5ae34652e2e36496e9741cf8895c37d3191c032da4bc4bb62f2fd20621bec",
+          "prefix": "HEpDH64vMs7dSi2BaC209w==",
+          "suffix": "rKWuNGUuLjZJbpdBz4iVww==",
+          "keyID": "HEpDH64vMs7dSi2BaC209w== rKWuNGUuLjZJbpdBz4iVww==",
+          "recipientChildPubKey": "03e33371107c1abc7fd4efc8ad5cea27fce8ff99542f30aa5efc6e36fb3bb8ff53",
+          "recipientChildHash160": "8cdfc3661587fe8162aecade01547dccb0ddde3a"
+        },
+        {
+          "epoch": 1,
+          "slot": 0,
+          "m": 0,
+          "j": 0,
+          "prefixHmac": "9244b32af6c8328885f44e09917860846293b8760af1a2bc62bfb00dfa1cb1be",
+          "suffixHmac": "022c92d137667d5d24870a7ac466837f6a68c7e19e9fd0f38312d9cc410a7d52",
+          "prefix": "kkSzKvbIMoiF9E4JkXhghA==",
+          "suffix": "AiyS0TdmfV0khwp6xGaDfw==",
+          "keyID": "kkSzKvbIMoiF9E4JkXhghA== AiyS0TdmfV0khwp6xGaDfw==",
+          "recipientChildPubKey": "0317adc8dfa33d7b3f3681936d764e71f4816546690da9a56dd2489ba831de35fe",
+          "recipientChildHash160": "1701fb01cc61476156afffc08202c8d31e86573a"
+        },
+        {
+          "epoch": 7,
+          "slot": 3,
+          "m": 41,
+          "j": 2,
+          "prefixHmac": "40303e87f56b3fe7bd655039b7d7f64f785caf2948dbc7a2d003e40d5130f5d5",
+          "suffixHmac": "5cdf8a8e22fa78debe462c3b5dc471dafe8031c22d83c467b059c105d4f8eb31",
+          "prefix": "QDA+h/VrP+e9ZVA5t9f2Tw==",
+          "suffix": "XN+KjiL6eN6+Riw7XcRx2g==",
+          "keyID": "QDA+h/VrP+e9ZVA5t9f2Tw== XN+KjiL6eN6+Riw7XcRx2g==",
+          "recipientChildPubKey": "03c140e01046b63ac6abbb16446ea520e01302642e87509e6eb50ba3301adbca82",
+          "recipientChildHash160": "664f2f3c0c61abaccfd4e261d908995a8f398659"
+        },
+        {
+          "epoch": 4294967295,
+          "slot": 4294967295,
+          "m": 4294967295,
+          "j": 4294967295,
+          "prefixHmac": "fbfe2b09005dbfe0ac8c39a1394568ce239ec8517721781bfb1735a9eab516aa",
+          "suffixHmac": "10851369204cbf1e2b033ed8b5ccb71ac46bc12d1ab1fb6153a4ef7cba3c254f",
+          "prefix": "+/4rCQBdv+CsjDmhOUVozg==",
+          "suffix": "EIUTaSBMvx4rAz7Ytcy3Gg==",
+          "keyID": "+/4rCQBdv+CsjDmhOUVozg== EIUTaSBMvx4rAz7Ytcy3Gg==",
+          "recipientChildPubKey": "02ec651641162220b4ac53662394b28d46e8b73f02d6782044bf76a0c26ade10b7",
+          "recipientChildHash160": "68761b49aed10a63ed4e378ba6572acb32981df1"
+        }
+      ]
+    },
+    {
+      "label": "leading-zero K",
+      "payerKeyLabel": "brc29-det-kat/zero-payer/1015",
+      "payerPrivateKeyHex": "637019aa13af2cc9b0c5cefda19069d92e90208d996c830d041ea99a7699bbda",
+      "payerIdentityKey": "031f34244cc75fab26f3331f834f57cf8ca3fde971c388b5a29bf393aa53fbf8a5",
+      "recipientKeyLabel": "brc29-det-kat/zero-recipient",
+      "recipientPrivateKeyHex": "590ae53380a50578b6eb3a61282c59e6346eba56b4e83b92fef2d4a4830df946",
+      "recipientIdentityKey": "027498e8669274af2802e0b31da86e0615da850f1685cd924af24d9bcf6b1c5b26",
+      "symmetricKeyHex": "0035e97524bd8b9e9a42d358b887fe6f440c676c6f1d1ded90cc545b355c200f",
+      "hmacKeyLength": 31,
+      "vectors": [
+        {
+          "epoch": 0,
+          "slot": 0,
+          "m": 0,
+          "j": 0,
+          "prefixHmac": "3749c2f355f92742de7af99c74060765227aaafe3b0edee996f97ffe54e4e40d",
+          "suffixHmac": "e32f6ee351a0dbbd5e9ef35c4f3e8a777bf4a50b8b78a302960d6a443b0ea0d9",
+          "prefix": "N0nC81X5J0LeevmcdAYHZQ==",
+          "suffix": "4y9u41Gg271envNcTz6Kdw==",
+          "keyID": "N0nC81X5J0LeevmcdAYHZQ== 4y9u41Gg271envNcTz6Kdw==",
+          "recipientChildPubKey": "03d1112a58f759c9e932c4e2a38534640102170af77505f90f129d35555cc26560",
+          "recipientChildHash160": "e0b10fc539479907df2ddc206fa10518f458e550"
+        },
+        {
+          "epoch": 2,
+          "slot": 5,
+          "m": 9,
+          "j": 1,
+          "prefixHmac": "d92acc22ede0f8aa1a1aa253fb69768ded081598aa66835ef3505b7c74d607ab",
+          "suffixHmac": "20a4a54595016298f51fbe15055c880fa6e87b2a002448f939ea16f2c13cbfdf",
+          "prefix": "2SrMIu3g+KoaGqJT+2l2jQ==",
+          "suffix": "IKSlRZUBYpj1H74VBVyIDw==",
+          "keyID": "2SrMIu3g+KoaGqJT+2l2jQ== IKSlRZUBYpj1H74VBVyIDw==",
+          "recipientChildPubKey": "03f54bbe3d876e9ef6923d6cf3aa3bba6c9900694a047d9a2a9283b0360e95b959",
+          "recipientChildHash160": "c3fd933e47e12cbc2508a4aeec1f2e7bdbc7144b"
+        }
+      ]
+    }
+  ]
+}
