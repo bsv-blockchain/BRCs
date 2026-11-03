@@ -1,0 +1,340 @@
+{
+  "description": "Test vectors for BRC-103 and BRC-104 as @bsv/sdk 2.0.13 makes and accepts them: the handshake, a general message, signed HTTP requests and signed HTTP responses. Each gives the exact bytes signed (dataHex or payloadHex), the key ID, the BRC-42 child key the verifier checks against (invoice \"2-auth message signature-<keyID>\", counterparty the signer), and the DER signature. A real SDK Peer accepted every message. TEST-ONLY keys and nonces.",
+  "sdkVersion": "2.0.13",
+  "protocolID": [
+    2,
+    "auth message signature"
+  ],
+  "version": "0.1",
+  "base": "https://example.com",
+  "client": {
+    "privateKeyHex": "0000000000000000000000000000000000000000000000000000000000004e1a",
+    "identityKey": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be"
+  },
+  "server": {
+    "privateKeyHex": "000000000000000000000000000000000000000000000000000000000000b4a1",
+    "identityKey": "0382bff8f78fa89572cc889130ce54fadbfc55088aa60eb658b8a11be44572afd6"
+  },
+  "nonces": "Session nonces are 48 bytes: 16 bytes and their HMAC under [2, \"server hmac\"], key ID the UTF-8 decoding of the 16 bytes, counterparty self. Message nonces (general messages, requests, responses) and request ids are 32 bytes.",
+  "handshake": {
+    "clientNonce": "ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+    "serverNonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+    "initialRequest": {
+      "version": "0.1",
+      "messageType": "initialRequest",
+      "identityKey": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+      "initialNonce": "ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+      "requestedCertificates": {
+        "certifiers": [],
+        "types": {}
+      }
+    },
+    "initialRequestJson": "{\"version\":\"0.1\",\"messageType\":\"initialRequest\",\"identityKey\":\"02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be\",\"initialNonce\":\"ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS\",\"requestedCertificates\":{\"certifiers\":[],\"types\":{}}}",
+    "post": {
+      "url": "https://example.com/.well-known/auth",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "initialResponse": {
+      "version": "0.1",
+      "messageType": "initialResponse",
+      "identityKey": "0382bff8f78fa89572cc889130ce54fadbfc55088aa60eb658b8a11be44572afd6",
+      "initialNonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "yourNonce": "ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+      "certificates": [],
+      "requestedCertificates": {
+        "certifiers": [],
+        "types": {}
+      },
+      "signature": "3045022100bed13e8fa88beb8e34c323b91bc892120cb904c883b48347d57dc1782380c8b702200eb6062e8c1317e074e15ecd5debc4248c19c04f32bad27d92e03697c3d461fc"
+    },
+    "keyID": "ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+    "dataHex": "212c37424d58636e79848f9aa5b0bbc69b5194b4c62ac999d314f7448c258c626ac37c76c123679ac6598fba29af1812a3aeb9c4cfdae5f0fb06111c27323d48fc790e62379d865a32058f88a55233f1bbd6d1b30dcffacde04d7928dd49f5d0",
+    "serverSigningChildPub": "02325cb9e8c1e7abf2eab0aa68b55b5e6ae42cd74c28d01d687832a0f0e023e716",
+    "signatureHex": "3045022100bed13e8fa88beb8e34c323b91bc892120cb904c883b48347d57dc1782380c8b702200eb6062e8c1317e074e15ecd5debc4248c19c04f32bad27d92e03697c3d461fc"
+  },
+  "general": {
+    "payloadHex": "612067656e6572616c206d6573736167652c20617320616e79207061796c6f61643a205a6fc3ab",
+    "nonce": "QUxXYm14g46ZpK+6xdDb5vH8BxIdKDM+SVRfanWAi5Y=",
+    "keyID": "QUxXYm14g46ZpK+6xdDb5vH8BxIdKDM+SVRfanWAi5Y= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+    "clientSigningChildPub": "024a45f0084742d7e927f5b5fb2eaf38b2e02d6d851d362b09be74fcf3c7c727ee",
+    "signatureHex": "30440220398c8607a01361e32e257684b83b931cb84dae14b6c14c0831e07704a2823ce7022038b46b4ad44fd75fa636b1efa271ab9955b5fd3d87976cb53eccdd20db2052a2"
+  },
+  "requests": [
+    {
+      "label": "a GET with no query, no headers and no body",
+      "method": "GET",
+      "url": "https://example.com/rpc",
+      "headers": {},
+      "body": null,
+      "requestIdBase64": "YWx3go2Yo665xM/a5fD7BhEcJzI9SFNeaXR/ipWgq7Y=",
+      "nonce": "gYyXoq24w87Z5O/6BRAbJjE8R1JdaHN+iZSfqrXAy9Y=",
+      "keyID": "gYyXoq24w87Z5O/6BRAbJjE8R1JdaHN+iZSfqrXAy9Y= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "payloadHex": "616c77828d98a3aeb9c4cfdae5f0fb06111c27323d48535e69747f8a95a0abb603474554042f727063ffffffffffffffffff00ffffffffffffffffff",
+      "clientSigningChildPub": "0312720ce19ef371003e8843b5e561ff8ee70eeaca5f384dbb6803c7814c307479",
+      "signatureHex": "3044022048b3c608c83adef67f0a68a223e641de5fc50e32a3a3286d95c2b1b8f3ec092d02207419a0e5b9466d1c2b1c41b0bcb21222f275f3982527089ecf9f24f2d843f830",
+      "sent": {
+        "url": "https://example.com/rpc",
+        "method": "GET",
+        "headers": {
+          "x-bsv-auth-version": "0.1",
+          "x-bsv-auth-identity-key": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+          "x-bsv-auth-nonce": "gYyXoq24w87Z5O/6BRAbJjE8R1JdaHN+iZSfqrXAy9Y=",
+          "x-bsv-auth-your-nonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+          "x-bsv-auth-signature": "3044022048b3c608c83adef67f0a68a223e641de5fc50e32a3a3286d95c2b1b8f3ec092d02207419a0e5b9466d1c2b1c41b0bcb21222f275f3982527089ecf9f24f2d843f830",
+          "x-bsv-auth-request-id": "YWx3go2Yo665xM/a5fD7BhEcJzI9SFNeaXR/ipWgq7Y="
+        },
+        "body": null
+      }
+    },
+    {
+      "label": "a GET with a query",
+      "method": "GET",
+      "url": "https://example.com/items?after=42&limit=10",
+      "headers": {},
+      "body": null,
+      "requestIdBase64": "Ym14g46ZpK+6xdDb5vH8BxIdKDM+SVRfanWAi5ahrLc=",
+      "nonce": "go2Yo665xM/a5fD7BhEcJzI9SFNeaXR/ipWgq7bBzNc=",
+      "keyID": "go2Yo665xM/a5fD7BhEcJzI9SFNeaXR/ipWgq7bBzNc= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "payloadHex": "626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a75808b96a1acb703474554062f6974656d73123f61667465723d3432266c696d69743d313000ffffffffffffffffff",
+      "clientSigningChildPub": "0313bc856badff1f1347530d64f9f6556f4b054130fc55a8b9ce224bbfc031045b",
+      "signatureHex": "3045022100a3814d97304ffd6d85b8790b91a9e35250c2508cd829061fcf08bc366b61630602204974d4f230357cb7ea054fb5430e30b11d6904be74923a0f970d16636faed37c",
+      "sent": {
+        "url": "https://example.com/items?after=42&limit=10",
+        "method": "GET",
+        "headers": {
+          "x-bsv-auth-version": "0.1",
+          "x-bsv-auth-identity-key": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+          "x-bsv-auth-nonce": "go2Yo665xM/a5fD7BhEcJzI9SFNeaXR/ipWgq7bBzNc=",
+          "x-bsv-auth-your-nonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+          "x-bsv-auth-signature": "3045022100a3814d97304ffd6d85b8790b91a9e35250c2508cd829061fcf08bc366b61630602204974d4f230357cb7ea054fb5430e30b11d6904be74923a0f970d16636faed37c",
+          "x-bsv-auth-request-id": "Ym14g46ZpK+6xdDb5vH8BxIdKDM+SVRfanWAi5ahrLc="
+        },
+        "body": null
+      }
+    },
+    {
+      "label": "a POST with a JSON body and a charset on its content-type, which is signed without the charset",
+      "method": "POST",
+      "url": "https://example.com/orders",
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": "{\"item\":\"ab\",\"note\":\"Zoë\"}",
+      "requestIdBase64": "Y255hI+apbC7xtHc5/L9CBMeKTQ/SlVga3aBjJeirbg=",
+      "nonce": "g46ZpK+6xdDb5vH8BxIdKDM+SVRfanWAi5ahrLfCzdg=",
+      "keyID": "g46ZpK+6xdDb5vH8BxIdKDM+SVRfanWAi5ahrLfCzdg= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "payloadHex": "636e79848f9aa5b0bbc6d1dce7f2fd08131e29343f4a55606b76818c97a2adb804504f5354072f6f7264657273ffffffffffffffffff010c636f6e74656e742d74797065106170706c69636174696f6e2f6a736f6e1b7b226974656d223a226162222c226e6f7465223a225a6fc3ab227d",
+      "clientSigningChildPub": "02b8af32875fc781ca6c6ab3cc680d966ebc3b13800488446ced9015581f2b5c0a",
+      "signatureHex": "304402202f38dd200904a076981097771e82295a6b5b69240789a88bc8dfda122f5335a00220010b500cd103fac6a832e2b524da7954e503327b3a58ce6eca7d029f9baae1de",
+      "sent": {
+        "url": "https://example.com/orders",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "x-bsv-auth-version": "0.1",
+          "x-bsv-auth-identity-key": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+          "x-bsv-auth-nonce": "g46ZpK+6xdDb5vH8BxIdKDM+SVRfanWAi5ahrLfCzdg=",
+          "x-bsv-auth-your-nonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+          "x-bsv-auth-signature": "304402202f38dd200904a076981097771e82295a6b5b69240789a88bc8dfda122f5335a00220010b500cd103fac6a832e2b524da7954e503327b3a58ce6eca7d029f9baae1de",
+          "x-bsv-auth-request-id": "Y255hI+apbC7xtHc5/L9CBMeKTQ/SlVga3aBjJeirbg="
+        },
+        "body": "{\"item\":\"ab\",\"note\":\"Zoë\"}"
+      }
+    },
+    {
+      "label": "a POST with no body, which the client signs as {}",
+      "method": "POST",
+      "url": "https://example.com/orders/submit",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": null,
+      "requestIdBase64": "ZG96hZCbprG8x9Ld6PP+CRQfKjVAS1ZhbHeCjZijrrk=",
+      "nonce": "hI+apbC7xtHc5/L9CBMeKTQ/SlVga3aBjJeirbjDztk=",
+      "keyID": "hI+apbC7xtHc5/L9CBMeKTQ/SlVga3aBjJeirbjDztk= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "payloadHex": "646f7a85909ba6b1bcc7d2dde8f3fe09141f2a35404b56616c77828d98a3aeb904504f53540e2f6f72646572732f7375626d6974ffffffffffffffffff010c636f6e74656e742d74797065106170706c69636174696f6e2f6a736f6e027b7d",
+      "clientSigningChildPub": "029f5a0d5a4d79e4388c5fab3a79d2ea3a9272b0bdd72796bf7bba58302bbb9d46",
+      "signatureHex": "3045022100aa97c415daddbf483b34ab3470c7c5da8fa1b34d7b63f6d584c5fb15b750e142022007fcfeba623e40b0147367574ef16a81d38351a850f7ab12a99dfcc57e899306",
+      "sent": {
+        "url": "https://example.com/orders/submit",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "x-bsv-auth-version": "0.1",
+          "x-bsv-auth-identity-key": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+          "x-bsv-auth-nonce": "hI+apbC7xtHc5/L9CBMeKTQ/SlVga3aBjJeirbjDztk=",
+          "x-bsv-auth-your-nonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+          "x-bsv-auth-signature": "3045022100aa97c415daddbf483b34ab3470c7c5da8fa1b34d7b63f6d584c5fb15b750e142022007fcfeba623e40b0147367574ef16a81d38351a850f7ab12a99dfcc57e899306",
+          "x-bsv-auth-request-id": "ZG96hZCbprG8x9Ld6PP+CRQfKjVAS1ZhbHeCjZijrrk="
+        },
+        "body": "{}"
+      }
+    },
+    {
+      "label": "a PUT with authorization and x-bsv headers, which are signed, sorted by name",
+      "method": "PUT",
+      "url": "https://example.com/contacts/ab",
+      "headers": {
+        "X-BSV-Payment": "{\"a\":1}",
+        "authorization": "Bearer abc",
+        "x-bsv-memo": "hi",
+        "content-type": "text/plain"
+      },
+      "body": "plain words",
+      "requestIdBase64": "ZXB7hpGcp7K9yNPe6fT/ChUgKzZBTFdibXiDjpmkr7o=",
+      "nonce": "hZCbprG8x9Ld6PP+CRQfKjVAS1ZhbHeCjZijrrnEz9o=",
+      "keyID": "hZCbprG8x9Ld6PP+CRQfKjVAS1ZhbHeCjZijrrnEz9o= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "payloadHex": "65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d78838e99a4afba035055540c2f636f6e74616374732f6162ffffffffffffffffff040d617574686f72697a6174696f6e0a426561726572206162630c636f6e74656e742d747970650a746578742f706c61696e0a782d6273762d6d656d6f0268690d782d6273762d7061796d656e74077b2261223a317d0b706c61696e20776f726473",
+      "clientSigningChildPub": "02db92a65da0cf0dff73ec9d0bc67c4b46a29059f05dea7a98e47fd82bd009f453",
+      "signatureHex": "3045022100e86993c92933b987056eb4f7c6ba7cda6b928a92b4bc464754a3b067049800890220621609e961cea24d2fae1eccd2588449f372e404e08332c3cc3652239992293b",
+      "sent": {
+        "url": "https://example.com/contacts/ab",
+        "method": "PUT",
+        "headers": {
+          "authorization": "Bearer abc",
+          "content-type": "text/plain",
+          "x-bsv-memo": "hi",
+          "x-bsv-payment": "{\"a\":1}",
+          "x-bsv-auth-version": "0.1",
+          "x-bsv-auth-identity-key": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+          "x-bsv-auth-nonce": "hZCbprG8x9Ld6PP+CRQfKjVAS1ZhbHeCjZijrrnEz9o=",
+          "x-bsv-auth-your-nonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+          "x-bsv-auth-signature": "3045022100e86993c92933b987056eb4f7c6ba7cda6b928a92b4bc464754a3b067049800890220621609e961cea24d2fae1eccd2588449f372e404e08332c3cc3652239992293b",
+          "x-bsv-auth-request-id": "ZXB7hpGcp7K9yNPe6fT/ChUgKzZBTFdibXiDjpmkr7o="
+        },
+        "body": "plain words"
+      }
+    },
+    {
+      "label": "a POST whose number[] body the client sends as its JSON text",
+      "method": "POST",
+      "url": "https://example.com/upload",
+      "headers": {
+        "content-type": "application/octet-stream"
+      },
+      "body": [
+        0,
+        1,
+        2,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255
+      ],
+      "requestIdBase64": "ZnF8h5KdqLO+ydTf6vUACxYhLDdCTVhjbnmEj5qlsLs=",
+      "nonce": "hpGcp7K9yNPe6fT/ChUgKzZBTFdibXiDjpmkr7rF0Ns=",
+      "keyID": "hpGcp7K9yNPe6fT/ChUgKzZBTFdibXiDjpmkr7rF0Ns= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "payloadHex": "66717c87929da8b3bec9d4dfeaf5000b16212c37424d58636e79848f9aa5b0bb04504f5354072f75706c6f6164ffffffffffffffffff010c636f6e74656e742d74797065186170706c69636174696f6e2f6f637465742d73747265616d1f5b302c312c322c3235302c3235312c3235322c3235332c3235342c3235355d",
+      "clientSigningChildPub": "0339f89700b9fa45d62b444e6c2dcd16c39ed761e3039d6b620274f118406731d8",
+      "signatureHex": "3045022100ce53f7da21ddfa1495a8c538f0c063923bd3aecb919d6d85d7017cd3138e407502204d404e4a93171e0e96ec999b0db72a6d044e06577a716129e5fa669d6f09afa7",
+      "sent": {
+        "url": "https://example.com/upload",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/octet-stream",
+          "x-bsv-auth-version": "0.1",
+          "x-bsv-auth-identity-key": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+          "x-bsv-auth-nonce": "hpGcp7K9yNPe6fT/ChUgKzZBTFdibXiDjpmkr7rF0Ns=",
+          "x-bsv-auth-your-nonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+          "x-bsv-auth-signature": "3045022100ce53f7da21ddfa1495a8c538f0c063923bd3aecb919d6d85d7017cd3138e407502204d404e4a93171e0e96ec999b0db72a6d044e06577a716129e5fa669d6f09afa7",
+          "x-bsv-auth-request-id": "ZnF8h5KdqLO+ydTf6vUACxYhLDdCTVhjbnmEj5qlsLs="
+        },
+        "body": "5b302c312c322c3235302c3235312c3235322c3235332c3235342c3235355d"
+      }
+    },
+    {
+      "label": "a DELETE with no body and no content-type, signed as an absent body (-1)",
+      "method": "DELETE",
+      "url": "https://example.com/contacts/ab?force=1",
+      "headers": {},
+      "body": null,
+      "requestIdBase64": "Z3J9iJOeqbS/ytXg6/YBDBciLThDTllkb3qFkJumsbw=",
+      "nonce": "h5KdqLO+ydTf6vUACxYhLDdCTVhjbnmEj5qlsLvG0dw=",
+      "keyID": "h5KdqLO+ydTf6vUACxYhLDdCTVhjbnmEj5qlsLvG0dw= o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+      "payloadHex": "67727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7a85909ba6b1bc0644454c4554450c2f636f6e74616374732f6162083f666f7263653d3100ffffffffffffffffff",
+      "clientSigningChildPub": "024ccfbe68a53fbe5eade0d4c0a4e65ce2fef6099e4cade6fb15e59406aad7b7c5",
+      "signatureHex": "3045022100ecdfd15bd3fe7e71261723d6bd113b4135f290d4347cf2c8777ebfca6028edcd02203f6644804dace74ea59c2d1ded59359327d6f6e98169570e6c96e17ce32b3278",
+      "sent": {
+        "url": "https://example.com/contacts/ab?force=1",
+        "method": "DELETE",
+        "headers": {
+          "x-bsv-auth-version": "0.1",
+          "x-bsv-auth-identity-key": "02dc3d5fc16bebcd47c802205f5d5ba3107b7632dfd6e46895fad581c31c5494be",
+          "x-bsv-auth-nonce": "h5KdqLO+ydTf6vUACxYhLDdCTVhjbnmEj5qlsLvG0dw=",
+          "x-bsv-auth-your-nonce": "o665xM/a5fD7BhEcJzI9SPx5DmI3nYZaMgWPiKVSM/G71tGzDc/6zeBNeSjdSfXQ",
+          "x-bsv-auth-signature": "3045022100ecdfd15bd3fe7e71261723d6bd113b4135f290d4347cf2c8777ebfca6028edcd02203f6644804dace74ea59c2d1ded59359327d6f6e98169570e6c96e17ce32b3278",
+          "x-bsv-auth-request-id": "Z3J9iJOeqbS/ytXg6/YBDBciLThDTllkb3qFkJumsbw="
+        },
+        "body": null
+      }
+    }
+  ],
+  "responses": [
+    {
+      "label": "a 200 with a JSON body",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "x-bsv-auth-version": "0.1",
+        "x-bsv-auth-identity-key": "0382bff8f78fa89572cc889130ce54fadbfc55088aa60eb658b8a11be44572afd6",
+        "x-bsv-auth-nonce": "wczX4u34Aw4ZJC86RVBbZnF8h5KdqLO+ydTf6vUACxY=",
+        "x-bsv-auth-your-nonce": "ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+        "x-bsv-auth-signature": "3045022100f9f87c6020faf3defbb0e2c5172fd68c6926be6c81405b4f4e9908a137c0724402200272a2b5240655c9d029f4f156fac59b6d958f5d161e40a666ba5481ff0a2f28",
+        "x-bsv-auth-request-id": "cXyHkp2os77J1N/q9QALFiEsN0JNWGNueYSPmqWwu8Y="
+      },
+      "bodyHex": "7b226f6b223a747275657d",
+      "requestIdBase64": "cXyHkp2os77J1N/q9QALFiEsN0JNWGNueYSPmqWwu8Y=",
+      "nonce": "wczX4u34Aw4ZJC86RVBbZnF8h5KdqLO+ydTf6vUACxY=",
+      "keyID": "wczX4u34Aw4ZJC86RVBbZnF8h5KdqLO+ydTf6vUACxY= ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+      "payloadHex": "717c87929da8b3bec9d4dfeaf5000b16212c37424d58636e79848f9aa5b0bbc6c8000b7b226f6b223a747275657d",
+      "serverSigningChildPub": "028384c4f68e35ce377d98a29ea9556f4b28bae17f6bda32648efa89a55a9bd6df",
+      "signatureHex": "3045022100f9f87c6020faf3defbb0e2c5172fd68c6926be6c81405b4f4e9908a137c0724402200272a2b5240655c9d029f4f156fac59b6d958f5d161e40a666ba5481ff0a2f28"
+    },
+    {
+      "label": "a 204 with no body, whose body length is signed as 0",
+      "status": 204,
+      "headers": {
+        "x-bsv-auth-version": "0.1",
+        "x-bsv-auth-identity-key": "0382bff8f78fa89572cc889130ce54fadbfc55088aa60eb658b8a11be44572afd6",
+        "x-bsv-auth-nonce": "ws3Y4+75BA8aJTA7RlFcZ3J9iJOeqbS/ytXg6/YBDBc=",
+        "x-bsv-auth-your-nonce": "ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+        "x-bsv-auth-signature": "304402200cf697db85316c0a52cc9a745fe5e466fb5c928109a696ab7a4139fc965d8e7d022002378bb34c0fb057dae43dbee21cfe1d1a37c574e061e06527dfde4a020c1a83",
+        "x-bsv-auth-request-id": "cn2Ik56ptL/K1eDr9gEMFyItOENOWWRveoWQm6axvMc="
+      },
+      "bodyHex": "",
+      "requestIdBase64": "cn2Ik56ptL/K1eDr9gEMFyItOENOWWRveoWQm6axvMc=",
+      "nonce": "ws3Y4+75BA8aJTA7RlFcZ3J9iJOeqbS/ytXg6/YBDBc=",
+      "keyID": "ws3Y4+75BA8aJTA7RlFcZ3J9iJOeqbS/ytXg6/YBDBc= ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+      "payloadHex": "727d88939ea9b4bfcad5e0ebf6010c17222d38434e59646f7a85909ba6b1bcc7cc0000",
+      "serverSigningChildPub": "02712cdd27425b8e2214192ea1d862ad6cba9dc77a2b68fca490f324989f557007",
+      "signatureHex": "304402200cf697db85316c0a52cc9a745fe5e466fb5c928109a696ab7a4139fc965d8e7d022002378bb34c0fb057dae43dbee21cfe1d1a37c574e061e06527dfde4a020c1a83"
+    },
+    {
+      "label": "a 402 whose x-bsv-payment headers are signed, sorted by name, and whose other headers are not",
+      "status": 402,
+      "headers": {
+        "x-bsv-payment-version": "1.0",
+        "x-bsv-payment-satoshis-required": "100",
+        "access-control-allow-origin": "*",
+        "x-bsv-auth-version": "0.1",
+        "x-bsv-auth-identity-key": "0382bff8f78fa89572cc889130ce54fadbfc55088aa60eb658b8a11be44572afd6",
+        "x-bsv-auth-nonce": "w87Z5O/6BRAbJjE8R1JdaHN+iZSfqrXAy9bh7PcCDRg=",
+        "x-bsv-auth-your-nonce": "ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+        "x-bsv-auth-signature": "3045022100a3aecf8628018e96545914e74e825504e84a1ea8676374c359eb761816ff31ac02206c92478a75550f2916e3d7ead91a5394c3033529297a4b0644ff72ebb5cbf134",
+        "x-bsv-auth-request-id": "c36JlJ+qtcDL1uHs9wINGCMuOURPWmVwe4aRnKeyvcg="
+      },
+      "bodyHex": "706179206d65",
+      "requestIdBase64": "c36JlJ+qtcDL1uHs9wINGCMuOURPWmVwe4aRnKeyvcg=",
+      "nonce": "w87Z5O/6BRAbJjE8R1JdaHN+iZSfqrXAy9bh7PcCDRg=",
+      "keyID": "w87Z5O/6BRAbJjE8R1JdaHN+iZSfqrXAy9bh7PcCDRg= ISw3Qk1YY255hI+apbC7xptRlLTGKsmZ0xT3RIwljGJqw3x2wSNnmsZZj7oprxgS",
+      "payloadHex": "737e89949faab5c0cbd6e1ecf7020d18232e39444f5a65707b86919ca7b2bdc8fd9201021f782d6273762d7061796d656e742d7361746f736869732d72657175697265640331303015782d6273762d7061796d656e742d76657273696f6e03312e3006706179206d65",
+      "serverSigningChildPub": "0352e4a16798480bed8cbbb8060d965f473a64d302a4b45f92b7021789b5d0b6c9",
+      "signatureHex": "3045022100a3aecf8628018e96545914e74e825504e84a1ea8676374c359eb761816ff31ac02206c92478a75550f2916e3d7ead91a5394c3033529297a4b0644ff72ebb5cbf134"
+    }
+  ]
+}
