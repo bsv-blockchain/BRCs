@@ -32,7 +32,7 @@ The standards in this repository are vendor-neutral. Current BSV Association ref
 - BSV Desktop and BSV Browser as BSV Association reference wallet/browser applications for the BRC-100 interface.
 - Overlay service implementations in [`bsv-blockchain/ts-stack`](https://github.com/bsv-blockchain/ts-stack/tree/main/packages/overlays), including the `overlay` and `overlay-express` packages, and related overlay example repositories.
 
-Vendor distributions can implement the same standards with their own branding and hosted service defaults. Examples include Babbage's Metanet Desktop / Metanet Explorer as well as the Hudos Browser built by Matt Archbold.
+Vendor distributions can implement the same standards with their own branding and hosted service defaults. Examples include Babbage's Metanet Desktop / Metanet Explorer as well as the Hodos Browser built by Matt Archbold.
 
 ## Structure
 
