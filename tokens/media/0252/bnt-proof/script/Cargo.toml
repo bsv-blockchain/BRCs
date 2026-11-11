@@ -2,7 +2,7 @@
 name = "bnt-step-script"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
+license = "Apache-2.0"
 
 # Its own workspace: sp1-sdk is heavy and the step crate's tests must not build it.
 [workspace]

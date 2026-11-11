@@ -320,7 +320,7 @@ BRC | Standard
 
 ## License
 
-Everything in this repository is subject to the [Open BSV License](https://github.com/bitcoin-sv/bitcoin-sv/blob/master/LICENSE).
+Everything in this repository is subject to the [Apache License 2.0](LICENSE).
 
 ## Terms and Conditions
 

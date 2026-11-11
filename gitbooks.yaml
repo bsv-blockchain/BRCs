@@ -3,7 +3,7 @@ structure:
     readme: README.md  
     summary: SUMMARY.md
 title: BRC: Bitcoin Request for Comments
-author: Bitcoin Association
+author: BSV Association
 description: A repository for submitting, discussing, sharing, and indexing technical proposals for use across the Bitcoin ecosystem.
 plugins:
   - search
