@@ -60,6 +60,7 @@ BRC | Standard
 219  | [Wallet Permission Prompt Liveness Contract](./0219.md)
 221  | [Deterministic, Order-Independent Coin Selection for Privacy Wallets](./0221.md)
 229  | [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./0229.md)
+230  | [Wallet-Native Sigma-Protocol Proofs as a BRC-98 Module](./0230.md)
 249  | [Vault Account Holding Across Devices](./0249.md)
 250  | [Device Login and Recovery](./0250.md)
 325  | [User-Initiated Browser Permission Requests for Wallet Discovery](./0325.md)
