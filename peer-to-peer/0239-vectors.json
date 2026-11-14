@@ -1,5 +1,5 @@
 {
-  "description": "Test vectors for canonical JSON for signed objects: RFC 8785 restricted to ASCII member names and integers within ±(2^53 − 1). input is JSON text; canonical is the canonical form, canonicalHex its UTF-8 bytes, sha256 their hash, and signatureHex a DER ECDSA signature (secp256k1, one SHA-256 of the bytes, low-S, RFC 6979) by the test key. A vector with result \"refuse\" MUST be refused; one with result \"accept-or-refuse\" MAY be refused, and if accepted MUST canonicalize as given.",
+  "description": "Test vectors for canonical JSON for signed objects: RFC 8785 restricted to ASCII member names and integers within ±(2^53 − 1), with no duplicate member names, no unpaired surrogates, and nesting a verifier must accept up to 32 deep. input is JSON text; canonical is the canonical form, canonicalHex its UTF-8 bytes, sha256 their hash, and signatureHex a DER ECDSA signature (secp256k1, one SHA-256 of the bytes, low-S, RFC 6979) by the test key. A vector with result \"refuse\" MUST be refused; one with result \"accept-or-refuse\" MAY be refused, and if accepted MUST canonicalize as given.",
   "signer": {
     "keyLabel": "canonical-json-profile/signer",
     "privateKeyHex": "7f21cf9f5dd52954a33044e36ccc6a26571fba00f3b0c7b70dadeb72d791dffe",
@@ -168,6 +168,85 @@
       "input": "[{\"a\":{\"ß\":1}}]",
       "result": "refuse",
       "reason": "a member name that is not ASCII"
+    },
+    {
+      "label": "refused: a duplicate member name",
+      "input": "{\"a\":1,\"a\":2}",
+      "result": "refuse",
+      "reason": "a duplicate member name"
+    },
+    {
+      "label": "refused: a duplicate member name with the same value, nested",
+      "input": "{\"o\":{\"b\":1,\"b\":1}}",
+      "result": "refuse",
+      "reason": "a duplicate member name"
+    },
+    {
+      "label": "refused: member names that are duplicates once unescaped",
+      "input": "{\"a\":1,\"\\u0061\":2}",
+      "result": "refuse",
+      "reason": "a duplicate member name"
+    },
+    {
+      "label": "refused: an unpaired high surrogate, escaped",
+      "input": "{\"s\":\"\\ud800\"}",
+      "result": "refuse",
+      "reason": "an unpaired surrogate"
+    },
+    {
+      "label": "refused: an unpaired low surrogate, escaped",
+      "input": "{\"s\":\"x\\udc00\"}",
+      "result": "refuse",
+      "reason": "an unpaired surrogate"
+    },
+    {
+      "label": "an escaped surrogate pair is written as the raw character",
+      "input": "{\"s\":\"\\ud83d\\ude00\"}",
+      "result": "accept",
+      "canonical": "{\"s\":\"😀\"}",
+      "canonicalHex": "7b2273223a22f09f9880227d",
+      "sha256": "f9949e1006d1ca22bc0b60ea94f09779f11a8f0a29bae250fc7ab313d879f5e7",
+      "signatureHex": "30450221008d89dfbc2fa23881dcf3debadcd7a96303cc90eb321adca5beb106afc0d7b8830220761f890bd39b9b3329573b9b3c3a96420379139ecd76b874d05e5243945c9489"
+    },
+    {
+      "label": "noncharacters are permitted and written raw: U+FFFF escaped, U+FDD0 raw",
+      "input": "{\"a\":\"\\uffff\",\"b\":\"﷐\"}",
+      "result": "accept",
+      "canonical": "{\"a\":\"￿\",\"b\":\"﷐\"}",
+      "canonicalHex": "7b2261223a22efbfbf222c2262223a22efb790227d",
+      "sha256": "db02f487da1ec845a88f0a5d1b3fa0415893695e3c0dfdf05a17c9b1b16eee13",
+      "signatureHex": "3044022017ee16d04336f208b66874857fd14c76edd78cce72562543aef69fa16605a5bb02202313cc5cdfde83a63109a13b3e04ffa2a3a31533b8cadafd79faef8426950267"
+    },
+    {
+      "label": "refused: a number too large for a binary64",
+      "input": "{\"n\":1E400}",
+      "result": "refuse",
+      "reason": "a number that is not an integer within ±(2^53 − 1)"
+    },
+    {
+      "label": "refused: an integer past 2^53 that a binary64 parser rounds to 2^53",
+      "input": "{\"n\":9007199254740993}",
+      "result": "refuse",
+      "reason": "a number that is not an integer within ±(2^53 − 1)"
+    },
+    {
+      "label": "nesting at the limit (32) is accepted",
+      "input": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+      "result": "accept",
+      "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+      "canonicalHex": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d",
+      "sha256": "0a1731009840e8e7ccd8b1af7a7c61381043f415ae20dfad21a86d7f9f317edb",
+      "signatureHex": "304402203035aef8ac64cd62950f935e65d33279ad9912fca5a9c0c62c61c91c89b0693302202dbbb8bb41f95f3cc2d78bbaf31da1ff131320c8afc2717152ee6723767fc198"
+    },
+    {
+      "label": "nesting past the limit (33)",
+      "input": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+      "result": "accept-or-refuse",
+      "note": "a verifier MAY refuse nesting deeper than 32",
+      "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+      "canonicalHex": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d",
+      "sha256": "ffba7a731546fa3b609b0503e5b88d1523824b0f082f1c2f9166b08b57933566",
+      "signatureHex": "3045022100fdc9f2c5afc87bd5a28aca08241df58599f5ed29afe3eec39b9d0a3f34f5dab602201a7e44786939ef6ae552b93311c7a807975819b7037e0b6b3ef6af4a6139642f"
     }
   ]
 }
