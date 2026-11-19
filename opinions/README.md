@@ -20,3 +20,4 @@ BRC  | Standard
 187  | [Thoughts on Declarative Stewardship](./0187.md)
 191  | [Thoughts on Identity, Privacy and Recovery on the Metanet](./0191.md)
 234  | [A Shared Schedule for Reducing Free Blockchain Index Coverage](./0234.md)
+262  | [What Bitcoin Owes the Person Who Wasn’t There](./0262.md)

@@ -285,6 +285,7 @@
 * [Thoughts on Declarative Stewardship](./opinions/0187.md)
 * [Thoughts on Identity, Privacy and Recovery on the Metanet](./opinions/0191.md)
 * [A Shared Schedule for Reducing Free Blockchain Index Coverage](./opinions/0234.md)
+* [What Bitcoin Owes the Person Who Wasn’t There](./opinions/0262.md)
 
 ## State Machines
 
