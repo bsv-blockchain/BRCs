@@ -25,6 +25,11 @@
 * [Consent Envelope: Verifiable Multi-Party Document Signing with On-Chain Signing Order](./apps/0222.md)
 * [Block Media Format (BMF) — Composable On-Chain Audio/Video](./apps/0224.md)
 * [Frictionless On-Chain Onboarding via Pre-Funded Claimable Tokens](./apps/0227.md)
+* [Connected App Catalogs](./apps/0241.md)
+* [Safety Labels for Connected Apps](./apps/0242.md)
+* [Recommendations from People You Know](./apps/0243.md)
+* [Pinned Builds for Connected Apps](./apps/0244.md)
+* [Opening What a Wallet Holds with Connected Apps](./apps/0245.md)
 * [Sponsored Onboarding and Wallet Choice](./apps/0300.md)
 
 ## Wallet
@@ -241,6 +246,7 @@
 * [Session Upgrade: BRC-33 Messages over WebRTPay](./peer-to-peer/0246.md)
 * [Identity-Key Issuer Attestation](./peer-to-peer/0247.md)
 * [Offline Issuer Identity Packages](./peer-to-peer/0248.md)
+* [Shareable References and a URI Scheme for the Metanet](./peer-to-peer/0258.md)
 * [Keyed Content and Conditional Key Release](./peer-to-peer/0369.md)
 
 ## Key Derivation
