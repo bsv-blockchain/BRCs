@@ -78,6 +78,7 @@
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
 * [Vault Account Holding Across Devices](./wallet/0249.md)
 * [Device Login and Recovery](./wallet/0250.md)
+* [Wallet Version Strings with Capability Flags](./wallet/0263.md)
 * [User-Initiated Browser Permission Requests for Wallet Discovery](./wallet/0325.md)
 * [Wallet Failure Presentation](./wallet/0326.md)
 
