@@ -76,6 +76,7 @@
 * [Wallet Permission Prompt Liveness Contract](./wallet/0219.md)
 * [Deterministic, Order-Independent Coin Selection for Privacy Wallets](./wallet/0221.md)
 * [Wallet-Native Elliptic Curve Point Multiplication as a BRC-98 Module](./wallet/0229.md)
+* [Wallet-Native Sigma-Protocol Proofs as a BRC-98 Module](./wallet/0230.md)
 * [Vault Account Holding Across Devices](./wallet/0249.md)
 * [Device Login and Recovery](./wallet/0250.md)
 * [Wallet Version Strings with Capability Flags](./wallet/0263.md)
