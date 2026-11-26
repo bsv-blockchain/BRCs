@@ -120,9 +120,9 @@
 * [Multicast Shard Domain Partitioning and the BEEF Object Plane](./transactions/0148.md)
 * [Multicast BEEF Object Frame Format](./transactions/0149.md)
 * [Outpoint BEEF](./transactions/0158.md)
+* [Multicast Topic Interest Protocol](./transactions/0223.md)
 * [Subject BEEF](./transactions/0233.md)
 * [Payment Evidence Statements for BREAD and BEEF](./transactions/0237.md)
-* [Multicast Topic Interest Protocol](./transactions/0264.md)
 
 ## Scripts
 
